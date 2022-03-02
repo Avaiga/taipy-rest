@@ -6,17 +6,17 @@ from datetime import datetime, timedelta
 import pandas as pd
 import pytest
 from dotenv import load_dotenv
-from taipy.common.alias import DataNodeId, JobId
-from taipy.common.frequency import Frequency
-from taipy.config import Config
-from taipy.cycle import Cycle
-from taipy.cycle.manager import CycleManager
-from taipy.data import InMemoryDataNode, Scope
-from taipy.job import Job, JobManager
-from taipy.pipeline import Pipeline
-from taipy.scenario import Scenario
-from taipy.task import Task
-from taipy.task.manager import TaskManager
+from taipy.core.common.alias import DataNodeId, JobId
+from taipy.core.common.frequency import Frequency
+from taipy.core.config.config import Config
+from taipy.core.cycle.cycle import Cycle
+from taipy.core.cycle.cycle_manager import CycleManager
+from taipy.core.data.in_memory import InMemoryDataNode, Scope
+from taipy.core.job.job_manager import Job, JobManager
+from taipy.core.pipeline.pipeline import Pipeline
+from taipy.core.scenario.scenario import Scenario
+from taipy.core.task.task import Task
+from taipy.core.task.task_manager import TaskManager
 
 from taipy_rest.app import create_app
 

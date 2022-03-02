@@ -19,7 +19,9 @@ Flask-SQLAlchemy = "*"
 Flask-JWT-Extended = "*"
 uwsgi = "*"
 black = "*"
-taipy = {git = "https://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@github.com/avaiga/taipy.git"}
+markupsafe = "==2.0.1"
+taipy-core = {git = "ssh://git@github.com/avaiga/taipy-core.git"}
+taipy-gui = {git = "ssh://git@github.com/avaiga/taipy-gui.git"}
 
 [dev-packages]
 pytest = "*"
