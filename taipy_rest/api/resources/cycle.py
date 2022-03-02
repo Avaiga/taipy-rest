@@ -3,14 +3,14 @@ from datetime import datetime
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-from taipy.common.frequency import Frequency
+from taipy.core.common.frequency import Frequency
 
-from taipy.cycle.manager import CycleManager
-from taipy.exceptions.cycle import NonExistingCycle
-from taipy.exceptions.repository import ModelNotFound
+from taipy.core.cycle.cycle_manager import CycleManager
+from taipy.core.exceptions.cycle import NonExistingCycle
+from taipy.core.exceptions.repository import ModelNotFound
 
 from taipy_rest.api.schemas import CycleSchema, CycleResponseSchema
-from taipy.cycle.cycle import Cycle
+from taipy.core.cycle.cycle import Cycle
 
 from taipy_rest.config import TAIPY_SETUP_FILE
 
