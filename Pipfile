@@ -11,7 +11,6 @@ python-dotenv = "*"
 passlib = "*"
 apispec = {extras = ["yaml"], version = "*"}
 apispec-webframeworks = "*"
-tox = "*"
 Flask = "<2"
 Flask-RESTful = "*"
 Flask-Migrate = "*"
@@ -23,6 +22,7 @@ markupsafe = "==2.0.1"
 taipy-core = {git = "ssh://git@github.com/avaiga/taipy-core.git"}
 
 [dev-packages]
+tox = "3.24.5"
 pytest = "*"
 pytest-factoryboy = "*"
 pytest-flask = "*"
