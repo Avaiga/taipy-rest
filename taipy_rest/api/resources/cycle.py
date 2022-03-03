@@ -71,7 +71,7 @@ class CycleResource(Resource):
             return make_response(
                 jsonify({"message": f"Cycle {cycle_id} not found"}), 404
             )
-        return {"cycle": schema.dump(manager.repository.to_model(cycle))}
+        return {"cycle": schema.dump(cycle)}
 
     def delete(self, cycle_id):
         try:
@@ -144,8 +144,7 @@ class CycleList(Resource):
         schema = CycleSchema(many=True)
         manager = CycleManager()
         cycles = manager.get_all()
-        cycles_model = [manager.repository.to_model(t) for t in cycles]
-        return schema.dump(cycles_model)
+        return schema.dump(cycles)
 
     def post(self):
         schema = CycleSchema()
@@ -156,7 +155,7 @@ class CycleList(Resource):
 
         return {
             "msg": "cycle created",
-            "cycle": schema.dump(manager.repository.to_model(cycle)),
+            "cycle": schema.dump(cycle),
         }, 201
 
     def __create_cycle_from_schema(self, cycle_schema: CycleSchema):

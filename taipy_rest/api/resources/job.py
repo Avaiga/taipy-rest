@@ -70,7 +70,7 @@ class JobResource(Resource):
         job = manager.get(job_id)
         if not job:
             return make_response(jsonify({"message": f"Job {job_id} not found"}), 404)
-        return {"job": schema.dump(manager.repository.to_model(job))}
+        return {"job": schema.dump(job)}
 
     def delete(self, job_id):
         try:
@@ -143,8 +143,7 @@ class JobList(Resource):
         schema = JobResponseSchema(many=True)
         manager = JobManager()
         jobs = manager.get_all()
-        jobs_model = [manager.repository.to_model(t) for t in jobs]
-        return schema.dump(jobs_model)
+        return schema.dump(jobs)
 
     def post(self):
         schema = JobSchema()
@@ -161,7 +160,7 @@ class JobList(Resource):
 
         return {
             "msg": "job created",
-            "job": response_schema.dump(manager.repository.to_model(job)),
+            "job": response_schema.dump(job),
         }, 201
 
     def __create_job_from_schema(self, job_schema: JobSchema) -> Optional[Job]:

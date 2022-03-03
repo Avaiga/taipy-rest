@@ -93,7 +93,7 @@ class DataNodeResource(Resource):
             return make_response(
                 jsonify({"message": f"DataNode {datanode_id} not found"}), 404
             )
-        return {"datanode": schema.dump(manager.repository.to_model(datanode))}
+        return {"datanode": schema.dump(datanode)}
 
     def delete(self, datanode_id):
         try:
@@ -165,8 +165,7 @@ class DataNodeList(Resource):
         schema = DataNodeSchema(many=True)
         manager = DataManager()
         datanodes = manager.get_all()
-        datanode_data = [manager.repository.to_model(d) for d in datanodes]
-        return schema.dump(datanode_data)
+        return schema.dump(datanodes)
 
     def post(self):
         args = request.args

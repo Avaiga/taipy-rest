@@ -71,7 +71,7 @@ class ScenarioResource(Resource):
             return make_response(
                 jsonify({"message": f"Scenario {scenario_id} not found"}), 404
             )
-        return {"scenario": schema.dump(manager.repository.to_model(scenario))}
+        return {"scenario": schema.dump(scenario)}
 
     def delete(self, scenario_id):
         try:
@@ -144,8 +144,7 @@ class ScenarioList(Resource):
         schema = ScenarioResponseSchema(many=True)
         manager = ScenarioManager()
         scenarios = manager.get_all()
-        scenarios_model = [manager.repository.to_model(t) for t in scenarios]
-        return schema.dump(scenarios_model)
+        return schema.dump(scenarios)
 
     def post(self):
         args = request.args
@@ -163,7 +162,7 @@ class ScenarioList(Resource):
 
             return {
                 "msg": "scenario created",
-                "scenario": response_schema.dump(manager.repository.to_model(scenario)),
+                "scenario": response_schema.dump(scenario),
             }, 201
         except AttributeError:
             return {"msg": f"Config name {config_name} not found"}, 404

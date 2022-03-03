@@ -70,7 +70,7 @@ class PipelineResource(Resource):
             return make_response(
                 jsonify({"message": f"Pipeline {pipeline_id} not found"}), 404
             )
-        return {"pipeline": schema.dump(manager.repository.to_model(pipeline))}
+        return {"pipeline": schema.dump(pipeline)}
 
     def delete(self, pipeline_id):
         try:
@@ -143,8 +143,7 @@ class PipelineList(Resource):
         schema = PipelineResponseSchema(many=True)
         manager = PipelineManager()
         pipelines = manager.get_all()
-        pipelines_model = [manager.repository.to_model(t) for t in pipelines]
-        return schema.dump(pipelines_model)
+        return schema.dump(pipelines)
 
     def post(self):
         args = request.args
@@ -161,7 +160,7 @@ class PipelineList(Resource):
 
             return {
                 "msg": "pipeline created",
-                "pipeline": response_schema.dump(manager.repository.to_model(pipeline)),
+                "pipeline": response_schema.dump(pipeline),
             }, 201
         except AttributeError:
             return {"msg": f"Config name {config_name} not found"}, 404

@@ -70,7 +70,7 @@ class TaskResource(Resource):
         task = manager.get(task_id)
         if not task:
             return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
-        return {"task": schema.dump(manager.repository.to_model(task))}
+        return {"task": schema.dump(task)}
 
     def delete(self, task_id):
         try:
@@ -143,8 +143,7 @@ class TaskList(Resource):
         schema = TaskSchema(many=True)
         manager = TaskManager()
         tasks = manager.get_all()
-        tasks_model = [manager.repository.to_model(t) for t in tasks]
-        return schema.dump(tasks_model)
+        return schema.dump(tasks)
 
     def post(self):
         args = request.args
@@ -161,7 +160,7 @@ class TaskList(Resource):
 
             return {
                 "msg": "task created",
-                "task": schema.dump(manager.repository.to_model(task)),
+                "task": schema.dump(task),
             }, 201
         except AttributeError:
             return {"msg": f"Config name {config_name} not found"}, 404
@@ -170,10 +169,10 @@ class TaskList(Resource):
         data_manager = DataManager()
         return Task(
             task_schema.get("config_name"),
-            [data_manager.get(ds) for ds in task_schema.get("input_ids")],
             load_fct(
                 task_schema.get("function_module"), task_schema.get("function_name")
             ),
+            [data_manager.get(ds) for ds in task_schema.get("input_ids")],
             [data_manager.get(ds) for ds in task_schema.get("output_ids")],
             task_schema.get("parent_id"),
         )
