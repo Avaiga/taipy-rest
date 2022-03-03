@@ -1,3 +1,5 @@
+import os
+
 from flask import jsonify, make_response, request
 from flask_restful import Resource
 
@@ -127,9 +129,12 @@ class PipelineList(Resource):
     """
 
     def __init__(self):
-        spec = importlib.util.spec_from_file_location("taipy_setup", TAIPY_SETUP_FILE)
-        self.module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.module)
+        if os.path.exists(TAIPY_SETUP_FILE):
+            spec = importlib.util.spec_from_file_location(
+                "taipy_setup", TAIPY_SETUP_FILE
+            )
+            self.module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(self.module)
 
     def fetch_config(self, config_name):
         return getattr(self.module, config_name)

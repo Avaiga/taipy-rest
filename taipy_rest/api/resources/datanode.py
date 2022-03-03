@@ -1,4 +1,5 @@
 import importlib
+import os
 from typing import List
 
 import numpy as np
@@ -77,9 +78,12 @@ class DataNodeResource(Resource):
     """
 
     def __init__(self):
-        spec = importlib.util.spec_from_file_location("taipy_setup", TAIPY_SETUP_FILE)
-        self.module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.module)
+        if os.path.exists(TAIPY_SETUP_FILE):
+            spec = importlib.util.spec_from_file_location(
+                "taipy_setup", TAIPY_SETUP_FILE
+            )
+            self.module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(self.module)
 
     def get(self, datanode_id):
         schema = DataNodeSchema()
@@ -147,9 +151,12 @@ class DataNodeList(Resource):
     """
 
     def __init__(self):
-        spec = importlib.util.spec_from_file_location("taipy_setup", TAIPY_SETUP_FILE)
-        self.module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.module)
+        if os.path.exists(TAIPY_SETUP_FILE):
+            spec = importlib.util.spec_from_file_location(
+                "taipy_setup", TAIPY_SETUP_FILE
+            )
+            self.module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(self.module)
 
     def fetch_config(self, config_name):
         return getattr(self.module, config_name)
@@ -209,9 +216,12 @@ class DataNodeReader(Resource):
     """
 
     def __init__(self):
-        spec = importlib.util.spec_from_file_location("taipy_setup", TAIPY_SETUP_FILE)
-        self.module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.module)
+        if os.path.exists(TAIPY_SETUP_FILE):
+            spec = importlib.util.spec_from_file_location(
+                "taipy_setup", TAIPY_SETUP_FILE
+            )
+            self.module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(self.module)
 
     def __make_operators(self, schema: DataNodeFilterSchema) -> List:
         return [

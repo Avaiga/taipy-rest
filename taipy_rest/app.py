@@ -27,9 +27,6 @@ def create_app(testing=False):
     configure_extensions(app)
     configure_apispec(app)
     register_blueprints(app)
-    # spec = importlib.util.spec_from_file_location("taipy_setup", TAIPY_SETUP_FILE)
-    # module = importlib.util.module_from_spec(spec)
-    # spec.loader.exec_module(module)
 
     abs_folder, _ = TAIPY_SETUP_FILE.rsplit("/", 1)
     gui = Gui(flask=app, pages={"demo": Markdown(os.path.join(abs_folder, "demo.md"))})
