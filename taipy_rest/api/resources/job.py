@@ -7,7 +7,6 @@ from taipy.core.common.alias import JobId
 
 from taipy.core.job.job_manager import JobManager
 from taipy.core.task.task_manager import TaskManager
-from taipy.core.exceptions.job import NonExistingJob
 from taipy.core.exceptions.repository import ModelNotFound
 
 from taipy_rest.api.schemas import JobSchema, JobResponseSchema
@@ -65,13 +64,12 @@ class JobResource(Resource):
     """
 
     def get(self, job_id):
-        try:
-            schema = JobResponseSchema()
-            manager = JobManager()
-            job = manager.get(job_id)
-            return {"job": schema.dump(manager.repository.to_model(job))}
-        except NonExistingJob:
+        schema = JobResponseSchema()
+        manager = JobManager()
+        job = manager.get(job_id)
+        if not job:
             return make_response(jsonify({"message": f"Job {job_id} not found"}), 404)
+        return {"job": schema.dump(manager.repository.to_model(job))}
 
     def delete(self, job_id):
         try:

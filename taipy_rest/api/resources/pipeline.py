@@ -61,15 +61,14 @@ class PipelineResource(Resource):
     """
 
     def get(self, pipeline_id):
-        try:
-            schema = PipelineResponseSchema()
-            manager = PipelineManager()
-            pipeline = manager.get(pipeline_id)
-            return {"pipeline": schema.dump(manager.repository.to_model(pipeline))}
-        except NonExistingPipeline:
+        schema = PipelineResponseSchema()
+        manager = PipelineManager()
+        pipeline = manager.get(pipeline_id)
+        if not pipeline:
             return make_response(
                 jsonify({"message": f"Pipeline {pipeline_id} not found"}), 404
             )
+        return {"pipeline": schema.dump(manager.repository.to_model(pipeline))}
 
     def delete(self, pipeline_id):
         try:

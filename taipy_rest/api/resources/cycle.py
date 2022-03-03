@@ -6,7 +6,6 @@ from flask_restful import Resource
 from taipy.core.common.frequency import Frequency
 
 from taipy.core.cycle.cycle_manager import CycleManager
-from taipy.core.exceptions.cycle import NonExistingCycle
 from taipy.core.exceptions.repository import ModelNotFound
 
 from taipy_rest.api.schemas import CycleSchema, CycleResponseSchema
@@ -64,15 +63,14 @@ class CycleResource(Resource):
     """
 
     def get(self, cycle_id):
-        try:
-            schema = CycleResponseSchema()
-            manager = CycleManager()
-            cycle = manager.get(cycle_id)
-            return {"cycle": schema.dump(manager.repository.to_model(cycle))}
-        except NonExistingCycle:
+        schema = CycleResponseSchema()
+        manager = CycleManager()
+        cycle = manager.get(cycle_id)
+        if not cycle:
             return make_response(
                 jsonify({"message": f"Cycle {cycle_id} not found"}), 404
             )
+        return {"cycle": schema.dump(manager.repository.to_model(cycle))}
 
     def delete(self, cycle_id):
         try:

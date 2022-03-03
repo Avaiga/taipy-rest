@@ -9,7 +9,7 @@ def test_get_task(client, default_task):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.task.manager.task_manager.TaskManager.get") as manager_mock:
+    with mock.patch("taipy.core.task.task_manager.TaskManager.get") as manager_mock:
         manager_mock.return_value = default_task
 
         # test get_task
@@ -23,7 +23,7 @@ def test_delete_task(client):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.task.manager.task_manager.TaskManager.delete"):
+    with mock.patch("taipy.core.task.task_manager.TaskManager.delete"):
         # test get_task
         rep = client.delete(url_for("api.task_by_id", task_id="foo"))
         assert rep.status_code == 200
@@ -71,7 +71,7 @@ def test_execute_task(client, default_task):
     rep = client.post(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.task.manager.task_manager.TaskManager.get") as manager_mock:
+    with mock.patch("taipy.core.task.task_manager.TaskManager.get") as manager_mock:
         manager_mock.return_value = default_task
 
         # test get_task

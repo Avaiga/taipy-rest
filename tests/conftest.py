@@ -71,7 +71,7 @@ def default_datanode():
     return InMemoryDataNode(
         "input_ds",
         Scope.SCENARIO,
-        DataNodeId("foo"),
+        DataNodeId("f"),
         "my name",
         "parent_id",
         properties={"default_data": [1, 2, 3, 4, 5, 6]},
@@ -131,8 +131,8 @@ def __default_task():
     )
     return Task(
         "foo",
-        [input_ds],
         print,
+        [input_ds],
         [output_ds],
         None,
     )
@@ -145,14 +145,14 @@ def default_task():
 
 @pytest.fixture
 def default_task_config():
-    return Config.add_task("task1", [], print, [])
+    return Config.add_task("task1", print, [], [])
 
 
 @pytest.fixture
 def default_task_config_list():
     configs = []
     for i in range(10):
-        configs.append(Config.add_task(f"task-{i}", [], print, []))
+        configs.append(Config.add_task(f"task-{i}", print, [], []))
     return configs
 
 
@@ -165,7 +165,7 @@ def __default_pipeline():
 
 
 def __task_config():
-    return Config.add_task("task1", [], print, [])
+    return Config.add_task("task1", print, [], [])
 
 
 @pytest.fixture

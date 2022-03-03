@@ -82,15 +82,14 @@ class DataNodeResource(Resource):
         spec.loader.exec_module(self.module)
 
     def get(self, datanode_id):
-        try:
-            schema = DataNodeSchema()
-            manager = DataManager()
-            datanode = manager.get(datanode_id)
-            return {"datanode": schema.dump(manager.repository.to_model(datanode))}
-        except NonExistingDataNode:
+        schema = DataNodeSchema()
+        manager = DataManager()
+        datanode = manager.get(datanode_id)
+        if not datanode:
             return make_response(
                 jsonify({"message": f"DataNode {datanode_id} not found"}), 404
             )
+        return {"datanode": schema.dump(manager.repository.to_model(datanode))}
 
     def delete(self, datanode_id):
         try:

@@ -63,15 +63,14 @@ class ScenarioResource(Resource):
     """
 
     def get(self, scenario_id):
-        try:
-            schema = ScenarioResponseSchema()
-            manager = ScenarioManager()
-            scenario = manager.get(scenario_id)
-            return {"scenario": schema.dump(manager.repository.to_model(scenario))}
-        except NonExistingScenario:
+        schema = ScenarioResponseSchema()
+        manager = ScenarioManager()
+        scenario = manager.get(scenario_id)
+        if not scenario:
             return make_response(
                 jsonify({"message": f"Scenario {scenario_id} not found"}), 404
             )
+        return {"scenario": schema.dump(manager.repository.to_model(scenario))}
 
     def delete(self, scenario_id):
         try:

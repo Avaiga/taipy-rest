@@ -9,7 +9,7 @@ def test_get_datanode(client, default_datanode):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.data.manager.data_manager.DataManager.get") as manager_mock:
+    with mock.patch("taipy.core.data.data_manager.DataManager.get") as manager_mock:
         manager_mock.return_value = default_datanode
         # test get_datanode
         rep = client.get(url_for("api.datanode_by_id", datanode_id="foo"))
@@ -22,7 +22,7 @@ def test_delete_datanode(client):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.data.manager.data_manager.DataManager.delete"):
+    with mock.patch("taipy.core.data.data_manager.DataManager.delete"):
         # test get_datanode
         rep = client.delete(url_for("api.datanode_by_id", datanode_id="foo"))
         assert rep.status_code == 200
@@ -65,7 +65,7 @@ def test_get_all_datanodes(client, default_datanode_config_list):
 
 
 def test_read_datanode(client, default_df_datanode):
-    with mock.patch("taipy.data.manager.data_manager.DataManager.get") as config_mock:
+    with mock.patch("taipy.core.data.data_manager.DataManager.get") as config_mock:
         config_mock.side_effect = [default_df_datanode]
         # without operators
         datanodes_url = url_for("api.datanode_reader", datanode_id="foo")
@@ -79,7 +79,7 @@ def test_read_datanode(client, default_df_datanode):
 
 
 def test_write_datanode(client, default_datanode):
-    with mock.patch("taipy.data.manager.data_manager.DataManager.get") as config_mock:
+    with mock.patch("taipy.core.data.data_manager.DataManager.get") as config_mock:
         config_mock.return_value = default_datanode
         # Get DataNode
         datanodes_read_url = url_for(

@@ -5,7 +5,6 @@ from flask_restful import Resource
 
 from taipy.core.task.task_manager import TaskManager
 from taipy.core.data.data_manager import DataManager
-from taipy.core.exceptions.task import NonExistingTask
 from taipy.core.exceptions.repository import ModelNotFound
 
 from taipy_rest.api.schemas import TaskSchema
@@ -65,13 +64,12 @@ class TaskResource(Resource):
     """
 
     def get(self, task_id):
-        try:
-            schema = TaskSchema()
-            manager = TaskManager()
-            task = manager.get(task_id)
-            return {"task": schema.dump(manager.repository.to_model(task))}
-        except NonExistingTask:
+        schema = TaskSchema()
+        manager = TaskManager()
+        task = manager.get(task_id)
+        if not task:
             return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
+        return {"task": schema.dump(manager.repository.to_model(task))}
 
     def delete(self, task_id):
         try:
@@ -207,10 +205,9 @@ class TaskExecutor(Resource):
     """
 
     def post(self, task_id):
-        try:
-            manager = TaskManager()
-            task = manager.get(task_id)
-            Scheduler().submit_task(task)
-            return {"message": f"Executed task {task_id}"}
-        except NonExistingTask:
+        manager = TaskManager()
+        task = manager.get(task_id)
+        if not task:
             return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
+        Scheduler().submit_task(task)
+        return {"message": f"Executed task {task_id}"}

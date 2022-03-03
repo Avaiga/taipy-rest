@@ -9,7 +9,7 @@ def test_get_job(client, default_job):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.job.job_manager.JobManager.get") as manager_mock:
+    with mock.patch("taipy.core.task.task_manager.JobManager.get") as manager_mock:
         manager_mock.return_value = default_job
 
         # test get_job
@@ -23,7 +23,7 @@ def test_delete_job(client):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.job.job_manager.JobManager.delete"):
+    with mock.patch("taipy.core.task.task_manager.JobManager.delete"):
         # test get_job
         rep = client.delete(url_for("api.job_by_id", job_id="foo"))
         assert rep.status_code == 200
