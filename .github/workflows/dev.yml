@@ -32,6 +32,22 @@ jobs:
         with:
           python-version: ${{ matrix.python-versions }}
 
+      - name: Install taipy-core
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_TAIPY_CORE }}" > ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519
+          pip install git+ssh://git@github.com/avaiga/taipy-core.git
+
+      - name: Install taipy-gui
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_TAIPY_GUI }}" > ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519
+          pip install git+ssh://git@github.com/avaiga/taipy-gui.git
+
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
