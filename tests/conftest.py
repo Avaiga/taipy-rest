@@ -158,7 +158,7 @@ def default_task_config_list():
 
 def __default_pipeline():
     return Pipeline(
-        config_name="foo",
+        config_id="foo",
         properties={},
         tasks=[__default_task()],
     )
@@ -209,7 +209,7 @@ def default_scenario_config_list():
 @pytest.fixture
 def default_scenario():
     return Scenario(
-        config_name="foo",
+        config_id="foo",
         properties={},
         pipelines=[__default_pipeline()],
     )
