@@ -67,7 +67,7 @@ jobs:
 
       - name: test with tox
         run: |
-          tox
+           tox -e all-tests
 
       - name: list files
         run: ls -l .
