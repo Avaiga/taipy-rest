@@ -14,21 +14,12 @@ jobs:
                 with:
                     python-version: 3.9
 
-            -   name: Install taipy-core
+            -   name: SSH key for taipy-core
                 run: |
                     mkdir -p ~/.ssh
                     echo "${{ secrets.SSH_KEY_TAIPY_CORE }}" > ~/.ssh/id_ed25519
                     ssh-keyscan github.com >> ~/.ssh/known_hosts
                     chmod 600 ~/.ssh/id_ed25519
-                    pip install git+ssh://git@github.com/avaiga/taipy-core.git
-
-            - name: Install taipy-gui
-              run: |
-                  mkdir -p ~/.ssh
-                  echo "${{ secrets.SSH_KEY_TAIPY_GUI }}" > ~/.ssh/id_ed25519
-                  ssh-keyscan github.com >> ~/.ssh/known_hosts
-                  chmod 600 ~/.ssh/id_ed25519
-                  pip install git+ssh://git@github.com/avaiga/taipy-gui.git
 
             -   name: Install pipenv
                 run: |
@@ -46,7 +37,6 @@ jobs:
                     pipenv lock
                     pipenv install --system --dev --python 3.9
                     pip install requests openpyxl
-                    pip install git+https://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@github.com/avaiga/taipy.git#egg=taipy --pre
 
             -   name: Build coverage file
                 run: |
