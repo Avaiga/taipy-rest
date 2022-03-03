@@ -1,5 +1,3 @@
-import importlib
-
 from flask import Flask
 
 from taipy_rest import api
@@ -7,13 +5,6 @@ from taipy_rest.extensions import apispec, db, migrate
 from taipy.gui import Gui, Markdown
 from taipy_rest.config import TAIPY_SETUP_FILE
 import os
-
-
-# def _routes(app):
-#     routes = []
-#     for route in app.url_map.iter_rules():
-#         routes.append('%s' % route)
-#     return routes
 
 
 def create_app(testing=False):
