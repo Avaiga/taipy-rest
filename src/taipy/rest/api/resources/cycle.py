@@ -8,11 +8,10 @@ from taipy.core.common.frequency import Frequency
 
 from taipy.core.cycle.cycle_manager import CycleManager
 from taipy.core.exceptions.repository import ModelNotFound
-
-from taipy_rest.api.schemas import CycleSchema, CycleResponseSchema
 from taipy.core.cycle.cycle import Cycle
 
-from taipy_rest.config import TAIPY_SETUP_FILE
+from ..schemas import CycleSchema, CycleResponseSchema
+from ...config import TAIPY_SETUP_FILE
 
 
 class CycleResource(Resource):

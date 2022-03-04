@@ -1,16 +1,16 @@
 from flask import Flask
 
-from taipy_rest import api
-from taipy_rest.extensions import apispec, db, migrate
+from . import api
+from .extensions import apispec, db, migrate
 from taipy.gui import Gui, Markdown
-from taipy_rest.config import TAIPY_SETUP_FILE
+from .config import TAIPY_SETUP_FILE
 import os
 
 
 def create_app(testing=False):
     """Application factory, used to create application"""
-    app = Flask("taipy_rest")
-    app.config.from_object("taipy_rest.config")
+    app = Flask("taipy.rest")
+    app.config.from_object("taipy.rest.config")
 
     if testing is True:
         app.config["TESTING"] = True

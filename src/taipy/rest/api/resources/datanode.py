@@ -11,7 +11,7 @@ from taipy.core.data.data_manager import DataManager
 from taipy.core.data.operator import Operator
 from taipy.core.exceptions.data_node import NonExistingDataNode
 
-from taipy_rest.api.schemas import (
+from ..schemas import (
     CSVDataNodeConfigSchema,
     DataNodeSchema,
     InMemoryDataNodeConfigSchema,
@@ -19,7 +19,7 @@ from taipy_rest.api.schemas import (
     SQLDataNodeConfigSchema,
     DataNodeFilterSchema,
 )
-from taipy_rest.config import TAIPY_SETUP_FILE
+from ...config import TAIPY_SETUP_FILE
 
 ds_schema_map = {
     "csv": CSVDataNodeConfigSchema,

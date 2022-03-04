@@ -2,7 +2,7 @@ from flask import Blueprint, current_app, jsonify
 from flask_restful import Api
 from marshmallow import ValidationError
 
-from taipy_rest.api.resources import (
+from .resources import (
     DataNodeList,
     DataNodeResource,
     DataNodeReader,
@@ -21,7 +21,7 @@ from taipy_rest.api.resources import (
     JobResource,
     JobList,
 )
-from taipy_rest.api.schemas import (
+from .schemas import (
     DataNodeSchema,
     TaskSchema,
     PipelineSchema,
@@ -29,7 +29,7 @@ from taipy_rest.api.schemas import (
     CycleSchema,
     JobSchema,
 )
-from taipy_rest.extensions import apispec
+from ..extensions import apispec
 
 blueprint = Blueprint("api", __name__, url_prefix="/api/v1")
 

@@ -9,10 +9,10 @@ from taipy.core.common.alias import JobId
 from taipy.core.job.job_manager import JobManager
 from taipy.core.task.task_manager import TaskManager
 from taipy.core.exceptions.repository import ModelNotFound
-
-from taipy_rest.api.schemas import JobSchema, JobResponseSchema
 from taipy.core.job.job import Job
-from taipy_rest.config import TAIPY_SETUP_FILE
+
+from ..schemas import JobSchema, JobResponseSchema
+from ...config import TAIPY_SETUP_FILE
 import importlib
 
 

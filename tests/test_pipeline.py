@@ -44,7 +44,7 @@ def test_create_pipeline(client, default_pipeline_config):
     assert rep.status_code == 404
 
     with mock.patch(
-        "taipy_rest.api.resources.pipeline.PipelineList.fetch_config"
+        "taipy.rest.api.resources.pipeline.PipelineList.fetch_config"
     ) as config_mock:
         config_mock.return_value = default_pipeline_config
         pipelines_url = url_for("api.pipelines", config_name="bar")
@@ -55,7 +55,7 @@ def test_create_pipeline(client, default_pipeline_config):
 def test_get_all_pipelines(client, default_pipeline_config_list):
     for ds in range(10):
         with mock.patch(
-            "taipy_rest.api.resources.pipeline.PipelineList.fetch_config"
+            "taipy.rest.api.resources.pipeline.PipelineList.fetch_config"
         ) as config_mock:
             config_mock.return_value = default_pipeline_config_list[ds]
             pipelines_url = url_for("api.pipelines", config_name=config_mock.name)

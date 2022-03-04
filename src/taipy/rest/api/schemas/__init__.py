@@ -1,4 +1,4 @@
-from taipy_rest.api.schemas.datanode import (
+from .datanode import (
     CSVDataNodeConfigSchema,
     DataNodeSchema,
     InMemoryDataNodeConfigSchema,
@@ -8,11 +8,11 @@ from taipy_rest.api.schemas.datanode import (
     DataNodeFilterSchema,
 )
 
-from taipy_rest.api.schemas.task import TaskSchema
-from taipy_rest.api.schemas.pipeline import PipelineSchema, PipelineResponseSchema
-from taipy_rest.api.schemas.scenario import ScenarioSchema, ScenarioResponseSchema
-from taipy_rest.api.schemas.cycle import CycleSchema, CycleResponseSchema
-from taipy_rest.api.schemas.job import JobSchema, JobResponseSchema
+from .task import TaskSchema
+from .pipeline import PipelineSchema, PipelineResponseSchema
+from .scenario import ScenarioSchema, ScenarioResponseSchema
+from .cycle import CycleSchema, CycleResponseSchema
+from .job import JobSchema, JobResponseSchema
 
 
 __all__ = [

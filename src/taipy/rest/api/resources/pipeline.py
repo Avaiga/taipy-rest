@@ -7,10 +7,10 @@ from taipy.core.pipeline.pipeline_manager import PipelineManager
 from taipy.core.task.task_manager import TaskManager
 from taipy.core.exceptions.pipeline import NonExistingPipeline
 from taipy.core.exceptions.repository import ModelNotFound
-
-from taipy_rest.api.schemas import PipelineSchema, PipelineResponseSchema
 from taipy.core.pipeline.pipeline import Pipeline
-from taipy_rest.config import TAIPY_SETUP_FILE
+
+from ..schemas import PipelineSchema, PipelineResponseSchema
+from ...config import TAIPY_SETUP_FILE
 import importlib
 
 

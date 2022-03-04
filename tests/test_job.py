@@ -36,7 +36,7 @@ def test_create_job(client, default_task_config):
     rep = client.post(jobs_url, json=data)
     assert rep.status_code == 400
 
-    with mock.patch("taipy_rest.api.resources.job.JobList.fetch_config") as config_mock:
+    with mock.patch("taipy.rest.api.resources.job.JobList.fetch_config") as config_mock:
         config_mock.return_value = default_task_config
         rep = client.post(jobs_url, json={"task_name": "foo"})
         assert rep.status_code == 201

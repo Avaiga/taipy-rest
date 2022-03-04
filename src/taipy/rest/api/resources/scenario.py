@@ -8,11 +8,10 @@ from taipy.core.pipeline.pipeline_manager import PipelineManager
 from taipy.core.scenario.scenario_manager import ScenarioManager
 from taipy.core.exceptions.scenario import NonExistingScenario
 from taipy.core.exceptions.repository import ModelNotFound
-
-from taipy_rest.api.schemas import ScenarioSchema, ScenarioResponseSchema
 from taipy.core.scenario.scenario import Scenario
 
-from taipy_rest.config import TAIPY_SETUP_FILE
+from ..schemas import ScenarioSchema, ScenarioResponseSchema
+from ...config import TAIPY_SETUP_FILE
 
 
 class ScenarioResource(Resource):

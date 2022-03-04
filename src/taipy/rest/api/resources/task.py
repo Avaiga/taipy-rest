@@ -8,12 +8,12 @@ from taipy.core.task.task_manager import TaskManager
 from taipy.core.data.data_manager import DataManager
 from taipy.core.exceptions.repository import ModelNotFound
 
-from taipy_rest.api.schemas import TaskSchema
 from taipy.core.task.task import Task
 from taipy.core.common.utils import load_fct
 from taipy.core.scheduler.scheduler import Scheduler
 
-from taipy_rest.config import TAIPY_SETUP_FILE
+from ..schemas import TaskSchema
+from ...config import TAIPY_SETUP_FILE
 
 
 class TaskResource(Resource):

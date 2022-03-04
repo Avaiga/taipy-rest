@@ -1,6 +1,7 @@
 import os
 import shutil
 import uuid
+import sys
 from datetime import datetime, timedelta
 
 import pandas as pd
@@ -18,7 +19,11 @@ from taipy.core.scenario.scenario import Scenario
 from taipy.core.task.task import Task
 from taipy.core.task.task_manager import TaskManager
 
-from taipy_rest.app import create_app
+from src.taipy import rest
+modules = sys.modules
+sys.modules['taipy.rest'] = rest
+
+from taipy.rest.app import create_app
 
 
 @pytest.fixture(scope="session")
