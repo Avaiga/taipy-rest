@@ -105,7 +105,7 @@ def default_datanode_config_list():
     for i in range(10):
         configs.append(
             Config.add_data_node(
-                name=f"ds-{i}", storage_type="in_memory", scope=Scope.PIPELINE
+                id=f"ds-{i}", storage_type="in_memory", scope=Scope.PIPELINE
             )
         )
     return configs
