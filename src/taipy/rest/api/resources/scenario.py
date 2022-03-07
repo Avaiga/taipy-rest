@@ -3,15 +3,14 @@ import os
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-from taipy.core.pipeline.pipeline_manager import PipelineManager
-
-from taipy.core.scenario.scenario_manager import ScenarioManager
-from taipy.core.exceptions.scenario import NonExistingScenario
 from taipy.core.exceptions.repository import ModelNotFound
+from taipy.core.exceptions.scenario import NonExistingScenario
+from taipy.core.pipeline.pipeline_manager import PipelineManager
 from taipy.core.scenario.scenario import Scenario
+from taipy.core.scenario.scenario_manager import ScenarioManager
 
-from ..schemas import ScenarioSchema, ScenarioResponseSchema
 from ...config import TAIPY_SETUP_FILE
+from ..schemas import ScenarioResponseSchema, ScenarioSchema
 
 
 class ScenarioResource(Resource):

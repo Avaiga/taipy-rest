@@ -1,10 +1,11 @@
+import os
+
 from flask import Flask
+from taipy.gui import Gui, Markdown
 
 from . import api
-from .extensions import apispec, db, migrate
-from taipy.gui import Gui, Markdown
 from .config import TAIPY_SETUP_FILE
-import os
+from .extensions import apispec, db, migrate
 
 
 def create_app(testing=False):

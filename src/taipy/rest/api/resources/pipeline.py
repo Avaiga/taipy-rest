@@ -1,17 +1,16 @@
+import importlib
 import os
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-
-from taipy.core.pipeline.pipeline_manager import PipelineManager
-from taipy.core.task.task_manager import TaskManager
 from taipy.core.exceptions.pipeline import NonExistingPipeline
 from taipy.core.exceptions.repository import ModelNotFound
 from taipy.core.pipeline.pipeline import Pipeline
+from taipy.core.pipeline.pipeline_manager import PipelineManager
+from taipy.core.task.task_manager import TaskManager
 
-from ..schemas import PipelineSchema, PipelineResponseSchema
 from ...config import TAIPY_SETUP_FILE
-import importlib
+from ..schemas import PipelineResponseSchema, PipelineSchema
 
 
 class PipelineResource(Resource):

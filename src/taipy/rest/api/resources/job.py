@@ -1,3 +1,4 @@
+import importlib
 import os
 import uuid
 from typing import Optional
@@ -5,15 +6,13 @@ from typing import Optional
 from flask import jsonify, make_response, request
 from flask_restful import Resource
 from taipy.core.common.alias import JobId
-
-from taipy.core.job.job_manager import JobManager
-from taipy.core.task.task_manager import TaskManager
 from taipy.core.exceptions.repository import ModelNotFound
 from taipy.core.job.job import Job
+from taipy.core.job.job_manager import JobManager
+from taipy.core.task.task_manager import TaskManager
 
-from ..schemas import JobSchema, JobResponseSchema
 from ...config import TAIPY_SETUP_FILE
-import importlib
+from ..schemas import JobResponseSchema, JobSchema
 
 
 class JobResource(Resource):

@@ -3,17 +3,15 @@ import os
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-
-from taipy.core.task.task_manager import TaskManager
+from taipy.core.common._utils import _load_fct
 from taipy.core.data.data_manager import DataManager
 from taipy.core.exceptions.repository import ModelNotFound
-
-from taipy.core.task.task import Task
-from taipy.core.common._utils import _load_fct
 from taipy.core.scheduler.scheduler import Scheduler
+from taipy.core.task.task import Task
+from taipy.core.task.task_manager import TaskManager
 
-from ..schemas import TaskSchema
 from ...config import TAIPY_SETUP_FILE
+from ..schemas import TaskSchema
 
 
 class TaskResource(Resource):

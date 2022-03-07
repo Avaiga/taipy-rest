@@ -6,20 +6,19 @@ import numpy as np
 import pandas as pd
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-
 from taipy.core.data.data_manager import DataManager
 from taipy.core.data.operator import Operator
 from taipy.core.exceptions.data_node import NonExistingDataNode
 
+from ...config import TAIPY_SETUP_FILE
 from ..schemas import (
     CSVDataNodeConfigSchema,
+    DataNodeFilterSchema,
     DataNodeSchema,
     InMemoryDataNodeConfigSchema,
     PickleDataNodeConfigSchema,
     SQLDataNodeConfigSchema,
-    DataNodeFilterSchema,
 )
-from ...config import TAIPY_SETUP_FILE
 
 ds_schema_map = {
     "csv": CSVDataNodeConfigSchema,

@@ -5,13 +5,12 @@ from datetime import datetime
 from flask import jsonify, make_response, request
 from flask_restful import Resource
 from taipy.core.common.frequency import Frequency
-
+from taipy.core.cycle.cycle import Cycle
 from taipy.core.cycle.cycle_manager import CycleManager
 from taipy.core.exceptions.repository import ModelNotFound
-from taipy.core.cycle.cycle import Cycle
 
-from ..schemas import CycleSchema, CycleResponseSchema
 from ...config import TAIPY_SETUP_FILE
+from ..schemas import CycleResponseSchema, CycleSchema
 
 
 class CycleResource(Resource):

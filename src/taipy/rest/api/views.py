@@ -2,34 +2,34 @@ from flask import Blueprint, current_app, jsonify
 from flask_restful import Api
 from marshmallow import ValidationError
 
+from ..extensions import apispec
 from .resources import (
+    CycleList,
+    CycleResource,
     DataNodeList,
-    DataNodeResource,
     DataNodeReader,
+    DataNodeResource,
     DataNodeWriter,
-    TaskList,
-    TaskResource,
-    TaskExecutor,
+    JobList,
+    JobResource,
+    PipelineExecutor,
     PipelineList,
     PipelineResource,
-    PipelineExecutor,
+    ScenarioExecutor,
     ScenarioList,
     ScenarioResource,
-    ScenarioExecutor,
-    CycleResource,
-    CycleList,
-    JobResource,
-    JobList,
+    TaskExecutor,
+    TaskList,
+    TaskResource,
 )
 from .schemas import (
+    CycleSchema,
     DataNodeSchema,
-    TaskSchema,
+    JobSchema,
     PipelineSchema,
     ScenarioSchema,
-    CycleSchema,
-    JobSchema,
+    TaskSchema,
 )
-from ..extensions import apispec
 
 blueprint = Blueprint("api", __name__, url_prefix="/api/v1")
 
