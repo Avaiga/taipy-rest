@@ -1,7 +1,6 @@
 import os
 import shutil
 import uuid
-import sys
 from datetime import datetime, timedelta
 
 import pandas as pd
@@ -18,10 +17,6 @@ from taipy.core.pipeline.pipeline import Pipeline
 from taipy.core.scenario.scenario import Scenario
 from taipy.core.task.task import Task
 from taipy.core.task.task_manager import TaskManager
-
-# from src.taipy import rest
-# modules = sys.modules
-# sys.modules['taipy.rest'] = rest
 
 from src.taipy.rest.app import create_app
 
@@ -110,7 +105,7 @@ def default_datanode_config_list():
     for i in range(10):
         configs.append(
             Config.add_data_node(
-                id=f"ds-{i}", storage_type="in_memory", scope=Scope.PIPELINE
+                id=f"ds_{i}", storage_type="in_memory", scope=Scope.PIPELINE
             )
         )
     return configs
