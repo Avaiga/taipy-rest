@@ -2,9 +2,9 @@ name: test workflow
 
 on:
   push:
-    branches: [ main,release ]
+    branches: [ develop ]
   pull_request:
-    branches: [ main,release ]
+    branches: [ develop ]
 
   workflow_dispatch:
     inputs:
