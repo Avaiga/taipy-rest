@@ -14,29 +14,12 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install pipenv
+      - name: Lint and Coverage
         run: |
           sed -i 's/ssh/https/g' Pipfile
           sed -i 's/git@github/${{ secrets.PERSONAL_TOKEN }}@github/g' Pipfile
 
-          python -m pip install --upgrade pipenv wheel
-          pip install pytest pytest-cov tox tox-gh-actions
-
-      - id: cache-pipenv
-        uses: actions/cache@v1
-        with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-
-      - name: Install dependencies
-        run: |
-          pipenv lock
-          pipenv install --system --dev --python 3.9
-          pip install requests openpyxl
-
-      - name: Build coverage file
-        run: |
-          pytest -s --cov=src --cov-append --cov-report=xml --cov-report term-missing tests
+          tox
 
       - name: Code coverage
         uses: orgoro/coverage@v2
