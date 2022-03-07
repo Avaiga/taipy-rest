@@ -32,6 +32,7 @@ jobs:
           sed -i 's/ssh/https/g' Pipfile
           sed -i 's/git@github/${{ secrets.PERSONAL_TOKEN }}@github/g' Pipfile
 
+          pip install tox
           tox -e tests
 
       - name: Notify user if failed
