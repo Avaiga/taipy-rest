@@ -33,6 +33,7 @@ jobs:
           sed 's/ssh/https/g' Pipfile > Pipfile
           sed 's/git@github/${{ secrets.PERSONAL_TOKEN }}@github/g' Pipfile > Pipfile
 
+          cat Pipfile
           pip install tox
           tox -e tests
 
