@@ -16,7 +16,6 @@ Flask-RESTful = "*"
 Flask-Migrate = "*"
 Flask-SQLAlchemy = "*"
 Flask-JWT-Extended = "*"
-uwsgi = "*"
 markupsafe = "==2.0.1"
 taipy-core = {git = "ssh://git@github.com/avaiga/taipy-core.git"}
 taipy-gui = {git = "ssh://git@github.com/avaiga/taipy-gui.git"}
