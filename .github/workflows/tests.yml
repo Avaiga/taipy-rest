@@ -29,8 +29,8 @@ jobs:
 
       - name: Tests
         run: |
-          sed -i 's/ssh/https/g' Pipfile
-          sed -i 's/git@github/${{ secrets.PERSONAL_TOKEN }}@github/g' Pipfile
+          sed 's/ssh/https/g' Pipfile > Pipfile
+          sed 's/git@github/${{ secrets.PERSONAL_TOKEN }}@github/g' Pipfile > Pipfile
 
           pip install tox
           tox -e tests
