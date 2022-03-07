@@ -1,26 +1,23 @@
-# This is a basic workflow to help you get started with Actions
-
 name: test workflow
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master,main,release ]
+    branches: [ main,release ]
   pull_request:
-    branches: [ master,main,release ]
+    branches: [ main,release ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      user-to-notify:
+        description: "Github username to notify"
+        required: false
+        default: ""
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-   #This workflow contains two jobs called "test" and "test-gui"
   test:
-    # The type of runner that the job will run on
     strategy:
       matrix:
-        python-versions: [3.9]
+        python-versions: ['3.8', '3.9', '3.10']
         os: [ubuntu-18.04]
     runs-on: ${{ matrix.os }}
 
@@ -52,7 +49,7 @@ jobs:
           pipenv install --deploy --dev --python 3.9
 
       - id: code-quality
-        if: matrix.os == 'ubuntu-18.04'
+        if: matrix.os == 'ubuntu-18.04' && matrix.python-versions == '3.9'
         uses: ricardochaves/python-lint@v1.4.0
         with:
             python-root-list: "src tests"
@@ -65,5 +62,10 @@ jobs:
         run: |
            tox -e all-tests
 
-      - name: list files
-        run: ls -l .
+      - name: Notify user if failed
+        if: failure() && github.event_name == 'workflow_dispatch'
+        run: |
+          if [[ -n "${{ github.event.inputs.user-to-notify }}" ]]; then
+            curl "${{ secrets.notify_endpoint }}" -d '{"username": "${{ github.event.inputs.user-to-notify }}", "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }' -H "Content-Type: application/json"
+          fi
+        shell: bash
