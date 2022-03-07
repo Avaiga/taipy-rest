@@ -96,7 +96,9 @@ def default_df_datanode():
 
 @pytest.fixture
 def default_datanode_config():
-    return Config.add_data_node(f"taipy_{uuid.uuid4().hex}", "in_memory", Scope.PIPELINE)
+    return Config.add_data_node(
+        f"taipy_{uuid.uuid4().hex}", "in_memory", Scope.PIPELINE
+    )
 
 
 @pytest.fixture
@@ -182,14 +184,17 @@ def default_pipeline_config():
 def default_pipeline_config_list():
     configs = []
     for i in range(10):
-        configs.append(Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config()))
+        configs.append(
+            Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config())
+        )
     return configs
 
 
 @pytest.fixture
 def default_scenario_config():
     return Config.add_scenario(
-        f"taipy_{uuid.uuid4().hex}", [Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config())]
+        f"taipy_{uuid.uuid4().hex}",
+        [Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config())],
     )
 
 
