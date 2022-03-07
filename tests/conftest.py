@@ -96,7 +96,7 @@ def default_df_datanode():
 
 @pytest.fixture
 def default_datanode_config():
-    return Config.add_data_node(uuid.uuid4().hex, "in_memory", Scope.PIPELINE)
+    return Config.add_data_node(f"taipy_{uuid.uuid4().hex}", "in_memory", Scope.PIPELINE)
 
 
 @pytest.fixture
@@ -152,7 +152,7 @@ def default_task_config():
 def default_task_config_list():
     configs = []
     for i in range(10):
-        configs.append(Config.add_task(f"task-{i}", print, [], []))
+        configs.append(Config.add_task(f"task_{i}", print, [], []))
     return configs
 
 
@@ -175,21 +175,21 @@ def default_pipeline():
 
 @pytest.fixture
 def default_pipeline_config():
-    return Config.add_pipeline(uuid.uuid4().hex, __task_config())
+    return Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config())
 
 
 @pytest.fixture
 def default_pipeline_config_list():
     configs = []
     for i in range(10):
-        configs.append(Config.add_pipeline(uuid.uuid4().hex, __task_config()))
+        configs.append(Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config()))
     return configs
 
 
 @pytest.fixture
 def default_scenario_config():
     return Config.add_scenario(
-        uuid.uuid4().hex, [Config.add_pipeline(uuid.uuid4().hex, __task_config())]
+        f"taipy_{uuid.uuid4().hex}", [Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config())]
     )
 
 
@@ -199,8 +199,8 @@ def default_scenario_config_list():
     for i in range(10):
         configs.append(
             Config.add_scenario(
-                uuid.uuid4().hex,
-                [Config.add_pipeline(uuid.uuid4().hex, __task_config())],
+                f"taipy_{uuid.uuid4().hex}",
+                [Config.add_pipeline(f"taipy_{uuid.uuid4().hex}", __task_config())],
             )
         )
     return configs
@@ -232,7 +232,7 @@ def create_cycle_list():
     cycles = []
     manager = CycleManager()
     for i in range(10):
-        c = __create_cycle(f"cycle-{1}")
+        c = __create_cycle(f"cycle_{1}")
         manager._set(c)
     return cycles
 
