@@ -9,8 +9,8 @@ import os
 
 def create_app(testing=False):
     """Application factory, used to create application"""
-    app = Flask("taipy.rest")
-    app.config.from_object("taipy.rest.config")
+    app = Flask("src.taipy.rest")
+    app.config.from_object("src.taipy.rest.config")
 
     if testing is True:
         app.config["TESTING"] = True

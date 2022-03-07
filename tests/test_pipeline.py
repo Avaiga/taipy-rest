@@ -11,7 +11,7 @@ def test_get_pipeline(client, default_pipeline):
     assert rep.status_code == 404
 
     with mock.patch(
-        "taipy.core.pipeline.pipeline_manager.PipelineManager.get"
+        "taipy.core.pipeline.pipeline_manager.PipelineManager._get"
     ) as manager_mock:
         manager_mock.return_value = default_pipeline
 
@@ -26,7 +26,7 @@ def test_delete_pipeline(client):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.core.pipeline.pipeline_manager.PipelineManager.delete"):
+    with mock.patch("taipy.core.pipeline.pipeline_manager.PipelineManager._delete"):
         # test get_pipeline
         rep = client.delete(url_for("api.pipeline_by_id", pipeline_id="foo"))
         assert rep.status_code == 200
@@ -44,7 +44,7 @@ def test_create_pipeline(client, default_pipeline_config):
     assert rep.status_code == 404
 
     with mock.patch(
-        "taipy.rest.api.resources.pipeline.PipelineList.fetch_config"
+        "src.taipy.rest.api.resources.pipeline.PipelineList.fetch_config"
     ) as config_mock:
         config_mock.return_value = default_pipeline_config
         pipelines_url = url_for("api.pipelines", config_name="bar")
@@ -55,7 +55,7 @@ def test_create_pipeline(client, default_pipeline_config):
 def test_get_all_pipelines(client, default_pipeline_config_list):
     for ds in range(10):
         with mock.patch(
-            "taipy.rest.api.resources.pipeline.PipelineList.fetch_config"
+            "src.taipy.rest.api.resources.pipeline.PipelineList.fetch_config"
         ) as config_mock:
             config_mock.return_value = default_pipeline_config_list[ds]
             pipelines_url = url_for("api.pipelines", config_name=config_mock.name)
@@ -76,7 +76,7 @@ def test_execute_pipeline(client, default_pipeline):
     assert rep.status_code == 404
 
     with mock.patch(
-        "taipy.core.pipeline.pipeline_manager.PipelineManager.get"
+        "taipy.core.pipeline.pipeline_manager.PipelineManager._get"
     ) as manager_mock:
         manager_mock.return_value = default_pipeline
 

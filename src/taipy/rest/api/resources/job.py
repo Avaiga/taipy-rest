@@ -67,7 +67,7 @@ class JobResource(Resource):
     def get(self, job_id):
         schema = JobResponseSchema()
         manager = JobManager()
-        job = manager.get(job_id)
+        job = manager._get(job_id)
         if not job:
             return make_response(jsonify({"message": f"Job {job_id} not found"}), 404)
         return {"job": schema.dump(job)}
@@ -75,7 +75,7 @@ class JobResource(Resource):
     def delete(self, job_id):
         try:
             manager = JobManager()
-            manager.delete(job_id)
+            manager._delete(job_id)
         except ModelNotFound:
             return make_response(
                 jsonify({"message": f"DataNode {job_id} not found"}), 404
@@ -142,7 +142,7 @@ class JobList(Resource):
     def get(self):
         schema = JobResponseSchema(many=True)
         manager = JobManager()
-        jobs = manager.get_all()
+        jobs = manager._get_all()
         return schema.dump(jobs)
 
     def post(self):
@@ -156,7 +156,7 @@ class JobList(Resource):
         if not job:
             return {"msg": f"Task with name {job_data.get('task_name')} not found"}, 404
 
-        manager.set(job)
+        manager._set(job)
 
         return {
             "msg": "job created",

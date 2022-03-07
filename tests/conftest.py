@@ -19,11 +19,11 @@ from taipy.core.scenario.scenario import Scenario
 from taipy.core.task.task import Task
 from taipy.core.task.task_manager import TaskManager
 
-from src.taipy import rest
-modules = sys.modules
-sys.modules['taipy.rest'] = rest
+# from src.taipy import rest
+# modules = sys.modules
+# sys.modules['taipy.rest'] = rest
 
-from taipy.rest.app import create_app
+from src.taipy.rest.app import create_app
 
 
 @pytest.fixture(scope="session")
@@ -238,7 +238,7 @@ def create_cycle_list():
     manager = CycleManager()
     for i in range(10):
         c = __create_cycle(f"cycle-{1}")
-        manager.set(c)
+        manager._set(c)
     return cycles
 
 
@@ -262,7 +262,7 @@ def default_cycle():
 def __create_job():
     task_manager = TaskManager()
     task = __default_task()
-    task_manager.set(task)
+    task_manager._set(task)
     return Job(id=JobId(f"JOB_{uuid.uuid4()}"), task=task)
 
 
@@ -277,7 +277,7 @@ def create_job_list():
     manager = JobManager()
     for i in range(10):
         c = __create_job()
-        manager.set(c)
+        manager._set(c)
     return jobs
 
 

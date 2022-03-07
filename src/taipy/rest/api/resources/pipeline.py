@@ -65,7 +65,7 @@ class PipelineResource(Resource):
     def get(self, pipeline_id):
         schema = PipelineResponseSchema()
         manager = PipelineManager()
-        pipeline = manager.get(pipeline_id)
+        pipeline = manager._get(pipeline_id)
         if not pipeline:
             return make_response(
                 jsonify({"message": f"Pipeline {pipeline_id} not found"}), 404
@@ -75,7 +75,7 @@ class PipelineResource(Resource):
     def delete(self, pipeline_id):
         try:
             manager = PipelineManager()
-            manager.delete(pipeline_id)
+            manager._delete(pipeline_id)
         except ModelNotFound:
             return make_response(
                 jsonify({"message": f"DataNode {pipeline_id} not found"}), 404
@@ -142,7 +142,7 @@ class PipelineList(Resource):
     def get(self):
         schema = PipelineResponseSchema(many=True)
         manager = PipelineManager()
-        pipelines = manager.get_all()
+        pipelines = manager._get_all()
         return schema.dump(pipelines)
 
     def post(self):
@@ -168,9 +168,9 @@ class PipelineList(Resource):
     def __create_pipeline_from_schema(self, pipeline_schema: PipelineSchema):
         task_manager = TaskManager()
         return Pipeline(
-            config_name=pipeline_schema.get("name"),
+            config_id=pipeline_schema.get("name"),
             properties=pipeline_schema.get("properties", {}),
-            tasks=[task_manager.get(ts) for ts in pipeline_schema.get("task_ids")],
+            tasks=[task_manager._get(ts) for ts in pipeline_schema.get("task_ids")],
             parent_id=pipeline_schema.get("parent_id"),
         )
 

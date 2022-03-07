@@ -9,7 +9,7 @@ from taipy.core.data.data_manager import DataManager
 from taipy.core.exceptions.repository import ModelNotFound
 
 from taipy.core.task.task import Task
-from taipy.core.common.utils import load_fct
+from taipy.core.common._utils import _load_fct
 from taipy.core.scheduler.scheduler import Scheduler
 
 from ..schemas import TaskSchema
@@ -67,7 +67,7 @@ class TaskResource(Resource):
     def get(self, task_id):
         schema = TaskSchema()
         manager = TaskManager()
-        task = manager.get(task_id)
+        task = manager._get(task_id)
         if not task:
             return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
         return {"task": schema.dump(task)}
@@ -75,7 +75,7 @@ class TaskResource(Resource):
     def delete(self, task_id):
         try:
             manager = TaskManager()
-            manager.delete(task_id)
+            manager._delete(task_id)
         except ModelNotFound:
             return make_response(
                 jsonify({"message": f"DataNode {task_id} not found"}), 404
@@ -142,7 +142,7 @@ class TaskList(Resource):
     def get(self):
         schema = TaskSchema(many=True)
         manager = TaskManager()
-        tasks = manager.get_all()
+        tasks = manager._get_all()
         return schema.dump(tasks)
 
     def post(self):
@@ -169,11 +169,11 @@ class TaskList(Resource):
         data_manager = DataManager()
         return Task(
             task_schema.get("config_name"),
-            load_fct(
+            _load_fct(
                 task_schema.get("function_module"), task_schema.get("function_name")
             ),
-            [data_manager.get(ds) for ds in task_schema.get("input_ids")],
-            [data_manager.get(ds) for ds in task_schema.get("output_ids")],
+            [data_manager._get(ds) for ds in task_schema.get("input_ids")],
+            [data_manager._get(ds) for ds in task_schema.get("output_ids")],
             task_schema.get("parent_id"),
         )
 
@@ -209,7 +209,7 @@ class TaskExecutor(Resource):
 
     def post(self, task_id):
         manager = TaskManager()
-        task = manager.get(task_id)
+        task = manager._get(task_id)
         if not task:
             return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
         Scheduler().submit_task(task)

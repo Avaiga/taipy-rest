@@ -65,7 +65,7 @@ class CycleResource(Resource):
     def get(self, cycle_id):
         schema = CycleResponseSchema()
         manager = CycleManager()
-        cycle = manager.get(cycle_id)
+        cycle = manager._get(cycle_id)
         if not cycle:
             return make_response(
                 jsonify({"message": f"Cycle {cycle_id} not found"}), 404
@@ -75,7 +75,7 @@ class CycleResource(Resource):
     def delete(self, cycle_id):
         try:
             manager = CycleManager()
-            manager.delete(cycle_id)
+            manager._delete(cycle_id)
         except ModelNotFound:
             return make_response(
                 jsonify({"message": f"DataNode {cycle_id} not found"}), 404
@@ -142,7 +142,7 @@ class CycleList(Resource):
     def get(self):
         schema = CycleSchema(many=True)
         manager = CycleManager()
-        cycles = manager.get_all()
+        cycles = manager._get_all()
         return schema.dump(cycles)
 
     def post(self):
@@ -150,7 +150,7 @@ class CycleList(Resource):
         manager = CycleManager()
 
         cycle = self.__create_cycle_from_schema(schema.load(request.json))
-        manager.set(cycle)
+        manager._set(cycle)
 
         return {
             "msg": "cycle created",

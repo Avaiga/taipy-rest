@@ -9,7 +9,7 @@ def test_get_task(client, default_task):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.core.task.task_manager.TaskManager.get") as manager_mock:
+    with mock.patch("taipy.core.task.task_manager.TaskManager._get") as manager_mock:
         manager_mock.return_value = default_task
 
         # test get_task
@@ -23,7 +23,7 @@ def test_delete_task(client):
     rep = client.get(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.core.task.task_manager.TaskManager.delete"):
+    with mock.patch("taipy.core.task.task_manager.TaskManager._delete"):
         # test get_task
         rep = client.delete(url_for("api.task_by_id", task_id="foo"))
         assert rep.status_code == 200
@@ -41,7 +41,7 @@ def test_create_task(client, default_task_config):
     assert rep.status_code == 404
 
     with mock.patch(
-        "taipy.rest.api.resources.task.TaskList.fetch_config"
+        "src.taipy.rest.api.resources.task.TaskList.fetch_config"
     ) as config_mock:
         config_mock.return_value = default_task_config
         tasks_url = url_for("api.tasks", config_name="bar")
@@ -52,7 +52,7 @@ def test_create_task(client, default_task_config):
 def test_get_all_tasks(client, task_data, default_task_config_list):
     for ds in range(10):
         with mock.patch(
-            "taipy.rest.api.resources.task.TaskList.fetch_config"
+            "src.taipy.rest.api.resources.task.TaskList.fetch_config"
         ) as config_mock:
             config_mock.return_value = default_task_config_list[ds]
             tasks_url = url_for("api.tasks", config_name=config_mock.name)
@@ -71,7 +71,7 @@ def test_execute_task(client, default_task):
     rep = client.post(user_url)
     assert rep.status_code == 404
 
-    with mock.patch("taipy.core.task.task_manager.TaskManager.get") as manager_mock:
+    with mock.patch("taipy.core.task.task_manager.TaskManager._get") as manager_mock:
         manager_mock.return_value = default_task
 
         # test get_task

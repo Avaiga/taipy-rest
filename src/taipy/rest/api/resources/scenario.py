@@ -65,7 +65,7 @@ class ScenarioResource(Resource):
     def get(self, scenario_id):
         schema = ScenarioResponseSchema()
         manager = ScenarioManager()
-        scenario = manager.get(scenario_id)
+        scenario = manager._get(scenario_id)
         if not scenario:
             return make_response(
                 jsonify({"message": f"Scenario {scenario_id} not found"}), 404
@@ -75,7 +75,7 @@ class ScenarioResource(Resource):
     def delete(self, scenario_id):
         try:
             manager = ScenarioManager()
-            manager.delete(scenario_id)
+            manager._delete(scenario_id)
         except ModelNotFound:
             return make_response(
                 jsonify({"message": f"DataNode {scenario_id} not found"}), 404
@@ -142,7 +142,7 @@ class ScenarioList(Resource):
     def get(self):
         schema = ScenarioResponseSchema(many=True)
         manager = ScenarioManager()
-        scenarios = manager.get_all()
+        scenarios = manager._get_all()
         return schema.dump(scenarios)
 
     def post(self):
@@ -172,7 +172,7 @@ class ScenarioList(Resource):
             config_name=scenario_schema.get("name"),
             properties=scenario_schema.get("properties", {}),
             pipelines=[
-                pipeline_manager.get(pl) for pl in scenario_schema.get("pipeline_ids")
+                pipeline_manager._get(pl) for pl in scenario_schema.get("pipeline_ids")
             ],
             scenario_id=scenario_schema.get("id"),
             is_master=scenario_schema.get("master_scenario"),

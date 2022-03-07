@@ -88,7 +88,7 @@ class DataNodeResource(Resource):
     def get(self, datanode_id):
         schema = DataNodeSchema()
         manager = DataManager()
-        datanode = manager.get(datanode_id)
+        datanode = manager._get(datanode_id)
         if not datanode:
             return make_response(
                 jsonify({"message": f"DataNode {datanode_id} not found"}), 404
@@ -98,7 +98,7 @@ class DataNodeResource(Resource):
     def delete(self, datanode_id):
         try:
             manager = DataManager()
-            manager.delete(datanode_id)
+            manager._delete(datanode_id)
         except NonExistingDataNode:
             return make_response(
                 jsonify({"message": f"DataNode {datanode_id} not found"}), 404
@@ -164,7 +164,7 @@ class DataNodeList(Resource):
     def get(self):
         schema = DataNodeSchema(many=True)
         manager = DataManager()
-        datanodes = manager.get_all()
+        datanodes = manager._get_all()
         return schema.dump(datanodes)
 
     def post(self):
@@ -236,7 +236,7 @@ class DataNodeReader(Resource):
         try:
             schema = DataNodeFilterSchema()
             manager = DataManager()
-            datanode = manager.get(datanode_id)
+            datanode = manager._get(datanode_id)
 
             data = request.json
             operators = self.__make_operators(schema.load(data)) if data else []
@@ -282,7 +282,7 @@ class DataNodeWriter(Resource):
         try:
             manager = DataManager()
             data = request.json
-            datanode = manager.get(datanode_id)
+            datanode = manager._get(datanode_id)
             datanode.write(data)
             return {"message": "DataNode data successfully updated"}
         except NonExistingDataNode:
