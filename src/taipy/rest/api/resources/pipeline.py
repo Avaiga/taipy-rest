@@ -6,8 +6,8 @@ from flask_restful import Resource
 from taipy.core.exceptions.pipeline import NonExistingPipeline
 from taipy.core.exceptions.repository import ModelNotFound
 from taipy.core.pipeline.pipeline import Pipeline
-from taipy.core.pipeline.pipeline_manager import PipelineManager
-from taipy.core.task.task_manager import TaskManager
+from taipy.core.pipeline._pipeline_manager import _PipelineManager as PipelineManager
+from taipy.core.task._task_manager import _TaskManager as TaskManager
 
 from ...config import TAIPY_SETUP_FILE
 from ..schemas import PipelineResponseSchema, PipelineSchema
@@ -155,7 +155,7 @@ class PipelineList(Resource):
 
         try:
             config = self.fetch_config(config_id)
-            pipeline = manager.get_or_create(config)
+            pipeline = manager._get_or_create(config)
 
             return {
                 "msg": "pipeline created",
@@ -206,7 +206,7 @@ class PipelineExecutor(Resource):
     def post(self, pipeline_id):
         try:
             manager = PipelineManager()
-            manager.submit(pipeline_id)
+            manager._submit(pipeline_id)
             return {"message": f"Executed pipeline {pipeline_id}"}
         except NonExistingPipeline:
             return make_response(

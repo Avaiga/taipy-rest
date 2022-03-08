@@ -5,9 +5,9 @@ from flask import jsonify, make_response, request
 from flask_restful import Resource
 from taipy.core.exceptions.repository import ModelNotFound
 from taipy.core.exceptions.scenario import NonExistingScenario
-from taipy.core.pipeline.pipeline_manager import PipelineManager
+from taipy.core.pipeline._pipeline_manager import _PipelineManager as PipelineManager
 from taipy.core.scenario.scenario import Scenario
-from taipy.core.scenario.scenario_manager import ScenarioManager
+from taipy.core.scenario._scenario_manager import _ScenarioManager as ScenarioManager
 
 from ...config import TAIPY_SETUP_FILE
 from ..schemas import ScenarioResponseSchema, ScenarioSchema
@@ -156,7 +156,7 @@ class ScenarioList(Resource):
 
         try:
             config = self.fetch_config(config_id)
-            scenario = manager.create(config)
+            scenario = manager._create(config)
 
             return {
                 "msg": "scenario created",
@@ -211,7 +211,7 @@ class ScenarioExecutor(Resource):
     def post(self, scenario_id):
         try:
             manager = ScenarioManager()
-            manager.submit(scenario_id)
+            manager._submit(scenario_id)
             return {"message": f"Executed scenario {scenario_id}"}
         except NonExistingScenario:
             return make_response(

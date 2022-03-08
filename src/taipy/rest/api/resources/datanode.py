@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-from taipy.core.data.data_manager import DataManager
+from taipy.core.data._data_manager import _DataManager as DataManager
 from taipy.core.data.operator import Operator
 from taipy.core.exceptions.data_node import NonExistingDataNode
 
@@ -177,7 +177,7 @@ class DataNodeList(Resource):
             config = self.fetch_config(config_id)
             schema = ds_schema_map.get(config.storage_type)()
             manager = DataManager()
-            manager.get_or_create(config)
+            manager._get_or_create(config)
 
             return {
                 "msg": "datanode created",

@@ -4,9 +4,9 @@ from datetime import datetime
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
-from taipy.core.common.frequency import Frequency
-from taipy.core.cycle.cycle import Cycle
-from taipy.core.cycle.cycle_manager import CycleManager
+from taipy.core import Frequency
+from taipy.core import Cycle
+from taipy.core.cycle._cycle_manager import _CycleManager as CycleManager
 from taipy.core.exceptions.repository import ModelNotFound
 
 from ...config import TAIPY_SETUP_FILE

@@ -7,9 +7,9 @@ from flask import jsonify, make_response, request
 from flask_restful import Resource
 from taipy.core.common.alias import JobId
 from taipy.core.exceptions.repository import ModelNotFound
-from taipy.core.job.job import Job
-from taipy.core.job.job_manager import JobManager
-from taipy.core.task.task_manager import TaskManager
+from taipy.core import Job
+from taipy.core.job._job_manager import _JobManager as JobManager
+from taipy.core.task._task_manager import _TaskManager as TaskManager
 
 from ...config import TAIPY_SETUP_FILE
 from ..schemas import JobResponseSchema, JobSchema
@@ -165,7 +165,7 @@ class JobList(Resource):
     def __create_job_from_schema(self, job_schema: JobSchema) -> Optional[Job]:
         task_manager = TaskManager()
         try:
-            task = task_manager.get_or_create(
+            task = task_manager._get_or_create(
                 self.fetch_config(job_schema.get("task_name"))
             )
         except AttributeError:
