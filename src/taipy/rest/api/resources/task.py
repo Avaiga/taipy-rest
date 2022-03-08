@@ -134,8 +134,8 @@ class TaskList(Resource):
             self.module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(self.module)
 
-    def fetch_config(self, config_name):
-        return getattr(self.module, config_name)
+    def fetch_config(self, config_id):
+        return getattr(self.module, config_id)
 
     def get(self):
         schema = TaskSchema(many=True)
@@ -145,15 +145,15 @@ class TaskList(Resource):
 
     def post(self):
         args = request.args
-        config_name = args.get("config_name")
+        config_id = args.get("config_id")
 
         schema = TaskSchema()
         manager = TaskManager()
-        if not config_name:
-            return {"msg": "Config name is mandatory"}, 400
+        if not config_id:
+            return {"msg": "Config id is mandatory"}, 400
 
         try:
-            config = self.fetch_config(config_name)
+            config = self.fetch_config(config_id)
             task = manager.get_or_create(config)
 
             return {
@@ -161,12 +161,12 @@ class TaskList(Resource):
                 "task": schema.dump(task),
             }, 201
         except AttributeError:
-            return {"msg": f"Config name {config_name} not found"}, 404
+            return {"msg": f"Config id {config_id} not found"}, 404
 
     def __create_task_from_schema(self, task_schema: TaskSchema):
         data_manager = DataManager()
         return Task(
-            task_schema.get("config_name"),
+            task_schema.get("config_id"),
             _load_fct(
                 task_schema.get("function_module"), task_schema.get("function_name")
             ),

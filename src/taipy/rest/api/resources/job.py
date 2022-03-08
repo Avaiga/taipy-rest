@@ -135,8 +135,8 @@ class JobList(Resource):
             self.module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(self.module)
 
-    def fetch_config(self, config_name):
-        return getattr(self.module, config_name)
+    def fetch_config(self, config_id):
+        return getattr(self.module, config_id)
 
     def get(self):
         schema = JobResponseSchema(many=True)

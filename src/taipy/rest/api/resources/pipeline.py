@@ -135,8 +135,8 @@ class PipelineList(Resource):
             self.module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(self.module)
 
-    def fetch_config(self, config_name):
-        return getattr(self.module, config_name)
+    def fetch_config(self, config_id):
+        return getattr(self.module, config_id)
 
     def get(self):
         schema = PipelineResponseSchema(many=True)
@@ -146,15 +146,15 @@ class PipelineList(Resource):
 
     def post(self):
         args = request.args
-        config_name = args.get("config_name")
+        config_id = args.get("config_id")
 
         response_schema = PipelineResponseSchema()
         manager = PipelineManager()
-        if not config_name:
-            return {"msg": "Config name is mandatory"}, 400
+        if not config_id:
+            return {"msg": "Config id is mandatory"}, 400
 
         try:
-            config = self.fetch_config(config_name)
+            config = self.fetch_config(config_id)
             pipeline = manager.get_or_create(config)
 
             return {
@@ -162,7 +162,7 @@ class PipelineList(Resource):
                 "pipeline": response_schema.dump(pipeline),
             }, 201
         except AttributeError:
-            return {"msg": f"Config name {config_name} not found"}, 404
+            return {"msg": f"Config id {config_id} not found"}, 404
 
     def __create_pipeline_from_schema(self, pipeline_schema: PipelineSchema):
         task_manager = TaskManager()

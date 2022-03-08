@@ -135,8 +135,8 @@ class ScenarioList(Resource):
             self.module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(self.module)
 
-    def fetch_config(self, config_name):
-        return getattr(self.module, config_name)
+    def fetch_config(self, config_id):
+        return getattr(self.module, config_id)
 
     def get(self):
         schema = ScenarioResponseSchema(many=True)
@@ -146,16 +146,16 @@ class ScenarioList(Resource):
 
     def post(self):
         args = request.args
-        config_name = args.get("config_name")
+        config_id = args.get("config_id")
 
         response_schema = ScenarioResponseSchema()
         manager = ScenarioManager()
 
-        if not config_name:
-            return {"msg": "Config name is mandatory"}, 400
+        if not config_id:
+            return {"msg": "Config id is mandatory"}, 400
 
         try:
-            config = self.fetch_config(config_name)
+            config = self.fetch_config(config_id)
             scenario = manager.create(config)
 
             return {
@@ -163,12 +163,12 @@ class ScenarioList(Resource):
                 "scenario": response_schema.dump(scenario),
             }, 201
         except AttributeError:
-            return {"msg": f"Config name {config_name} not found"}, 404
+            return {"msg": f"Config id {config_id} not found"}, 404
 
     def __create_scenario_from_schema(self, scenario_schema: ScenarioSchema):
         pipeline_manager = PipelineManager()
         return Scenario(
-            config_name=scenario_schema.get("name"),
+            config_id=scenario_schema.get("name"),
             properties=scenario_schema.get("properties", {}),
             pipelines=[
                 pipeline_manager._get(pl) for pl in scenario_schema.get("pipeline_ids")

@@ -3,7 +3,7 @@ from marshmallow import Schema, fields, pre_dump
 
 class DataNodeSchema(Schema):
 
-    config_name = fields.String()
+    config_id = fields.String()
     scope = fields.String()
     id = fields.String()
     name = fields.String()

@@ -35,7 +35,7 @@ def test_create_datanode(client, default_datanode_config):
     assert rep.status_code == 400
 
     # config does not exist
-    datanodes_url = url_for("api.datanodes", config_name="foo")
+    datanodes_url = url_for("api.datanodes", config_id="foo")
     rep = client.post(datanodes_url)
     assert rep.status_code == 404
 
@@ -43,7 +43,7 @@ def test_create_datanode(client, default_datanode_config):
         "src.taipy.rest.api.resources.datanode.DataNodeList.fetch_config"
     ) as config_mock:
         config_mock.return_value = default_datanode_config
-        datanodes_url = url_for("api.datanodes", config_name="bar")
+        datanodes_url = url_for("api.datanodes", config_id="bar")
         rep = client.post(datanodes_url)
         assert rep.status_code == 201
 
@@ -54,7 +54,7 @@ def test_get_all_datanodes(client, default_datanode_config_list):
             "src.taipy.rest.api.resources.datanode.DataNodeList.fetch_config"
         ) as config_mock:
             config_mock.return_value = default_datanode_config_list[ds]
-            datanodes_url = url_for("api.datanodes", config_name=config_mock.name)
+            datanodes_url = url_for("api.datanodes", config_id=config_mock.name)
             client.post(datanodes_url)
 
     rep = client.get(datanodes_url)

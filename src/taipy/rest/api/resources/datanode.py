@@ -157,8 +157,8 @@ class DataNodeList(Resource):
             self.module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(self.module)
 
-    def fetch_config(self, config_name):
-        return getattr(self.module, config_name)
+    def fetch_config(self, config_id):
+        return getattr(self.module, config_id)
 
     def get(self):
         schema = DataNodeSchema(many=True)
@@ -168,13 +168,13 @@ class DataNodeList(Resource):
 
     def post(self):
         args = request.args
-        config_name = args.get("config_name")
+        config_id = args.get("config_id")
 
-        if not config_name:
-            return {"msg": "Config name is mandatory"}, 400
+        if not config_id:
+            return {"msg": "Config id is mandatory"}, 400
 
         try:
-            config = self.fetch_config(config_name)
+            config = self.fetch_config(config_id)
             schema = ds_schema_map.get(config.storage_type)()
             manager = DataManager()
             manager.get_or_create(config)
@@ -184,7 +184,7 @@ class DataNodeList(Resource):
                 "datanode": schema.dump(config),
             }, 201
         except AttributeError:
-            return {"msg": f"Config name {config_name} not found"}, 404
+            return {"msg": f"Config id {config_id} not found"}, 404
 
 
 class DataNodeReader(Resource):

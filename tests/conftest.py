@@ -41,7 +41,7 @@ def datanode_data():
 @pytest.fixture
 def task_data():
     return {
-        "config_name": "foo",
+        "config_id": "foo",
         "input_ids": ["DATASOURCE_foo_3b888e17-1974-4a56-a42c-c7c96bc9cd54"],
         "function_name": "print",
         "function_module": "builtins",

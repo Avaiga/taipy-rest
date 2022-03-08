@@ -36,7 +36,7 @@ def test_create_task(client, default_task_config):
     assert rep.status_code == 400
 
     # config does not exist
-    tasks_url = url_for("api.tasks", config_name="foo")
+    tasks_url = url_for("api.tasks", config_id="foo")
     rep = client.post(tasks_url)
     assert rep.status_code == 404
 
@@ -44,7 +44,7 @@ def test_create_task(client, default_task_config):
         "src.taipy.rest.api.resources.task.TaskList.fetch_config"
     ) as config_mock:
         config_mock.return_value = default_task_config
-        tasks_url = url_for("api.tasks", config_name="bar")
+        tasks_url = url_for("api.tasks", config_id="bar")
         rep = client.post(tasks_url)
         assert rep.status_code == 201
 
@@ -55,7 +55,7 @@ def test_get_all_tasks(client, task_data, default_task_config_list):
             "src.taipy.rest.api.resources.task.TaskList.fetch_config"
         ) as config_mock:
             config_mock.return_value = default_task_config_list[ds]
-            tasks_url = url_for("api.tasks", config_name=config_mock.name)
+            tasks_url = url_for("api.tasks", config_id=config_mock.name)
             client.post(tasks_url)
 
     rep = client.get(tasks_url)
