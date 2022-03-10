@@ -61,6 +61,9 @@ class TaskResource(Resource):
           description: task does not exist
     """
 
+    def __init__(self, **kwargs):
+        self.logger = kwargs.get("logger")
+
     def get(self, task_id):
         schema = TaskSchema()
         manager = TaskManager()

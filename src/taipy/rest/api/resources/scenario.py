@@ -61,6 +61,9 @@ class ScenarioResource(Resource):
           description: scenario does not exist
     """
 
+    def __init__(self, **kwargs):
+        self.logger = kwargs.get("logger")
+
     def get(self, scenario_id):
         schema = ScenarioResponseSchema()
         manager = ScenarioManager()
