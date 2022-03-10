@@ -125,7 +125,8 @@ class TaskList(Resource):
                   task: TaskSchema
     """
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        self.logger = kwargs.get("logger")
         if os.path.exists(TAIPY_SETUP_FILE):
             spec = importlib.util.spec_from_file_location(
                 "taipy_setup", TAIPY_SETUP_FILE
@@ -203,6 +204,9 @@ class TaskExecutor(Resource):
       404:
           description: task does not exist
     """
+
+    def __init__(self, **kwargs):
+        self.logger = kwargs.get("logger")
 
     def post(self, task_id):
         manager = TaskManager()
