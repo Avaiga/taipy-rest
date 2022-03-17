@@ -25,8 +25,7 @@ def create_app(testing=False):
         abs_folder, _ = TAIPY_SETUP_FILE.rsplit("/", 1)
         gui = Gui(flask=app, pages={"demo": Markdown(os.path.join(abs_folder, "demo.md"))})
         gui.run(run_server=False)
-    else:
-        pass
+
     return app
 
 
