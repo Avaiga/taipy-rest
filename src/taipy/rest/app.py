@@ -22,7 +22,6 @@ def create_app(testing=False):
 
     if gui_installed():
         from taipy.gui import Gui, Markdown
-        app.config["GUI"] = True
         abs_folder, _ = TAIPY_SETUP_FILE.rsplit("/", 1)
         gui = Gui(flask=app, pages={"demo": Markdown(os.path.join(abs_folder, "demo.md"))})
         gui.run(run_server=False)

@@ -1,16 +1,18 @@
-from unittest import mock
+from unittest.mock import patch, MagicMock, ANY
 from src.taipy.rest.app import create_app
 
 
-def test_create_app_with_gui_installed():
-    with mock.patch("src.taipy.rest.app.gui_installed") as mck_gui_installed:
-        mck_gui_installed.return_value = True
-        app = create_app()
-        assert app.config["GUI"] is True
+@patch("taipy.gui.Gui")
+@patch("src.taipy.rest.app.gui_installed")
+def test_create_app_with_gui_installed(gui_installed: MagicMock, Gui: MagicMock):
+    gui_installed.return_value = True
+    app = create_app()
+    Gui.assert_called_once_with(flask=app, pages=ANY)
 
 
-def test_create_app_without_gui_installed():
-    with mock.patch("src.taipy.rest.app.gui_installed") as mck_gui_installed:
-        mck_gui_installed.return_value = False
-        app = create_app()
-        assert app.config.get("GUI") is None
+@patch("taipy.gui.Gui")
+@patch("src.taipy.rest.app.gui_installed")
+def test_create_app_without_gui_installed(gui_installed: MagicMock, Gui: MagicMock):
+    gui_installed.return_value = False
+    create_app()
+    Gui.assert_not_called()
