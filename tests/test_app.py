@@ -8,6 +8,7 @@ def test_create_app_with_gui_installed(gui_installed: MagicMock, Gui: MagicMock)
     gui_installed.return_value = True
     app = create_app()
     Gui.assert_called_once_with(flask=app, pages=ANY)
+    Gui.return_value.run.assert_called_once_with(run_server=False)
 
 
 @patch("taipy.gui.Gui")
