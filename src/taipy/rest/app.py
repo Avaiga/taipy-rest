@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 
 from . import api
@@ -6,11 +7,12 @@ from .extensions import apispec
 
 def create_app(testing=False):
     """Application factory, used to create application"""
-    app = Flask("src.taipy.rest")
-    app.config.from_object("src.taipy.rest.config")
-
-    if testing is True:
-        app.config["TESTING"] = True
+    app = Flask(__name__)
+    app.config.update(
+        ENV=os.getenv("FLASK_ENV"),
+        TESTING=testing,
+        SECRET_KEY=os.getenv("SECRET_KEY")
+    )
 
     configure_apispec(app)
     register_blueprints(app)
