@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_namespace_packages
 
 __version__ = "1.0.0.dev"
 
@@ -9,8 +9,8 @@ extras = {
 setup(
     name="taipy_rest",
     version=__version__,
-    packages=["taipy.rest"],
-    package_dir={'taipy': 'src/taipy'},
+    packages=find_namespace_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=[
         "flask",
         "flask-sqlalchemy",
