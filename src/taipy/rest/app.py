@@ -5,13 +5,13 @@ from . import api
 from .extensions import apispec
 
 
-def create_app(testing=False):
+def create_app(testing=False, env=None, secret=None, *args, **kwargs):
     """Application factory, used to create application"""
     app = Flask(__name__)
     app.config.update(
-        ENV=os.getenv("FLASK_ENV"),
-        TESTING=testing,
-        SECRET_KEY=os.getenv("SECRET_KEY")
+        ENV=os.getenv("FLASK_ENV", env),
+        TESTING=os.getenv("TESTING", testing),
+        SECRET_KEY=os.getenv("SECRET_KEY", secret)
     )
 
     configure_apispec(app)
