@@ -3,5 +3,5 @@ from .app import create_app
 app = create_app()
 
 
-def run():
-    return app.run(debug=False)
+def run(debug=False):
+    return app.run(debug=debug)
