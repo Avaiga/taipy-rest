@@ -5,7 +5,7 @@ from . import api
 from .extensions import apispec
 
 
-def create_app(testing=False, flask_env=None, secret_key=None, *args, **kwargs):
+def create_app(testing=False, flask_env=None, secret_key=None):
     """Application factory, used to create application"""
     app = Flask(__name__)
     app.config.update(
