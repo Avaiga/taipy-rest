@@ -7,7 +7,7 @@ class Rest:
     """
     def __init__(self, testing=False, env=None, secret_key=None):
         """
-        Initialise the REST API server.
+        Initialise a REST API server.
 
         Parameters:
             testing (bool): If you are on testing mode.
@@ -18,7 +18,7 @@ class Rest:
 
     def run(self, **kwargs):
         """
-        Start the REST API server. This method is blocking.
+        Start a REST API server. This method is blocking.
 
         Parameters:
             kwargs: Options to provide to the application server.
