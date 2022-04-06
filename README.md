@@ -28,7 +28,7 @@ specific language governing permissions and limitations under the License.
 - [Directory Structure](#directory-structure)
 
 
-## What is Taipy-REST
+## What is Taipy REST
 
 Taipy is a Python library for creating Business Applications. More information on our
 [website](https://www.taipy.io). Taipy is split into multiple repositories including _taipy-core_ and _taipy-rest_ 
