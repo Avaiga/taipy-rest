@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 ## Usage
 - [License](#license)
 - [Usage](#usage)
-- [Taipy Rest](#what-is-taipy-rest)
+- [Taipy REST](#what-is-taipy-rest)
 - [Installation, Configuration and Run](#installation)
   - [Installation](INSTALLATION.md#installation)
   - [Configuration](INSTALLATION.md#Configuration)
