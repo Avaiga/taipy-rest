@@ -64,7 +64,26 @@ Want to be part of the _Taipy REST_ community? Check out our [`CODE_OF_CONDUCT.m
 
 ## Directory Structure
 
-TODO
+- `migrations`: TODO
+    - `src/taipy/rest`: TODO
+        - `api`: TODO
+        - `commons`: TODO
+        - `app.py`: TODO
+        - `extensions.py`: TODO
+        - `rest.py`: Main python entrypoint for running _taipy-rest_ application.
+    - `tests`: Unit tests.
+- `CODE_OF_CONDUCT.md`: Code of conduct for members and contributors of _taipy-rest_.
+- `CONTRIBUTING.md`: Instructions to contribute to _taipy-rest_.
+- `INSTALLATION.md`: Instructions to install _taipy-rest_.
+- `cookiecutter-options.yml`: TODO
+- `docker-compose.yml`: TODO
+- `dockerfile`: TODO
+- `LICENSE`: The Apache 2.0 License.
+- `makefile`: TODO
+- `Pipfile`: File used by the Pipenv virtual environment to manage project dependencies.
+- `README.md`: Current file.
+- `setup.py`: The setup script managing building, distributing, and installing _taipy-rest_.
+- `tox.ini`: Contains test scenarios to be run.
 
 
 
