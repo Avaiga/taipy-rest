@@ -73,7 +73,7 @@ jobs:
       - name: Prepare tests on unix
         if: matrix.os != 'windows-latest'
         run: |
-          rm -rf taipy
+          rm -rf src
           pip install pytest pytest-mock
 
       - name: Prepare tests on windows
