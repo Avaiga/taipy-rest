@@ -75,19 +75,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-versions }}
 
-      - name: Prepare tests on unix
-        if: matrix.os != 'windows-latest'
-        run: |
-          rm -rf src
-          pip install pytest pytest-mock
-
-      - name: Prepare tests on windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          rmdir -Recurse -Force src
-          pip install pytest pytest-mock
-
-      - name: Install and test package
+      - name: Install the package
         run: |
           pip install ${{ github.event.repository.name }}
-          pytest
