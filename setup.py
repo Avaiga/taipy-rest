@@ -22,7 +22,7 @@ setup(
     keywords="taipy-rest",
     version="1.0.0.dev",
     author_email="dev@taipy.io",
-    packages=find_namespace_packages(where="src") + find_packages(include=["taipy.rest"]),
+    packages=find_namespace_packages(where="src") + find_packages(include=["taipy", "taipy.rest"]),
     package_dir={"": "src"},
     long_description=readme,
     long_description_content_type="text/markdown",
