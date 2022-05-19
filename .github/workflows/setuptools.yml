@@ -29,7 +29,7 @@ jobs:
           pip install .
           rm -r src
 
-          pip install pytest pytest-mock
+          pip install pytest pytest-mock python-dotenv
           pytest
 
   optionals-packages:
@@ -57,7 +57,7 @@ jobs:
           rm -r src
 
           # Run test with optionals packages installed
-          pip install pytest pytest-mock
+          pip install pytest pytest-mock python-dotenv
           pytest > pytest_res
           cat pytest_res
 
