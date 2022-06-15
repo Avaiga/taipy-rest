@@ -20,6 +20,7 @@ from taipy.core.data._data_manager_factory import _DataManagerFactory
 from taipy.core.data.operator import Operator
 from taipy.core.exceptions.exceptions import NonExistingDataNode
 
+from ..middlewares._taipy_middleware import _taipy_middleware
 from ...commons.to_from_model import to_model
 from ..schemas import (
     CSVDataNodeConfigSchema,
@@ -158,6 +159,7 @@ class DataNodeList(Resource):
     def fetch_config(self, config_id):
         return Config.data_nodes[config_id]
 
+    @_taipy_middleware
     def get(self):
         schema = DataNodeSchema(many=True)
         manager = _DataManagerFactory._build_manager()

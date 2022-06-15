@@ -13,6 +13,7 @@ from functools import wraps
 from importlib import util
 
 from flask import request
+from taipy.core.common._utils import _load_fct
 
 
 def _get_request_jwt():
@@ -28,10 +29,19 @@ def _taipy_middleware(f):
     def wrapper(*args, **kwargs):
         jwt = _get_request_jwt()
         print(jwt)
-        return f(*args, **kwargs)
+        if _using_enterprise():
+            print("Enterprise is installed")
+            _enterprise_middleware()(request, f, *args, **kwargs)
+        else:
+            print("Enterprise not installed")
+            return f(*args, **kwargs)
 
     return wrapper
 
 
 def _using_enterprise():
     return util.find_spec("taipy.enterprise") is not None
+
+
+def _enterprise_middleware():
+    return _load_fct("taipy.enterprise.rest.middlewares._middleware", "_middleware")
