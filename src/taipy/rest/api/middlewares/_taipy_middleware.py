@@ -16,22 +16,12 @@ from flask import request
 from taipy.core.common._utils import _load_fct
 
 
-def _get_request_jwt():
-    jwt = None
-    bearer_token = request.headers.get("Authorization")
-    if bearer_token:
-        jwt = bearer_token.split(" ")[1]
-    return jwt
-
-
 def _taipy_middleware(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        jwt = _get_request_jwt()
-        print(jwt)
         if _using_enterprise():
             print("Enterprise is installed")
-            _enterprise_middleware()(request, f, *args, **kwargs)
+            return _enterprise_middleware()(request, f, *args, **kwargs)
         else:
             print("Enterprise not installed")
             return f(*args, **kwargs)
