@@ -14,7 +14,7 @@ from datetime import datetime
 from flask import jsonify, make_response, request
 from flask_restful import Resource
 from taipy.core import Cycle, Frequency
-from taipy.core.cycle._cycle_manager import _CycleManager as CycleManager
+from taipy.core.cycle._cycle_manager_factory import _CycleManagerFactory
 from taipy.core.exceptions.exceptions import ModelNotFound
 
 from ...commons.to_from_model import to_model
@@ -76,7 +76,7 @@ class CycleResource(Resource):
 
     def get(self, cycle_id):
         schema = CycleResponseSchema()
-        manager = CycleManager()
+        manager = _CycleManagerFactory._build_manager()
         cycle = manager._get(cycle_id)
         if not cycle:
             return make_response(jsonify({"message": f"Cycle {cycle_id} not found"}), 404)
@@ -84,7 +84,7 @@ class CycleResource(Resource):
 
     def delete(self, cycle_id):
         try:
-            manager = CycleManager()
+            manager = _CycleManagerFactory._build_manager()
             manager._delete(cycle_id)
         except ModelNotFound:
             return make_response(jsonify({"message": f"DataNode {cycle_id} not found"}), 404)
@@ -141,13 +141,13 @@ class CycleList(Resource):
 
     def get(self):
         schema = CycleResponseSchema(many=True)
-        manager = CycleManager()
+        manager = _CycleManagerFactory._build_manager()
         cycles = [to_model(REPOSITORY, cycle) for cycle in manager._get_all()]
         return schema.dump(cycles)
 
     def post(self):
         schema = CycleResponseSchema()
-        manager = CycleManager()
+        manager = _CycleManagerFactory._build_manager()
 
         cycle = self.__create_cycle_from_schema(schema.load(request.json))
         manager._set(cycle)
