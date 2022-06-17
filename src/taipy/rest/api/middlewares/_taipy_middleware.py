@@ -12,8 +12,6 @@
 from functools import wraps
 from importlib import util
 
-from flask import request
-
 from taipy.core.common._utils import _load_fct
 
 
@@ -22,7 +20,7 @@ def _taipy_middleware(f):
     def wrapper(*args, **kwargs):
         if _using_enterprise():
             print("Enterprise is installed")
-            return _enterprise_middleware()(request)(f)(*args, **kwargs)
+            return _enterprise_middleware()(f)(*args, **kwargs)
         else:
             print("Enterprise not installed")
             return f(*args, **kwargs)
