@@ -13,11 +13,13 @@ from datetime import datetime
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
+
 from taipy.core import Cycle, Frequency
 from taipy.core.cycle._cycle_manager_factory import _CycleManagerFactory
 from taipy.core.exceptions.exceptions import ModelNotFound
 
 from ...commons.to_from_model import to_model
+from ..middlewares._taipy_middleware import _taipy_middleware
 from ..schemas import CycleResponseSchema, CycleSchema
 
 REPOSITORY = "cycle"
@@ -74,6 +76,7 @@ class CycleResource(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def get(self, cycle_id):
         schema = CycleResponseSchema()
         manager = _CycleManagerFactory._build_manager()
@@ -82,6 +85,7 @@ class CycleResource(Resource):
             return make_response(jsonify({"message": f"Cycle {cycle_id} not found"}), 404)
         return {"cycle": schema.dump(to_model(REPOSITORY, cycle))}
 
+    @_taipy_middleware
     def delete(self, cycle_id):
         try:
             manager = _CycleManagerFactory._build_manager()
@@ -139,12 +143,14 @@ class CycleList(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def get(self):
         schema = CycleResponseSchema(many=True)
         manager = _CycleManagerFactory._build_manager()
         cycles = [to_model(REPOSITORY, cycle) for cycle in manager._get_all()]
         return schema.dump(cycles)
 
+    @_taipy_middleware
     def post(self):
         schema = CycleResponseSchema()
         manager = _CycleManagerFactory._build_manager()

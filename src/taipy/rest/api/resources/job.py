@@ -14,6 +14,7 @@ from typing import Optional
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
+
 from taipy.core import Job
 from taipy.core.common.alias import JobId
 from taipy.core.config.config import Config
@@ -21,6 +22,7 @@ from taipy.core.exceptions.exceptions import ModelNotFound
 from taipy.core.job._job_manager_factory import _JobManagerFactory
 from taipy.core.task._task_manager_factory import _TaskManagerFactory
 
+from ..middlewares._taipy_middleware import _taipy_middleware
 from ..schemas import JobSchema
 
 
@@ -75,6 +77,7 @@ class JobResource(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def get(self, job_id):
         schema = JobSchema()
         manager = _JobManagerFactory._build_manager()
@@ -83,6 +86,7 @@ class JobResource(Resource):
             return make_response(jsonify({"message": f"Job {job_id} not found"}), 404)
         return {"job": schema.dump(job)}
 
+    @_taipy_middleware
     def delete(self, job_id):
         try:
             manager = _JobManagerFactory._build_manager()
@@ -143,12 +147,14 @@ class JobList(Resource):
     def fetch_config(self, config_id):
         return Config.tasks[config_id]
 
+    @_taipy_middleware
     def get(self):
         schema = JobSchema(many=True)
         manager = _JobManagerFactory._build_manager()
         jobs = manager._get_all()
         return schema.dump(jobs)
 
+    @_taipy_middleware
     def post(self):
         args = request.args
         task_name = args.get("task_name")

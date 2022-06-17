@@ -11,6 +11,7 @@
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
+
 from taipy.core.config.config import Config
 from taipy.core.exceptions.exceptions import ModelNotFound, NonExistingPipeline
 from taipy.core.pipeline._pipeline_manager_factory import _PipelineManagerFactory
@@ -18,6 +19,7 @@ from taipy.core.pipeline.pipeline import Pipeline
 from taipy.core.task._task_manager_factory import _TaskManagerFactory
 
 from ...commons.to_from_model import to_model
+from ..middlewares._taipy_middleware import _taipy_middleware
 from ..schemas import PipelineResponseSchema, PipelineSchema
 
 REPOSITORY = "pipeline"
@@ -74,6 +76,7 @@ class PipelineResource(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def get(self, pipeline_id):
         schema = PipelineResponseSchema()
         manager = _PipelineManagerFactory._build_manager()
@@ -82,6 +85,7 @@ class PipelineResource(Resource):
             return make_response(jsonify({"message": f"Pipeline {pipeline_id} not found"}), 404)
         return {"pipeline": schema.dump(to_model(REPOSITORY, pipeline))}
 
+    @_taipy_middleware
     def delete(self, pipeline_id):
         try:
             manager = _PipelineManagerFactory._build_manager()
@@ -142,12 +146,14 @@ class PipelineList(Resource):
     def fetch_config(self, config_id):
         return Config.pipelines[config_id]
 
+    @_taipy_middleware
     def get(self):
         schema = PipelineResponseSchema(many=True)
         manager = _PipelineManagerFactory._build_manager()
         pipelines = [to_model(REPOSITORY, pipeline) for pipeline in manager._get_all()]
         return schema.dump(pipelines)
 
+    @_taipy_middleware
     def post(self):
         args = request.args
         config_id = args.get("config_id")
@@ -210,6 +216,7 @@ class PipelineExecutor(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def post(self, pipeline_id):
         try:
             manager = _PipelineManagerFactory._build_manager()

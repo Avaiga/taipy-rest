@@ -15,13 +15,14 @@ import numpy as np
 import pandas as pd
 from flask import jsonify, make_response, request
 from flask_restful import Resource
+
 from taipy.core.config.config import Config
 from taipy.core.data._data_manager_factory import _DataManagerFactory
 from taipy.core.data.operator import Operator
 from taipy.core.exceptions.exceptions import NonExistingDataNode
 
-from ..middlewares._taipy_middleware import _taipy_middleware
 from ...commons.to_from_model import to_model
+from ..middlewares._taipy_middleware import _taipy_middleware
 from ..schemas import (
     CSVDataNodeConfigSchema,
     DataNodeFilterSchema,
@@ -92,6 +93,7 @@ class DataNodeResource(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def get(self, datanode_id):
         schema = DataNodeSchema()
         manager = _DataManagerFactory._build_manager()
@@ -100,6 +102,7 @@ class DataNodeResource(Resource):
             return make_response(jsonify({"message": f"DataNode {datanode_id} not found"}), 404)
         return {"datanode": schema.dump(to_model(REPOSITORY, datanode, class_map=datanode.storage_type()))}
 
+    @_taipy_middleware
     def delete(self, datanode_id):
         try:
             manager = _DataManagerFactory._build_manager()
@@ -168,6 +171,7 @@ class DataNodeList(Resource):
         ]
         return schema.dump(datanodes)
 
+    @_taipy_middleware
     def post(self):
         args = request.args
         config_id = args.get("config_id")
@@ -228,6 +232,7 @@ class DataNodeReader(Resource):
             for x in schema.get("operators")
         ]
 
+    @_taipy_middleware
     def get(self, datanode_id):
         try:
             schema = DataNodeFilterSchema()
@@ -275,6 +280,7 @@ class DataNodeWriter(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def put(self, datanode_id):
         try:
             manager = _DataManagerFactory._build_manager()

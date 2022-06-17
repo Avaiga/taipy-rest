@@ -12,21 +12,21 @@
 import os
 import shutil
 import uuid
+from datetime import datetime, timedelta
 
+import pandas as pd
 import pytest
 from dotenv import load_dotenv
-from taipy.core import Config, Cycle, Frequency, Job, Pipeline, Scenario, Task, Scope
+
+from src.taipy.rest.app import create_app
+from taipy.core import Config, Cycle, Frequency, Job, Pipeline, Scenario, Scope, Task
 from taipy.core.common.alias import DataNodeId, JobId
 from taipy.core.cycle._cycle_manager import _CycleManager
 from taipy.core.data.in_memory import InMemoryDataNode
 from taipy.core.job._job_manager import _JobManager
 from taipy.core.task._task_manager import _TaskManager
-import pandas as pd
-from datetime import datetime, timedelta
 
-
-from src.taipy.rest.app import create_app
-from .setup.shared.algorithms import forecast, evaluate
+from .setup.shared.algorithms import evaluate, forecast
 
 
 @pytest.fixture

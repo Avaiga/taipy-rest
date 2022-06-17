@@ -11,6 +11,7 @@
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
+
 from taipy.core.common._utils import _load_fct
 from taipy.core.config.config import Config
 from taipy.core.data._data_manager_factory import _DataManagerFactory
@@ -19,6 +20,7 @@ from taipy.core.task._task_manager_factory import _TaskManagerFactory
 from taipy.core.task.task import Task
 
 from ...commons.to_from_model import to_model
+from ..middlewares._taipy_middleware import _taipy_middleware
 from ..schemas import TaskSchema
 
 REPOSITORY = "task"
@@ -75,6 +77,7 @@ class TaskResource(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def get(self, task_id):
         schema = TaskSchema()
         manager = _TaskManagerFactory._build_manager()
@@ -83,6 +86,7 @@ class TaskResource(Resource):
             return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
         return {"task": schema.dump(to_model(REPOSITORY, task))}
 
+    @_taipy_middleware
     def delete(self, task_id):
         try:
             manager = _TaskManagerFactory._build_manager()
@@ -143,12 +147,14 @@ class TaskList(Resource):
     def fetch_config(self, config_id):
         return Config.tasks[config_id]
 
+    @_taipy_middleware
     def get(self):
         schema = TaskSchema(many=True)
         manager = _TaskManagerFactory._build_manager()
         tasks = [to_model(REPOSITORY, task) for task in manager._get_all()]
         return schema.dump(tasks)
 
+    @_taipy_middleware
     def post(self):
         args = request.args
         config_id = args.get("config_id")
@@ -212,6 +218,7 @@ class TaskExecutor(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def post(self, task_id):
         manager = _TaskManagerFactory._build_manager()
         task = manager._get(task_id)

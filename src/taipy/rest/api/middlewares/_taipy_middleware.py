@@ -13,6 +13,7 @@ from functools import wraps
 from importlib import util
 
 from flask import request
+
 from taipy.core.common._utils import _load_fct
 
 

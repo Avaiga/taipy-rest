@@ -11,6 +11,7 @@
 
 from flask import jsonify, make_response, request
 from flask_restful import Resource
+
 from taipy.core.config.config import Config
 from taipy.core.exceptions.exceptions import ModelNotFound, NonExistingScenario
 from taipy.core.pipeline._pipeline_manager_factory import _PipelineManagerFactory
@@ -18,6 +19,7 @@ from taipy.core.scenario._scenario_manager_factory import _ScenarioManagerFactor
 from taipy.core.scenario.scenario import Scenario
 
 from ...commons.to_from_model import to_model
+from ..middlewares._taipy_middleware import _taipy_middleware
 from ..schemas import ScenarioResponseSchema, ScenarioSchema
 
 REPOSITORY = "scenario"
@@ -74,6 +76,7 @@ class ScenarioResource(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def get(self, scenario_id):
         schema = ScenarioResponseSchema()
         manager = _ScenarioManagerFactory._build_manager()
@@ -82,6 +85,7 @@ class ScenarioResource(Resource):
             return make_response(jsonify({"message": f"Scenario {scenario_id} not found"}), 404)
         return {"scenario": schema.dump(to_model(REPOSITORY, scenario))}
 
+    @_taipy_middleware
     def delete(self, scenario_id):
         try:
             manager = _ScenarioManagerFactory._build_manager()
@@ -142,12 +146,14 @@ class ScenarioList(Resource):
     def fetch_config(self, config_id):
         return Config.scenarios[config_id]
 
+    @_taipy_middleware
     def get(self):
         schema = ScenarioResponseSchema(many=True)
         manager = _ScenarioManagerFactory._build_manager()
         scenarios = [to_model(REPOSITORY, scenario) for scenario in manager._get_all()]
         return schema.dump(scenarios)
 
+    @_taipy_middleware
     def post(self):
         args = request.args
         config_id = args.get("config_id")
@@ -213,6 +219,7 @@ class ScenarioExecutor(Resource):
     def __init__(self, **kwargs):
         self.logger = kwargs.get("logger")
 
+    @_taipy_middleware
     def post(self, scenario_id):
         try:
             manager = _ScenarioManagerFactory._build_manager()

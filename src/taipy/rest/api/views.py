@@ -12,6 +12,7 @@
 from flask import Blueprint, current_app, jsonify
 from flask_restful import Api
 from marshmallow import ValidationError
+
 from taipy.core.common._taipy_logger import _TaipyLogger
 
 from ..extensions import apispec
@@ -34,14 +35,7 @@ from .resources import (
     TaskList,
     TaskResource,
 )
-from .schemas import (
-    CycleSchema,
-    DataNodeSchema,
-    JobSchema,
-    PipelineSchema,
-    ScenarioSchema,
-    TaskSchema,
-)
+from .schemas import CycleSchema, DataNodeSchema, JobSchema, PipelineSchema, ScenarioSchema, TaskSchema
 
 _logger = _TaipyLogger._get_logger()
 
