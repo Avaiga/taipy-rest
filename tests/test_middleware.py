@@ -12,16 +12,13 @@
 from functools import wraps
 from unittest.mock import MagicMock, patch
 
-from taipy.rest.api.middlewares._middleware import _middleware
+from src.taipy.rest.api.middlewares._middleware import _middleware
 
 
-def mock_enterprise_middleware(request):
-    def wrapper(f):
-        @wraps(f)
-        def inner(*args, **kwargs):
-            return f(*args, **kwargs)
-
-        return inner
+def mock_enterprise_middleware(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        return f(*args, **kwargs)
 
     return wrapper
 
