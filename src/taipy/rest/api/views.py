@@ -14,6 +14,7 @@ from flask_restful import Api
 from marshmallow import ValidationError
 
 from taipy.core.common._taipy_logger import _TaipyLogger
+from taipy.core.common._utils import _load_fct
 
 from ..extensions import apispec
 from .resources import (
@@ -144,6 +145,19 @@ api.add_resource(
     resource_class_kwargs={"logger": _logger},
 )
 api.add_resource(JobList, "/jobs", endpoint="jobs", resource_class_kwargs={"logger": _logger})
+
+
+def load_enterprise_resources(api: Api):
+    """
+    Load enterprise resources.
+    """
+
+    load_resources = _load_fct("taipy.enterprise.rest.api.views", "_load_resources")
+    if load_resources:
+        load_resources(api)
+
+
+load_enterprise_resources(api)
 
 
 @blueprint.before_app_first_request
