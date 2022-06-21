@@ -31,4 +31,4 @@ def _using_enterprise():
 
 
 def _enterprise_middleware():
-    return _load_fct("taipy.enterprise.rest.middlewares._middleware", "_middleware")
+    return _load_fct("taipy.enterprise.rest.api.middlewares._middleware", "_middleware")
