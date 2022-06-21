@@ -19,10 +19,8 @@ def _taipy_middleware(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         if _using_enterprise():
-            print("Enterprise is installed")
             return _enterprise_middleware()(f)(*args, **kwargs)
         else:
-            print("Enterprise not installed")
             return f(*args, **kwargs)
 
     return wrapper
