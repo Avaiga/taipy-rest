@@ -15,7 +15,7 @@ from importlib import util
 from taipy.core.common._utils import _load_fct
 
 
-def _taipy_middleware(f):
+def _middleware(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         if _using_enterprise():

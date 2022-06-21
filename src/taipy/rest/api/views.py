@@ -17,6 +17,7 @@ from taipy.core.common._taipy_logger import _TaipyLogger
 from taipy.core.common._utils import _load_fct
 
 from ..extensions import apispec
+from .middlewares._middleware import _using_enterprise
 from .resources import (
     CycleList,
     CycleResource,
@@ -152,9 +153,10 @@ def load_enterprise_resources(api: Api):
     Load enterprise resources.
     """
 
+    if not _using_enterprise():
+        return
     load_resources = _load_fct("taipy.enterprise.rest.api.views", "_load_resources")
-    if load_resources:
-        load_resources(api)
+    load_resources(api)
 
 
 load_enterprise_resources(api)
