@@ -20,7 +20,7 @@ setup(
     name="taipy-rest",
     keywords="taipy-rest",
     python_requires=">=3.8",
-    version="1.1.0.dev",
+    version="1.1.0",
     author_email="dev@taipy.io",
     packages=find_namespace_packages(where="src") + find_packages(include=["taipy", "taipy.rest"]),
     package_dir={"": "src"},
@@ -47,6 +47,6 @@ setup(
         "passlib>=1.7.4,<1.8",
         "apispec[yaml]>=5.1,<6.0",
         "apispec-webframeworks>=0.5.2,<0.6",
-        "taipy-core@git+https://git@github.com/Avaiga/taipy-core.git@develop",
+        "taipy-core>=1.1,<1.2",
     ],
 )
