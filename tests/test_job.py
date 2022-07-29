@@ -64,6 +64,7 @@ def test_get_all_jobs(client, create_job_list):
 
 # @pytest.mark.xfail()
 def test_cancel_job(client, default_job):
+    #TODO: improve this test after the PR refactoring dispatcher
     from taipy.core._scheduler._scheduler import _Scheduler
     _Scheduler._update_job_config()
     
