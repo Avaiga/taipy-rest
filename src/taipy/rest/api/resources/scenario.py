@@ -62,7 +62,7 @@ class ScenarioResource(Resource):
         - in: path
           name: scenario_id
           schema:
-            type: integer
+            type: string
       responses:
         200:
           content:

@@ -63,7 +63,7 @@ class TaskResource(Resource):
         - in: path
           name: task_id
           schema:
-            type: integer
+            type: string
       responses:
         200:
           content:

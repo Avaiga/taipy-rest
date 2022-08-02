@@ -62,7 +62,7 @@ class PipelineResource(Resource):
         - in: path
           name: pipeline_id
           schema:
-            type: integer
+            type: string
       responses:
         200:
           content:

@@ -85,7 +85,7 @@ class DataNodeResource(Resource):
         - in: path
           name: datanode_id
           schema:
-            type: integer
+            type: string
       responses:
         200:
           content:
