@@ -56,7 +56,7 @@ class DataNodeResource(Resource):
       tags:
         - api
       summary: Get a data node
-      description: >
+      description: |
         Return a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
@@ -78,7 +78,7 @@ class DataNodeResource(Resource):
       tags:
         - api
       summary: Delete a data node
-      description: >
+      description: |
         Delete a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
@@ -130,7 +130,7 @@ class DataNodeList(Resource):
       tags:
         - api
       summary: Get all data nodes
-      description: >
+      description: |
         Returns all data nodes.
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
@@ -149,7 +149,7 @@ class DataNodeList(Resource):
       tags:
         - api
       summary: Create a datanode
-      description: >
+      description: |
         Create a data node from its config_id. If the config does not exist, a 404 error is returned.
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
@@ -215,7 +215,7 @@ class DataNodeReader(Resource):
       tags:
         - api
       summary: Read a data node
-      description: >
+      description: |
         Return the data read from a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
         In the Enterprise version, this endpoint requires TAIPY_READER role.
 
@@ -281,7 +281,7 @@ class DataNodeWriter(Resource):
       tags:
         - api
       summary: Write into a data node
-      description: >
+      description: |
         Write data from request body into a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
