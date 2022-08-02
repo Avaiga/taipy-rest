@@ -37,7 +37,7 @@ class JobResource(Resource):
       description: |
         Return a single job by JobId. If the job does not exist, a 404 error is returned.
 
-        In the Enterprise version, the endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, the endpoint requires TAIPY_READER role.
       parameters:
         - in: path
           name: job_id
@@ -60,7 +60,7 @@ class JobResource(Resource):
       description: |
         Delete a single job by JobId. If the job does not exist, a 404 error is returned.
 
-        In the Enterprise version, the endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, the endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: job_id
@@ -114,7 +114,7 @@ class JobList(Resource):
       description: |
         Return all jobs.
 
-        In the Enterprise version, the endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, the endpoint requires TAIPY_READER role.
       responses:
         200:
           content:
@@ -134,7 +134,7 @@ class JobList(Resource):
       description: |
         Create a job from a task config_id. If the config does not exist, a 404 error is returned.
 
-        In the Enterprise version, the endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, the endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
           application/json:
@@ -209,7 +209,7 @@ class JobExecutor(Resource):
       description: |
         Cancel a job by JobId. If the job does not exist, a 404 error is returned.
 
-        In the Enterprise version, the endpoint requires TAIPY_EXECUTOR role.
+        In the **Enterprise** version, the endpoint requires TAIPY_EXECUTOR role.
       parameters:
         - in: path
           name: job_id

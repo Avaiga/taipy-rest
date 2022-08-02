@@ -59,7 +59,7 @@ class DataNodeResource(Resource):
       description: |
         Return a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
 
-        In the Enterprise version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
           name: datanode_id
@@ -82,7 +82,7 @@ class DataNodeResource(Resource):
       description: |
         Delete a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
 
-        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: datanode_id
@@ -135,7 +135,7 @@ class DataNodeList(Resource):
       description: |
         Returns all data nodes.
 
-        In the Enterprise version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
       responses:
         200:
           content:
@@ -155,7 +155,7 @@ class DataNodeList(Resource):
       description: |
         Create a data node from its config_id. If the config does not exist, a 404 error is returned.
 
-        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
           application/json:
@@ -222,7 +222,7 @@ class DataNodeReader(Resource):
       description: |
         Return the data read from a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
 
-        In the Enterprise version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
 
       parameters:
         - in: path
@@ -289,7 +289,7 @@ class DataNodeWriter(Resource):
       description: |
         Write data from request body into a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
 
-        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: datanode_id
