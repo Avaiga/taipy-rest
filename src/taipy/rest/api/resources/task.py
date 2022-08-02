@@ -36,6 +36,7 @@ class TaskResource(Resource):
       summary: Get a task
       description: |
         Return a single task by TaskId. If the task does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
@@ -58,6 +59,7 @@ class TaskResource(Resource):
       summary: Delete a task
       description: |
         Delete a single task by TaskId. If the task does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
@@ -111,6 +113,7 @@ class TaskList(Resource):
       summary: Get all tasks
       description: |
         Return all tasks.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
@@ -130,6 +133,7 @@ class TaskList(Resource):
       summary: Create a task
       description: |
         Create a new task from its config_id. If the config does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
@@ -204,6 +208,7 @@ class TaskExecutor(Resource):
       summary: Execute a task
       description: |
         Execute a task by TaskId. If the task does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EXECUTOR role.
       parameters:
         - in: path

@@ -35,6 +35,7 @@ class PipelineResource(Resource):
       summary: Get a pipeline
       description: |
         Return a single pipeline by PipelineId. If the pipeline does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
@@ -57,6 +58,7 @@ class PipelineResource(Resource):
       summary: Delete a pipeline
       description: |
         Delete a single pipeline by PipelineId. If the pipeline does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
@@ -110,6 +112,7 @@ class PipelineList(Resource):
       summary: Get all pipelines
       description: |
         Return all pipelines.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
@@ -129,6 +132,7 @@ class PipelineList(Resource):
       summary: Create a pipeline
       description: |
         Create a pipeline from its config_id. If the config does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
@@ -202,6 +206,7 @@ class PipelineExecutor(Resource):
       summary: Execute a pipeline
       description: |
         Execute a pipeline from PipelineId. If the pipeline does not exist, a 404 error is returned.
+
         In the Enterprise version, This endpoint requires TAIPY_EXECUTOR role.
       parameters:
         - in: path

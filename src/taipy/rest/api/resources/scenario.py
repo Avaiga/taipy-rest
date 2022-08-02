@@ -35,6 +35,7 @@ class ScenarioResource(Resource):
       summary: Get a scenario
       description: |
         Return a single scenario by ScenarioId. If the scenario does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
@@ -57,6 +58,7 @@ class ScenarioResource(Resource):
       summary: Delete a scenario
       description: |
         Delete a single scenario by ScenarioId. If the scenario does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
@@ -110,6 +112,7 @@ class ScenarioList(Resource):
       summary: Get all scenarios
       description: |
         Return all scenarios.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
@@ -129,6 +132,7 @@ class ScenarioList(Resource):
       summary: Create a scenario
       description: |
         Create a new scenario from its config_id. If the config does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
@@ -205,6 +209,7 @@ class ScenarioExecutor(Resource):
       summary: Execute a scenario
       description: |
         Execute a scenario by ScenarioId. If the scenario does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EXECUTOR role.
       parameters:
         - in: path

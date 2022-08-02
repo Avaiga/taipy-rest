@@ -36,6 +36,7 @@ class CycleResource(Resource):
       summary: Get a cycle
       description: |
         Return a single cycle by CycleId. If the cycle does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
@@ -58,6 +59,7 @@ class CycleResource(Resource):
       summary: Delete a cycle
       description: |
         Delete a single cycle by CycleId. If the cycle does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
@@ -111,6 +113,7 @@ class CycleList(Resource):
       summary: Get all cycles
       description: |
         Return all cycles.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
@@ -130,6 +133,7 @@ class CycleList(Resource):
       summary: Create a cycle
       description: |
         Create a new cycle from its config_id. If the config does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:

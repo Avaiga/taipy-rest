@@ -58,6 +58,7 @@ class DataNodeResource(Resource):
       summary: Get a data node
       description: |
         Return a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
@@ -80,6 +81,7 @@ class DataNodeResource(Resource):
       summary: Delete a data node
       description: |
         Delete a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
@@ -132,6 +134,7 @@ class DataNodeList(Resource):
       summary: Get all data nodes
       description: |
         Returns all data nodes.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
@@ -151,6 +154,7 @@ class DataNodeList(Resource):
       summary: Create a datanode
       description: |
         Create a data node from its config_id. If the config does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
@@ -217,6 +221,7 @@ class DataNodeReader(Resource):
       summary: Read a data node
       description: |
         Return the data read from a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_READER role.
 
       parameters:
@@ -283,6 +288,7 @@ class DataNodeWriter(Resource):
       summary: Write into a data node
       description: |
         Write data from request body into a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+
         In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
