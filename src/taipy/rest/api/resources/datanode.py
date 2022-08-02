@@ -55,8 +55,10 @@ class DataNodeResource(Resource):
     get:
       tags:
         - api
-      summary: Get a datanode
-      description: Get a single datanode by ID
+      summary: Get a data node
+      description: >
+        Return a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
           name: datanode_id
@@ -71,12 +73,14 @@ class DataNodeResource(Resource):
                 properties:
                   datanode: DataNodeSchema
         404:
-          description: datanode does not exist
+          description: Data node does not exist
     delete:
       tags:
         - api
-      summary: Delete a datanode
-      description: Delete a single datanode by ID
+      summary: Delete a data node
+      description: >
+        Delete a single data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: datanode_id
@@ -91,9 +95,9 @@ class DataNodeResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: datanode deleted
+                    example: Data node deleted
         404:
-          description: datanode does not exist
+          description: Data node does not exist
     """
 
     def __init__(self, **kwargs):
@@ -105,7 +109,7 @@ class DataNodeResource(Resource):
         manager = _DataManagerFactory._build_manager()
         datanode = manager._get(datanode_id)
         if not datanode:
-            return make_response(jsonify({"message": f"DataNode {datanode_id} not found"}), 404)
+            return make_response(jsonify({"message": f"Data node {datanode_id} not found"}), 404)
         return {"datanode": schema.dump(_to_model(REPOSITORY, datanode, class_map=datanode.storage_type()))}
 
     @_middleware
@@ -114,8 +118,8 @@ class DataNodeResource(Resource):
             manager = _DataManagerFactory._build_manager()
             manager._delete(datanode_id)
         except NonExistingDataNode:
-            return make_response(jsonify({"message": f"DataNode {datanode_id} not found"}), 404)
-        return {"msg": f"datanode {datanode_id} deleted"}
+            return make_response(jsonify({"message": f"Data node {datanode_id} not found"}), 404)
+        return {"msg": f"Data node {datanode_id} deleted"}
 
 
 class DataNodeList(Resource):
@@ -125,8 +129,10 @@ class DataNodeList(Resource):
     get:
       tags:
         - api
-      summary: Get a list of datanodes
-      description: Get a list of paginated datanodes
+      summary: Get all data nodes
+      description: >
+        Returns all data nodes.
+        In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
           content:
@@ -143,7 +149,9 @@ class DataNodeList(Resource):
       tags:
         - api
       summary: Create a datanode
-      description: Create a new datanode
+      description: >
+        Create a data node from its config_id. If the config does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
           application/json:
@@ -158,7 +166,7 @@ class DataNodeList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: datanode created
+                    example: Data node created
                   datanode: DataNodeSchema
     """
 
@@ -192,7 +200,7 @@ class DataNodeList(Resource):
             manager._bulk_get_or_create({config})
 
             return {
-                "msg": "datanode created",
+                "msg": "Data node created",
                 "datanode": schema.dump(config),
             }, 201
         except KeyError:
@@ -206,8 +214,11 @@ class DataNodeReader(Resource):
     get:
       tags:
         - api
-      summary: Read a data node content
-      description: Return a content of a data node
+      summary: Read a data node
+      description: >
+        Return the data read from a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_READER role.
+
       parameters:
         - in: path
           name: datanode_id
@@ -259,7 +270,7 @@ class DataNodeReader(Resource):
                 data = list(data)
             return {"data": data}
         except NonExistingDataNode:
-            return make_response(jsonify({"message": f"DataNode {datanode_id} not found"}), 404)
+            return make_response(jsonify({"message": f"Data node {datanode_id} not found"}), 404)
 
 
 class DataNodeWriter(Resource):
@@ -270,7 +281,9 @@ class DataNodeWriter(Resource):
       tags:
         - api
       summary: Write into a data node
-      description: Write into a data node
+      description: >
+        Write data from request body into a data node by DataNodeId. If the data node does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: datanode_id
@@ -303,6 +316,6 @@ class DataNodeWriter(Resource):
             data = request.json
             datanode = manager._get(datanode_id)
             datanode.write(data)
-            return {"message": "DataNode data successfully updated"}
+            return {"message": "Data node data successfully updated"}
         except NonExistingDataNode:
-            return make_response(jsonify({"message": f"DataNode {datanode_id} not found"}), 404)
+            return make_response(jsonify({"message": f"Data node {datanode_id} not found"}), 404)

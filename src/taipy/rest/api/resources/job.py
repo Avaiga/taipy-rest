@@ -34,7 +34,9 @@ class JobResource(Resource):
       tags:
         - api
       summary: Get a job
-      description: Get a single job by ID
+      description: >
+        Return a single job by JobId. If the job does not exist, a 404 error is returned.
+        In the Enterprise version, the endpoint requires TAIPY_READER role.
       parameters:
         - in: path
           name: job_id
@@ -49,17 +51,19 @@ class JobResource(Resource):
                 properties:
                   job: JobSchema
         404:
-          description: job does not exist
+          description: Job does not exist
     delete:
       tags:
         - api
       summary: Delete a job
-      description: Delete a single job by ID
+      description: >
+        Delete a single job by JobId. If the job does not exist, a 404 error is returned.
+        In the Enterprise version, the endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: job_id
           schema:
-            type: integer
+            type: string
       responses:
         200:
           content:
@@ -69,9 +73,9 @@ class JobResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: job deleted
+                    example: Job deleted
         404:
-          description: job does not exist
+          description: Job does not exist
     """
 
     def __init__(self, **kwargs):
@@ -92,9 +96,9 @@ class JobResource(Resource):
             manager = _JobManagerFactory._build_manager()
             manager._delete(job_id)
         except ModelNotFound:
-            return make_response(jsonify({"message": f"DataNode {job_id} not found"}), 404)
+            return make_response(jsonify({"message": f"Job {job_id} not found"}), 404)
 
-        return {"msg": f"job {job_id} deleted"}
+        return {"msg": f"Job {job_id} deleted"}
 
 
 class JobList(Resource):
@@ -104,8 +108,10 @@ class JobList(Resource):
     get:
       tags:
         - api
-      summary: Get a list of jobs
-      description: Get a list of paginated jobs
+      summary: Get all jobs
+      description: >
+        Return all jobs.
+        In the Enterprise version, the endpoint requires TAIPY_READER role.
       responses:
         200:
           content:
@@ -122,7 +128,9 @@ class JobList(Resource):
       tags:
         - api
       summary: Create a job
-      description: Create a new job
+      description: >
+        Create a job from a task config_id. If the config does not exist, a 404 error is returned.
+        In the Enterprise version, the endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
           application/json:
@@ -137,7 +145,7 @@ class JobList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: job created
+                    example: Job created
                   job: JobSchema
     """
 
@@ -157,22 +165,22 @@ class JobList(Resource):
     @_middleware
     def post(self):
         args = request.args
-        task_name = args.get("task_name")
+        task_config_id = args.get("task_id")
 
-        if not task_name:
-            return {"msg": "Config id is mandatory"}, 400
+        if not task_config_id:
+            return {"msg": "Task config_id is mandatory"}, 400
 
         manager = _JobManagerFactory._build_manager()
         schema = JobSchema()
-        job = self.__create_job_from_schema(task_name)
+        job = self.__create_job_from_schema(task_config_id)
 
         if not job:
-            return {"msg": f"Task with name {task_name} not found"}, 404
+            return {"msg": f"Task with config_id {task_config_id} not found"}, 404
 
         manager._set(job)
 
         return {
-            "msg": "job created",
+            "msg": "Job created",
             "job": schema.dump(job),
         }, 201
 
@@ -182,7 +190,7 @@ class JobList(Resource):
             task = task_manager._bulk_get_or_create([self.fetch_config(task_name)])[0]
         except KeyError:
             return None
-        
+
         return Job(id=JobId(f"JOB_{uuid.uuid4()}"), task=task, submit_id=f"SUBMISSION_{uuid.uuid4()}")
 
 
@@ -194,7 +202,9 @@ class JobExecutor(Resource):
       tags:
         - api
       summary: Cancel a job
-      description: Cancel a job
+      description: >
+        Cancel a job by JobId. If the job does not exist, a 404 error is returned.
+        In the Enterprise version, the endpoint requires TAIPY_EXECUTOR role.
       parameters:
         - in: path
           name: job_id
@@ -209,10 +219,10 @@ class JobExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    example: job cancelled
+                    example: Job cancelled
                   job: JobSchema
         404:
-          description: job does not exist
+          description: Job does not exist
     """
 
     def __init__(self, **kwargs):

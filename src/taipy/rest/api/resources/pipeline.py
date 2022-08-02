@@ -33,7 +33,9 @@ class PipelineResource(Resource):
       tags:
         - api
       summary: Get a pipeline
-      description: Get a single pipeline by ID
+      description: >
+        Return a single pipeline by PipelineId. If the pipeline does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
           name: pipeline_id
@@ -48,12 +50,14 @@ class PipelineResource(Resource):
                 properties:
                   pipeline: PipelineSchema
         404:
-          description: pipeline does not exist
+          description: Pipeline does not exist
     delete:
       tags:
         - api
       summary: Delete a pipeline
-      description: Delete a single pipeline by ID
+      description: >
+        Delete a single pipeline by PipelineId. If the pipeline does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: pipeline_id
@@ -68,9 +72,9 @@ class PipelineResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: pipeline deleted
+                    example: Pipeline deleted
         404:
-          description: pipeline does not exist
+          description: Pipeline does not exist
     """
 
     def __init__(self, **kwargs):
@@ -93,7 +97,7 @@ class PipelineResource(Resource):
         except ModelNotFound:
             return make_response(jsonify({"message": f"DataNode {pipeline_id} not found"}), 404)
 
-        return {"msg": f"pipeline {pipeline_id} deleted"}
+        return {"msg": f"Pipeline {pipeline_id} deleted"}
 
 
 class PipelineList(Resource):
@@ -103,8 +107,10 @@ class PipelineList(Resource):
     get:
       tags:
         - api
-      summary: Get a list of pipelines
-      description: Get a list of paginated pipelines
+      summary: Get all pipelines
+      description: >
+        Return all pipelines.
+        In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
           content:
@@ -121,7 +127,9 @@ class PipelineList(Resource):
       tags:
         - api
       summary: Create a pipeline
-      description: Create a new pipeline
+      description: >
+        Create a pipeline from its config_id. If the config does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
           application/json:
@@ -136,7 +144,7 @@ class PipelineList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: pipeline created
+                    example: Pipeline created
                   pipeline: PipelineSchema
     """
 
@@ -168,7 +176,7 @@ class PipelineList(Resource):
             pipeline = manager._get_or_create(config)
 
             return {
-                "msg": "pipeline created",
+                "msg": "Pipeline created",
                 "pipeline": response_schema.dump(_to_model(REPOSITORY, pipeline)),
             }, 201
         except KeyError:
@@ -192,7 +200,9 @@ class PipelineExecutor(Resource):
       tags:
         - api
       summary: Execute a pipeline
-      description: Execute a pipeline
+      description: >
+        Execute a pipeline from PipelineId. If the pipeline does not exist, a 404 error is returned.
+        This endpoint requires TAIPY_EXECUTOR role.
       parameters:
         - in: path
           name: pipeline_id
@@ -207,10 +217,10 @@ class PipelineExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    example: pipeline created
+                    example: Pipeline created
                   pipeline: PipelineSchema
         404:
-            description: pipeline does not exist
+            description: Pipeline does not exist
     """
 
     def __init__(self, **kwargs):

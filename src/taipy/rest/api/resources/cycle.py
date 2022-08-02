@@ -34,7 +34,9 @@ class CycleResource(Resource):
       tags:
         - api
       summary: Get a cycle
-      description: Get a single cycle by ID
+      description: >
+        Return a single cycle by CycleId. If the cycle does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_READER role.
       parameters:
         - in: path
           name: cycle_id
@@ -49,17 +51,19 @@ class CycleResource(Resource):
                 properties:
                   cycle: CycleSchema
         404:
-          description: cycle does not exist
+          description: Cycle does not exist
     delete:
       tags:
         - api
       summary: Delete a cycle
-      description: Delete a single cycle by ID
+      description: >
+        Delete a single cycle by CycleId. If the cycle does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       parameters:
         - in: path
           name: cycle_id
           schema:
-            type: integer
+            type: string
       responses:
         200:
           content:
@@ -69,9 +73,9 @@ class CycleResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: cycle deleted
+                    example: Cycle deleted
         404:
-          description: cycle does not exist
+          description: Cycle does not exist
     """
 
     def __init__(self, **kwargs):
@@ -104,8 +108,10 @@ class CycleList(Resource):
     get:
       tags:
         - api
-      summary: Get a list of cycles
-      description: Get a list of paginated cycles
+      summary: Get all cycles
+      description: >
+        Return all cycles.
+        In the Enterprise version, this endpoint requires TAIPY_READER role.
       responses:
         200:
           content:
@@ -122,7 +128,9 @@ class CycleList(Resource):
       tags:
         - api
       summary: Create a cycle
-      description: Create a new cycle
+      description: >
+        Create a new cycle from its config_id. If the config does not exist, a 404 error is returned.
+        In the Enterprise version, this endpoint requires TAIPY_EDITOR role.
       requestBody:
         content:
           application/json:
@@ -137,7 +145,7 @@ class CycleList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: cycle created
+                    example: Cycle created
                   cycle: CycleSchema
     """
 
@@ -160,7 +168,7 @@ class CycleList(Resource):
         manager._set(cycle)
 
         return {
-            "msg": "cycle created",
+            "msg": "Cycle created",
             "cycle": schema.dump(_to_model(REPOSITORY, cycle)),
         }, 201
 
