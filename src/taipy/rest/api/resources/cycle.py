@@ -162,7 +162,9 @@ class CycleList(Resource):
         ```shell
           curl -X POST -H "Content-Type: application/json" -d '{"frequency": "DAILY", "properties": {}, "creation_date": "2020-01-01T00:00:00", "start_date": "2020-01-01T00:00:00", "end_date": "2020-01-01T00:00:00"}' http://localhost:5000/api/v1/cycles
         ```
+
       requestBody:
+        required: true
         content:
           application/json:
             schema:

@@ -258,6 +258,12 @@ class DataNodeReader(Resource):
           curl -X GET http://localhost:5000/api/v1/datanodes/DATANODE_ID/read
         ```
 
+        Code example with filters:
+
+        ```shell
+          curl -X GET -H 'Content-Type: application/json' -d '{"operators": [{"key": "foo", "value": 10, "operator": ">"}], "join_operator": "AND"}' http://localhost:5000/api/v1/datanodes/DATANODE_ID/read
+        ```
+
       parameters:
         - in: path
           name: datanode_id
