@@ -59,7 +59,7 @@ class DataNodeResource(Resource):
       description: |
         Return a single data node by datanode_id. If the data node does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
 
         Code example:
 
@@ -89,7 +89,7 @@ class DataNodeResource(Resource):
       description: |
         Delete a single data node by datanode_id. If the data node does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
 
         Code example:
 
@@ -150,7 +150,7 @@ class DataNodeList(Resource):
       description: |
         Returns all data nodes.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
 
         Code example:
 
@@ -176,7 +176,7 @@ class DataNodeList(Resource):
       description: |
         Create a data node from its config_id. If the config does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
 
         Code example:
 
@@ -250,7 +250,7 @@ class DataNodeReader(Resource):
       description: |
         Return the data read from a data node by datanode_id. If the data node does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
 
         Code example:
 
@@ -327,7 +327,7 @@ class DataNodeWriter(Resource):
       description: |
         Write data from request body into a data node by datanode_id. If the data node does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
 
         Code example:
 

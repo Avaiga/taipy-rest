@@ -36,7 +36,7 @@ class CycleResource(Resource):
       description: |
         Return a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
 
         Code example:
 
@@ -67,7 +67,7 @@ class CycleResource(Resource):
       description: |
         Delete a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
 
         Code example:
 
@@ -90,6 +90,7 @@ class CycleResource(Resource):
                 properties:
                   msg:
                     type: string
+                    message: Error message
                     example: Cycle deleted
         404:
           description: No cycle has the _cycle_id_ identifier
@@ -128,7 +129,7 @@ class CycleList(Resource):
       description: |
         Return all cycles.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
 
         Code example:
 
@@ -155,7 +156,7 @@ class CycleList(Resource):
       description: |
         Create a new cycle from the request body.
 
-        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
 
         Code example:
 

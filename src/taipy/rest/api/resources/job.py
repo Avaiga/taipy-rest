@@ -36,7 +36,7 @@ class JobResource(Resource):
       description: |
         Return a single job by job_id. If the job does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_READER_ role.
 
         Code example:
 
@@ -67,7 +67,7 @@ class JobResource(Resource):
       description: |
         Delete a single job by job_id. If the job does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_EDITOR_ role.
 
         Code example:
 
@@ -128,7 +128,7 @@ class JobList(Resource):
       description: |
         Return all jobs.
 
-        In the **Enterprise** version, the endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_READER_ role.
 
         Code example:
 
@@ -155,7 +155,7 @@ class JobList(Resource):
       description: |
         Create a job from a task config_id. If the config does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_EDITOR_ role.
 
         Code example:
 
@@ -238,7 +238,7 @@ class JobExecutor(Resource):
       description: |
         Cancel a job by job_id. If the job does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires _TAIPY_EXECUTOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_EXECUTOR_ role.
 
         Code example:
 
