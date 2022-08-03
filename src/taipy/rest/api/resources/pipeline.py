@@ -13,7 +13,7 @@ from flask import jsonify, make_response, request
 from flask_restful import Resource
 
 from taipy.config.config import Config
-from taipy.core.exceptions.exceptions import ModelNotFound, NonExistingPipeline
+from taipy.core.exceptions.exceptions import NonExistingPipeline
 from taipy.core.pipeline._pipeline_manager_factory import _PipelineManagerFactory
 from taipy.core.pipeline.pipeline import Pipeline
 from taipy.core.task._task_manager_factory import _TaskManagerFactory
@@ -37,6 +37,13 @@ class PipelineResource(Resource):
         Return a single pipeline by pipeline_id. If the pipeline does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/pipelines/PIPELINE_ID
+        ```
+
       parameters:
         - in: path
           name: pipeline_id
@@ -61,6 +68,13 @@ class PipelineResource(Resource):
         Delete a single pipeline by pipeline_id. If the pipeline does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X DELETE http://localhost:5000/api/v1/pipelines/PIPELINE_ID
+        ```
+
       parameters:
         - in: path
           name: pipeline_id
@@ -95,12 +109,11 @@ class PipelineResource(Resource):
 
     @_middleware
     def delete(self, pipeline_id):
-        try:
-            manager = _PipelineManagerFactory._build_manager()
-            manager._delete(pipeline_id)
-        except ModelNotFound:
-            return make_response(jsonify({"message": f"DataNode {pipeline_id} not found"}), 404)
-
+        manager = _PipelineManagerFactory._build_manager()
+        pipeline = manager._get(pipeline_id)
+        if not pipeline:
+            return make_response(jsonify({"message": f"Pipeline {pipeline_id} not found"}), 404)
+        manager._delete(pipeline_id)
         return {"msg": f"Pipeline {pipeline_id} deleted"}
 
 
@@ -116,6 +129,13 @@ class PipelineList(Resource):
         Return all pipelines.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/pipelines
+        ```
+
       responses:
         200:
           content:
@@ -136,6 +156,13 @@ class PipelineList(Resource):
         Create a pipeline from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/pipelines?config_id=CONFIG_ID
+        ```
+
       parameters:
         - in: query
           name: config_id
@@ -189,15 +216,6 @@ class PipelineList(Resource):
         except KeyError:
             return {"msg": f"Config id {config_id} not found"}, 404
 
-    def __create_pipeline_from_schema(self, pipeline_schema: PipelineSchema):
-        task_manager = _TaskManagerFactory._build_manager()
-        return Pipeline(
-            config_id=pipeline_schema.get("name"),
-            properties=pipeline_schema.get("properties", {}),
-            tasks=[task_manager._get(ts) for ts in pipeline_schema.get("task_ids")],
-            parent_id=pipeline_schema.get("parent_id"),
-        )
-
 
 class PipelineExecutor(Resource):
     """Execute a pipeline
@@ -211,6 +229,13 @@ class PipelineExecutor(Resource):
         Execute a pipeline from pipeline_id. If the pipeline does not exist, a 404 error is returned.
 
         In the **Enterprise** version, This endpoint requires _TAIPY_EXECUTOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/pipelines/submit/PIPELINE_ID
+        ```
+
       parameters:
         - in: path
           name: pipeline_id

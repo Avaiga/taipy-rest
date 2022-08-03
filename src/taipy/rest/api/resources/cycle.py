@@ -17,7 +17,6 @@ from flask_restful import Resource
 from taipy.config.scenario.frequency import Frequency
 from taipy.core import Cycle
 from taipy.core.cycle._cycle_manager_factory import _CycleManagerFactory
-from taipy.core.exceptions.exceptions import ModelNotFound
 
 from ...commons.to_from_model import _to_model
 from ..middlewares._middleware import _middleware
@@ -38,6 +37,13 @@ class CycleResource(Resource):
         Return a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/cycles/CYCLE_ID
+        ```
+
       parameters:
         - in: path
           name: cycle_id
@@ -62,6 +68,13 @@ class CycleResource(Resource):
         Delete a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X DELETE http://localhost:5000/api/v1/cycles/CYCLE_ID
+        ```
+
       parameters:
         - in: path
           name: cycle_id
@@ -96,12 +109,11 @@ class CycleResource(Resource):
 
     @_middleware
     def delete(self, cycle_id):
-        try:
-            manager = _CycleManagerFactory._build_manager()
-            manager._delete(cycle_id)
-        except ModelNotFound:
-            return make_response(jsonify({"message": f"DataNode {cycle_id} not found"}), 404)
-
+        manager = _CycleManagerFactory._build_manager()
+        cycle = manager._get(cycle_id)
+        if not cycle:
+            return make_response(jsonify({"message": f"Cycle {cycle_id} not found"}), 404)
+        manager._delete(cycle_id)
         return {"msg": f"cycle {cycle_id} deleted"}
 
 
@@ -117,6 +129,13 @@ class CycleList(Resource):
         Return all cycles.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/cycles
+        ```
+
       responses:
         200:
           content:
@@ -137,6 +156,12 @@ class CycleList(Resource):
         Create a new cycle from the request body.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST -H "Content-Type: application/json" -d '{"frequency": "DAILY", "properties": {}, "creation_date": "2020-01-01T00:00:00", "start_date": "2020-01-01T00:00:00", "end_date": "2020-01-01T00:00:00"}' http://localhost:5000/api/v1/cycles
+        ```
       requestBody:
         content:
           application/json:

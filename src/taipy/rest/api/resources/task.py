@@ -15,7 +15,6 @@ from flask_restful import Resource
 from taipy.config.config import Config
 from taipy.core.common._utils import _load_fct
 from taipy.core.data._data_manager_factory import _DataManagerFactory
-from taipy.core.exceptions.exceptions import ModelNotFound
 from taipy.core.task._task_manager_factory import _TaskManagerFactory
 from taipy.core.task.task import Task
 
@@ -38,6 +37,13 @@ class TaskResource(Resource):
         Return a single task by task_id. If the task does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/tasks/TASK_ID
+        ```
+
       parameters:
         - in: path
           name: task_id
@@ -62,6 +68,12 @@ class TaskResource(Resource):
         Delete a single task by task_id. If the task does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X DELETE http://localhost:5000/api/v1/tasks/TASK_ID
+        ```
       parameters:
         - in: path
           name: task_id
@@ -96,13 +108,12 @@ class TaskResource(Resource):
 
     @_middleware
     def delete(self, task_id):
-        try:
-            manager = _TaskManagerFactory._build_manager()
-            manager._delete(task_id)
-        except ModelNotFound:
-            return make_response(jsonify({"message": f"DataNode {task_id} not found"}), 404)
-
-        return {"msg": f"task {task_id} deleted"}
+        manager = _TaskManagerFactory._build_manager()
+        task = manager._get(task_id)
+        if not task:
+            return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
+        manager._delete(task_id)
+        return {"msg": f"Task {task_id} deleted"}
 
 
 class TaskList(Resource):
@@ -117,6 +128,13 @@ class TaskList(Resource):
         Return all tasks.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/tasks
+        ```
+
       responses:
         200:
           content:
@@ -137,6 +155,12 @@ class TaskList(Resource):
         Create a new task from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/tasks?config_id=CONFIG_ID
+        ```
       parameters:
         - in: query
           name: config_id
@@ -190,16 +214,6 @@ class TaskList(Resource):
         except KeyError:
             return {"msg": f"Config id {config_id} not found"}, 404
 
-    def __create_task_from_schema(self, task_schema: TaskSchema):
-        data_manager = _DataManagerFactory._build_manager()
-        return Task(
-            task_schema.get("config_id"),
-            _load_fct(task_schema.get("function_module"), task_schema.get("function_name")),
-            [data_manager._get(ds) for ds in task_schema.get("input_ids")],
-            [data_manager._get(ds) for ds in task_schema.get("output_ids")],
-            task_schema.get("parent_id"),
-        )
-
 
 class TaskExecutor(Resource):
     """Execute a task
@@ -213,6 +227,13 @@ class TaskExecutor(Resource):
         Execute a task by task_id. If the task does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EXECUTOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/tasks/submit/TASK_ID
+        ```
+
       parameters:
         - in: path
           name: task_id

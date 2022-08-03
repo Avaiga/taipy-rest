@@ -13,7 +13,7 @@ from flask import jsonify, make_response, request
 from flask_restful import Resource
 
 from taipy.config.config import Config
-from taipy.core.exceptions.exceptions import ModelNotFound, NonExistingScenario
+from taipy.core.exceptions.exceptions import NonExistingScenario
 from taipy.core.pipeline._pipeline_manager_factory import _PipelineManagerFactory
 from taipy.core.scenario._scenario_manager_factory import _ScenarioManagerFactory
 from taipy.core.scenario.scenario import Scenario
@@ -37,6 +37,13 @@ class ScenarioResource(Resource):
         Return a single scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```
+          curl -X GET http://localhost:5000/api/v1/scenarios/SCENARIO_ID
+        ```
+
       parameters:
         - in: path
           name: scenario_id
@@ -61,6 +68,13 @@ class ScenarioResource(Resource):
         Delete a single scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X DELETE http://localhost:5000/api/v1/scenarios/SCENARIO_ID
+        ```
+
       parameters:
         - in: path
           name: scenario_id
@@ -95,12 +109,11 @@ class ScenarioResource(Resource):
 
     @_middleware
     def delete(self, scenario_id):
-        try:
-            manager = _ScenarioManagerFactory._build_manager()
-            manager._delete(scenario_id)
-        except ModelNotFound:
-            return make_response(jsonify({"message": f"DataNode {scenario_id} not found"}), 404)
-
+        manager = _ScenarioManagerFactory._build_manager()
+        scenario = manager._get(scenario_id)
+        if not scenario:
+            return make_response(jsonify({"message": f"Scenario {scenario_id} not found"}), 404)
+        manager._delete(scenario_id)
         return {"msg": f"scenario {scenario_id} deleted"}
 
 
@@ -116,6 +129,13 @@ class ScenarioList(Resource):
         Return all scenarios.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/scenarios
+        ```
+
       responses:
         200:
           content:
@@ -136,6 +156,12 @@ class ScenarioList(Resource):
         Create a new scenario from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/scenarios?config_id=CONFIG_ID
+        ```
       parameters:
         - in: query
           name: config_id
@@ -190,17 +216,6 @@ class ScenarioList(Resource):
         except KeyError:
             return {"msg": f"Config id {config_id} not found"}, 404
 
-    def __create_scenario_from_schema(self, scenario_schema: ScenarioSchema):
-        pipeline_manager = _PipelineManagerFactory._build_manager()
-        return Scenario(
-            config_id=scenario_schema.get("name"),
-            properties=scenario_schema.get("properties", {}),
-            pipelines=[pipeline_manager._get(pl) for pl in scenario_schema.get("pipeline_ids")],
-            scenario_id=scenario_schema.get("id"),
-            is_master=scenario_schema.get("master_scenario"),
-            cycle=scenario_schema.get("cycle"),
-        )
-
 
 class ScenarioExecutor(Resource):
     """Execute a scenario
@@ -214,6 +229,13 @@ class ScenarioExecutor(Resource):
         Execute a scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EXECUTOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/scenarios/submit/SCENARIO_ID
+        ```
+
       parameters:
         - in: path
           name: scenario_id

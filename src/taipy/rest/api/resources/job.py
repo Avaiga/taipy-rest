@@ -18,7 +18,6 @@ from flask_restful import Resource
 from taipy.config.config import Config
 from taipy.core import Job
 from taipy.core.common.alias import JobId
-from taipy.core.exceptions.exceptions import ModelNotFound
 from taipy.core.job._job_manager_factory import _JobManagerFactory
 from taipy.core.task._task_manager_factory import _TaskManagerFactory
 
@@ -38,6 +37,13 @@ class JobResource(Resource):
         Return a single job by job_id. If the job does not exist, a 404 error is returned.
 
         In the **Enterprise** version, the endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/jobs/JOB_ID
+        ```
+
       parameters:
         - in: path
           name: job_id
@@ -62,6 +68,13 @@ class JobResource(Resource):
         Delete a single job by job_id. If the job does not exist, a 404 error is returned.
 
         In the **Enterprise** version, the endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X DELETE http://localhost:5000/api/v1/jobs/JOB_ID
+        ```
+
       parameters:
         - in: path
           name: job_id
@@ -96,12 +109,11 @@ class JobResource(Resource):
 
     @_middleware
     def delete(self, job_id):
-        try:
-            manager = _JobManagerFactory._build_manager()
-            manager._delete(job_id)
-        except ModelNotFound:
+        manager = _JobManagerFactory._build_manager()
+        job = manager._get(job_id)
+        if not job:
             return make_response(jsonify({"message": f"Job {job_id} not found"}), 404)
-
+        manager._delete(job)
         return {"msg": f"Job {job_id} deleted"}
 
 
@@ -117,6 +129,13 @@ class JobList(Resource):
         Return all jobs.
 
         In the **Enterprise** version, the endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/jobs
+        ```
+
       responses:
         200:
           content:
@@ -137,6 +156,13 @@ class JobList(Resource):
         Create a job from a task config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, the endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/jobs?task_id=TASK_ID
+        ```
+
       parameters:
         - in: query
           name: task_id
@@ -213,6 +239,13 @@ class JobExecutor(Resource):
         Cancel a job by job_id. If the job does not exist, a 404 error is returned.
 
         In the **Enterprise** version, the endpoint requires _TAIPY_EXECUTOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/jobs/cancel/JOB_ID
+        ```
+
       parameters:
         - in: path
           name: job_id

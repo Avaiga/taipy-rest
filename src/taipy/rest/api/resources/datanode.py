@@ -60,6 +60,12 @@ class DataNodeResource(Resource):
         Return a single data node by datanode_id. If the data node does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/datanodes/DATANODE_ID
+        ```
       parameters:
         - in: path
           name: datanode_id
@@ -84,6 +90,13 @@ class DataNodeResource(Resource):
         Delete a single data node by datanode_id. If the data node does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X DELETE http://localhost:5000/api/v1/datanodes/DATANODE_ID
+        ```
+
       parameters:
         - in: path
           name: datanode_id
@@ -138,6 +151,12 @@ class DataNodeList(Resource):
         Returns all data nodes.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
+
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/datanodes
+        ```
       responses:
         200:
           content:
@@ -158,6 +177,12 @@ class DataNodeList(Resource):
         Create a data node from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X POST http://localhost:5000/api/v1/datanodes?config_id=CONFIG_ID
+        ```
       parameters:
         - in: query
           name: config_id
@@ -227,6 +252,12 @@ class DataNodeReader(Resource):
 
         In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
 
+        Code example:
+
+        ```shell
+          curl -X GET http://localhost:5000/api/v1/datanodes/DATANODE_ID/read
+        ```
+
       parameters:
         - in: path
           name: datanode_id
@@ -246,7 +277,7 @@ class DataNodeReader(Resource):
                 properties:
                   datanode: DataNodeSchema
         404:
-          description: datanode does not exist
+          description: No data node has the _data_node_id_ identifier
     """
 
     def __init__(self, **kwargs):
@@ -264,21 +295,19 @@ class DataNodeReader(Resource):
 
     @_middleware
     def get(self, datanode_id):
-        try:
-            schema = DataNodeFilterSchema()
-            manager = _DataManagerFactory._build_manager()
-            datanode = manager._get(datanode_id)
-
-            data = request.get_json(silent=True)
-            operators = self.__make_operators(schema.load(data)) if data else []
-            data = datanode.filter(operators)
-            if isinstance(data, pd.DataFrame):
-                data = data.to_dict(orient="records")
-            elif isinstance(data, np.ndarray):
-                data = list(data)
-            return {"data": data}
-        except NonExistingDataNode:
+        schema = DataNodeFilterSchema()
+        manager = _DataManagerFactory._build_manager()
+        data_node = manager._get(datanode_id)
+        data = request.get_json(silent=True)
+        if not data_node:
             return make_response(jsonify({"message": f"Data node {datanode_id} not found"}), 404)
+        operators = self.__make_operators(schema.load(data)) if data else []
+        data = data_node.filter(operators)
+        if isinstance(data, pd.DataFrame):
+            data = data.to_dict(orient="records")
+        elif isinstance(data, np.ndarray):
+            data = list(data)
+        return {"data": data}
 
 
 class DataNodeWriter(Resource):
@@ -293,6 +322,13 @@ class DataNodeWriter(Resource):
         Write data from request body into a data node by datanode_id. If the data node does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
+
+        Code example:
+
+        ```shell
+          curl -X PUT -d '{"data": [{"a": 1, "b": 2}]}' -H 'Content-Type: application/json'  http://localhost:5000/api/v1/datanodes/DATANODE_ID/write
+        ```
+
       parameters:
         - in: path
           name: datanode_id
@@ -312,7 +348,7 @@ class DataNodeWriter(Resource):
                 properties:
                   datanode: DataNodeSchema
         404:
-          description: datanode does not exist
+          description: No data node has the _data_node_id_ identifier
     """
 
     def __init__(self, **kwargs):
@@ -320,11 +356,10 @@ class DataNodeWriter(Resource):
 
     @_middleware
     def put(self, datanode_id):
-        try:
-            manager = _DataManagerFactory._build_manager()
-            data = request.json
-            datanode = manager._get(datanode_id)
-            datanode.write(data)
-            return {"message": "Data node data successfully updated"}
-        except NonExistingDataNode:
+        manager = _DataManagerFactory._build_manager()
+        data = request.json
+        data_node = manager._get(datanode_id)
+        if not data_node:
             return make_response(jsonify({"message": f"Data node {datanode_id} not found"}), 404)
+        data_node.write(data)
+        return {"message": "Data node is successfully written"}
