@@ -217,10 +217,10 @@ class JobList(Resource):
             "job": schema.dump(job),
         }, 201
 
-    def __create_job_from_schema(self, task_name: str) -> Optional[Job]:
+    def __create_job_from_schema(self, task_config_id: str) -> Optional[Job]:
         task_manager = _TaskManagerFactory._build_manager()
         try:
-            task = task_manager._bulk_get_or_create([self.fetch_config(task_name)])[0]
+            task = task_manager._bulk_get_or_create([self.fetch_config(task_config_id)])[0]
         except KeyError:
             return None
 
