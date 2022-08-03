@@ -43,6 +43,7 @@ class TaskResource(Resource):
           name: task_id
           schema:
             type: string
+          description: The generated id of the task
       responses:
         200:
           content:
@@ -66,6 +67,7 @@ class TaskResource(Resource):
           name: task_id
           schema:
             type: string
+          description: The generated id of the task
       responses:
         200:
           content:
@@ -140,6 +142,7 @@ class TaskList(Resource):
           name: config_id
           schema:
             type: string
+          description: The id of the task config
       responses:
         201:
           content:

@@ -43,6 +43,7 @@ class CycleResource(Resource):
           name: cycle_id
           schema:
             type: string
+          description: The generated id of the cycle
       responses:
         200:
           content:
@@ -66,6 +67,7 @@ class CycleResource(Resource):
           name: cycle_id
           schema:
             type: string
+          description: The generated id of the cycle
       responses:
         200:
           content:

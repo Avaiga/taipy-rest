@@ -65,6 +65,7 @@ class DataNodeResource(Resource):
           name: datanode_id
           schema:
             type: string
+          description: The generated id of the data node
       responses:
         200:
           content:
@@ -88,6 +89,7 @@ class DataNodeResource(Resource):
           name: datanode_id
           schema:
             type: string
+          description: The generated id of the data node
       responses:
         200:
           content:
@@ -161,6 +163,7 @@ class DataNodeList(Resource):
           name: config_id
           schema:
             type: string
+          description: The id of the data node config
       responses:
         201:
           content:

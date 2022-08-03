@@ -42,6 +42,7 @@ class PipelineResource(Resource):
           name: pipeline_id
           schema:
             type: string
+          description: The generated id of the pipeline
       responses:
         200:
           content:
@@ -65,6 +66,7 @@ class PipelineResource(Resource):
           name: pipeline_id
           schema:
             type: string
+          description: The generated id of the pipeline
       responses:
         200:
           content:
@@ -139,6 +141,7 @@ class PipelineList(Resource):
           name: config_id
           schema:
             type: string
+          description: The id of the pipeline config
       responses:
         201:
           content:

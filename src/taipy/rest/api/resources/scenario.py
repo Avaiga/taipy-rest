@@ -42,6 +42,7 @@ class ScenarioResource(Resource):
           name: scenario_id
           schema:
             type: string
+          description: The generated id of the scenario
       responses:
         200:
           content:
@@ -65,6 +66,7 @@ class ScenarioResource(Resource):
           name: scenario_id
           schema:
             type: string
+          description: The generated id of the scenario
       responses:
         200:
           content:
@@ -139,6 +141,7 @@ class ScenarioList(Resource):
           name: config_id
           schema:
             type: string
+          description: The id of the scenario config
       responses:
         201:
           content:
