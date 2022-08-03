@@ -35,9 +35,9 @@ class CycleResource(Resource):
         - api
       summary: Get a cycle
       description: |
-        Return a single cycle by CycleId. If the cycle does not exist, a 404 error is returned.
+        Return a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
       parameters:
         - in: path
           name: cycle_id
@@ -52,15 +52,15 @@ class CycleResource(Resource):
                 properties:
                   cycle: CycleSchema
         404:
-          description: Cycle does not exist
+          description: No cycle has the _cycle_id_ identifier
     delete:
       tags:
         - api
       summary: Delete a cycle
       description: |
-        Delete a single cycle by CycleId. If the cycle does not exist, a 404 error is returned.
+        Delete a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
       parameters:
         - in: path
           name: cycle_id
@@ -77,7 +77,7 @@ class CycleResource(Resource):
                     type: string
                     example: Cycle deleted
         404:
-          description: Cycle does not exist
+          description: No cycle has the _cycle_id_ identifier
     """
 
     def __init__(self, **kwargs):
@@ -114,7 +114,7 @@ class CycleList(Resource):
       description: |
         Return all cycles.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
       responses:
         200:
           content:
@@ -134,7 +134,7 @@ class CycleList(Resource):
       description: |
         Create a new cycle from its config_id. If the config does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
       requestBody:
         content:
           application/json:

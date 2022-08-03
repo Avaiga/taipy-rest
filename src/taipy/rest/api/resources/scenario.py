@@ -34,9 +34,9 @@ class ScenarioResource(Resource):
         - api
       summary: Get a scenario
       description: |
-        Return a single scenario by ScenarioId. If the scenario does not exist, a 404 error is returned.
+        Return a single scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
       parameters:
         - in: path
           name: scenario_id
@@ -51,15 +51,15 @@ class ScenarioResource(Resource):
                 properties:
                   scenario: ScenarioSchema
         404:
-          description: Scenario does not exist
+          description: No scenario has the _scenario_id_ identifier
     delete:
       tags:
         - api
       summary: Delete a scenario
       description: |
-        Delete a single scenario by ScenarioId. If the scenario does not exist, a 404 error is returned.
+        Delete a single scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
       parameters:
         - in: path
           name: scenario_id
@@ -76,7 +76,7 @@ class ScenarioResource(Resource):
                     type: string
                     example: Scenario deleted
         404:
-          description: Scenario does not exist
+          description: No scenario has the _scenario_id_ identifier
     """
 
     def __init__(self, **kwargs):
@@ -113,7 +113,7 @@ class ScenarioList(Resource):
       description: |
         Return all scenarios.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
       responses:
         200:
           content:
@@ -133,7 +133,7 @@ class ScenarioList(Resource):
       description: |
         Create a new scenario from its config_id. If the config does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
       requestBody:
         content:
           application/json:
@@ -208,9 +208,9 @@ class ScenarioExecutor(Resource):
         - api
       summary: Execute a scenario
       description: |
-        Execute a scenario by ScenarioId. If the scenario does not exist, a 404 error is returned.
+        Execute a scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EXECUTOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EXECUTOR_ role.
       parameters:
         - in: path
           name: scenario_id
@@ -228,7 +228,7 @@ class ScenarioExecutor(Resource):
                     example: scenario created
                   scenario: ScenarioSchema
         404:
-          description: scenario does not exist
+          description: No scenario has the _scenario_id_ identifier
     """
 
     def __init__(self, **kwargs):

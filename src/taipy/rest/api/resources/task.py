@@ -35,9 +35,9 @@ class TaskResource(Resource):
         - api
       summary: Get a task
       description: |
-        Return a single task by TaskId. If the task does not exist, a 404 error is returned.
+        Return a single task by task_id. If the task does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
       parameters:
         - in: path
           name: task_id
@@ -52,15 +52,15 @@ class TaskResource(Resource):
                 properties:
                   task: TaskSchema
         404:
-          description: Task does not exist
+          description: No task has the _task_id_ identifier
     delete:
       tags:
         - api
       summary: Delete a task
       description: |
-        Delete a single task by TaskId. If the task does not exist, a 404 error is returned.
+        Delete a single task by task_id. If the task does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
       parameters:
         - in: path
           name: task_id
@@ -77,7 +77,7 @@ class TaskResource(Resource):
                     type: string
                     example: Task deleted
         404:
-          description: Task does not exist
+          description: No task has the _task_id_ identifier
     """
 
     def __init__(self, **kwargs):
@@ -114,7 +114,7 @@ class TaskList(Resource):
       description: |
         Return all tasks.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_READER_ role.
       responses:
         200:
           content:
@@ -134,7 +134,7 @@ class TaskList(Resource):
       description: |
         Create a new task from its config_id. If the config does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
       requestBody:
         content:
           application/json:
@@ -207,9 +207,9 @@ class TaskExecutor(Resource):
         - api
       summary: Execute a task
       description: |
-        Execute a task by TaskId. If the task does not exist, a 404 error is returned.
+        Execute a task by task_id. If the task does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, this endpoint requires TAIPY_EXECUTOR role.
+        In the **Enterprise** version, this endpoint requires _TAIPY_EXECUTOR_ role.
       parameters:
         - in: path
           name: task_id
@@ -227,7 +227,7 @@ class TaskExecutor(Resource):
                     example: Task created
                   task: TaskSchema
         404:
-          description: Task does not exist
+          description: No task has the _task_id_ identifier
     """
 
     def __init__(self, **kwargs):

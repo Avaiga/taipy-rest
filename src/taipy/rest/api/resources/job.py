@@ -35,9 +35,9 @@ class JobResource(Resource):
         - api
       summary: Get a job
       description: |
-        Return a single job by JobId. If the job does not exist, a 404 error is returned.
+        Return a single job by job_id. If the job does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, the endpoint requires _TAIPY_READER_ role.
       parameters:
         - in: path
           name: job_id
@@ -52,15 +52,15 @@ class JobResource(Resource):
                 properties:
                   job: JobSchema
         404:
-          description: Job does not exist
+          description: No job has the _job_id_ identifier
     delete:
       tags:
         - api
       summary: Delete a job
       description: |
-        Delete a single job by JobId. If the job does not exist, a 404 error is returned.
+        Delete a single job by job_id. If the job does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, the endpoint requires _TAIPY_EDITOR_ role.
       parameters:
         - in: path
           name: job_id
@@ -77,7 +77,7 @@ class JobResource(Resource):
                     type: string
                     example: Job deleted
         404:
-          description: Job does not exist
+          description: No job has the _job_id_ identifier
     """
 
     def __init__(self, **kwargs):
@@ -114,7 +114,7 @@ class JobList(Resource):
       description: |
         Return all jobs.
 
-        In the **Enterprise** version, the endpoint requires TAIPY_READER role.
+        In the **Enterprise** version, the endpoint requires _TAIPY_READER_ role.
       responses:
         200:
           content:
@@ -134,7 +134,7 @@ class JobList(Resource):
       description: |
         Create a job from a task config_id. If the config does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires TAIPY_EDITOR role.
+        In the **Enterprise** version, the endpoint requires _TAIPY_EDITOR_ role.
       requestBody:
         content:
           application/json:
@@ -207,9 +207,9 @@ class JobExecutor(Resource):
         - api
       summary: Cancel a job
       description: |
-        Cancel a job by JobId. If the job does not exist, a 404 error is returned.
+        Cancel a job by job_id. If the job does not exist, a 404 error is returned.
 
-        In the **Enterprise** version, the endpoint requires TAIPY_EXECUTOR role.
+        In the **Enterprise** version, the endpoint requires _TAIPY_EXECUTOR_ role.
       parameters:
         - in: path
           name: job_id
@@ -227,7 +227,7 @@ class JobExecutor(Resource):
                     example: Job cancelled
                   job: JobSchema
         404:
-          description: Job does not exist
+          description: No job has the _job_id_ identifier
     """
 
     def __init__(self, **kwargs):
