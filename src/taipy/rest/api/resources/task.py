@@ -135,11 +135,11 @@ class TaskList(Resource):
         Create a new task from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              TaskSchema
+      parameters:
+        - in: query
+          name: config_id
+          schema:
+            type: string
       responses:
         201:
           content:

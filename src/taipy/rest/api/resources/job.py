@@ -135,11 +135,11 @@ class JobList(Resource):
         Create a job from a task config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, the endpoint requires _TAIPY_EDITOR_ role.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              JobSchema
+      parameters:
+        - in: query
+          name: task_id
+          schema:
+            type: string
       responses:
         201:
           content:

@@ -134,11 +134,11 @@ class ScenarioList(Resource):
         Create a new scenario from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              ScenarioSchema
+      parameters:
+        - in: query
+          name: config_id
+          schema:
+            type: string
       responses:
         201:
           content:
@@ -148,7 +148,7 @@ class ScenarioList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: scenario created
+                    example: Scenario created
                   scenario: ScenarioSchema
     """
 

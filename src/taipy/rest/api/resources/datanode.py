@@ -156,11 +156,11 @@ class DataNodeList(Resource):
         Create a data node from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              DataNodeSchema
+      parameters:
+        - in: query
+          name: config_id
+          schema:
+            type: string
       responses:
         201:
           content:

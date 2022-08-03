@@ -134,11 +134,11 @@ class PipelineList(Resource):
         Create a pipeline from its config_id. If the config does not exist, a 404 error is returned.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              PipelineSchema
+      parameters:
+        - in: query
+          name: config_id
+          schema:
+            type: string
       responses:
         201:
           content:
