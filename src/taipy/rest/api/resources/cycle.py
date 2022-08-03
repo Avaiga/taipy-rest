@@ -132,7 +132,7 @@ class CycleList(Resource):
         - api
       summary: Create a cycle
       description: |
-        Create a new cycle from its config_id. If the config does not exist, a 404 error is returned.
+        Create a new cycle from the request body.
 
         In the **Enterprise** version, this endpoint requires _TAIPY_EDITOR_ role.
       requestBody:
