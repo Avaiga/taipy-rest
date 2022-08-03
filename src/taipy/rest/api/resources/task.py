@@ -89,7 +89,7 @@ class TaskResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Task deleted
+                    description: Status message
         404:
           description: No task has the _task_id_ identifier
     """
@@ -176,7 +176,7 @@ class TaskList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Task created
+                    description: Status message
                   task: TaskSchema
     """
 
@@ -248,7 +248,7 @@ class TaskExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Task created
+                    description: Status message
                   task: TaskSchema
         404:
           description: No task has the _task_id_ identifier

@@ -112,7 +112,7 @@ class DataNodeResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Data node deleted
+                    description: Status message
         404:
           description: No data node has the _datanode_id_ identifier
     """
@@ -198,7 +198,7 @@ class DataNodeList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Data node created
+                    description: Status message
                   datanode: DataNodeSchema
     """
 

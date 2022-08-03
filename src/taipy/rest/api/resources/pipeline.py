@@ -90,7 +90,7 @@ class PipelineResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Pipeline deleted
+                    description: Status message
         404:
           description: No pipeline has the _pipeline_id_ identifier
     """
@@ -178,7 +178,7 @@ class PipelineList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Pipeline created
+                    description: Status message
                   pipeline: PipelineSchema
     """
 
@@ -250,7 +250,7 @@ class PipelineExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Pipeline created
+                    description: Status message
                   pipeline: PipelineSchema
         404:
             description: No pipeline has the _pipeline_id_ identifier

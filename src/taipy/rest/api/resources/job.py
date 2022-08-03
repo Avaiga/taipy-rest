@@ -90,7 +90,7 @@ class JobResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Job deleted
+                    description: Status message
         404:
           description: No job has the _job_id_ identifier
     """
@@ -178,7 +178,7 @@ class JobList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Job created
+                    description: Status message
                   job: JobSchema
     """
 
@@ -260,7 +260,7 @@ class JobExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Job cancelled
+                    description: Status message
                   job: JobSchema
         404:
           description: No job has the _job_id_ identifier

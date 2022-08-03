@@ -90,7 +90,7 @@ class ScenarioResource(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Scenario deleted
+                    description: Status message
         404:
           description: No scenario has the _scenario_id_ identifier
     """
@@ -177,7 +177,7 @@ class ScenarioList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Scenario created
+                    description: Status message
                   scenario: ScenarioSchema
     """
 
@@ -250,7 +250,7 @@ class ScenarioExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    example: scenario created
+                    description: Status message
                   scenario: ScenarioSchema
         404:
           description: No scenario has the _scenario_id_ identifier

@@ -90,8 +90,7 @@ class CycleResource(Resource):
                 properties:
                   msg:
                     type: string
-                    message: Error message
-                    example: Cycle deleted
+                    description: Status message
         404:
           description: No cycle has the _cycle_id_ identifier
     """
