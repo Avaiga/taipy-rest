@@ -66,7 +66,7 @@ class TaskResource(Resource):
         - api
       summary: Delete a task.
       description: |
-        Delete a single task by *task_id*. If the task does not exist, a 404 error is returned.
+        Delete a task. If the task does not exist, a 404 error is returned.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.

@@ -66,7 +66,7 @@ class ScenarioResource(Resource):
         - api
       summary: Delete a scenario.
       description: |
-        Delete a single scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
+        Delete a scenario. If the scenario does not exist, a 404 error is returned.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.

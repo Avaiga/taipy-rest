@@ -121,7 +121,7 @@ class CycleResource(Resource):
         - api
       summary: Delete a cycle.
       description: |
-        Delete a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
+        Delete a cycle. If the cycle does not exist, a 404 error is returned.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.

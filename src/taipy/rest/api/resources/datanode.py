@@ -88,7 +88,7 @@ class DataNodeResource(Resource):
         - api
       summary: Delete a data node.
       description: |
-        Delete a single data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
+        Delete a data node. If the data node does not exist, a 404 error is returned.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.

@@ -66,7 +66,7 @@ class PipelineResource(Resource):
         - api
       summary: Delete a pipeline.
       description: |
-        Delete a single pipeline by pipeline_id. If the pipeline does not exist, a 404 error is returned.
+        Delete a pipeline. If the pipeline does not exist, a 404 error is returned.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.

@@ -66,7 +66,7 @@ class JobResource(Resource):
         - api
       summary: Delete a job.
       description: |
-        Delete a single job by *job_id*. If the job does not exist, a 404 error is returned.
+        Delete a job. If the job does not exist, a 404 error is returned.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EDITOR` role.
