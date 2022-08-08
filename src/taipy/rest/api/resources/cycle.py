@@ -237,7 +237,7 @@ class CycleList(Resource):
                 properties:
                   msg:
                     type: string
-                    example: Cycle created
+                    description: Status message.
                   cycle: CycleSchema
     """
 
