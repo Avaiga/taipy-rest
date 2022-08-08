@@ -116,7 +116,7 @@ class PipelineResource(Resource):
         if not pipeline:
             return make_response(jsonify({"message": f"Pipeline {pipeline_id} not found"}), 404)
         manager._delete(pipeline_id)
-        return {"msg": f"Pipeline {pipeline_id} deleted"}
+        return {"msg": f"Pipeline {pipeline_id} deleted."}
 
 
 class PipelineList(Resource):
@@ -214,7 +214,7 @@ class PipelineList(Resource):
             pipeline = manager._get_or_create(config)
 
             return {
-                "msg": "Pipeline created",
+                "msg": "Pipeline created.",
                 "pipeline": response_schema.dump(_to_model(REPOSITORY, pipeline)),
             }, 201
         except KeyError:

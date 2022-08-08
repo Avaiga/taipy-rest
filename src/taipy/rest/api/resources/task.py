@@ -115,7 +115,7 @@ class TaskResource(Resource):
         if not task:
             return make_response(jsonify({"message": f"Task {task_id} not found"}), 404)
         manager._delete(task_id)
-        return {"msg": f"Task {task_id} deleted"}
+        return {"msg": f"Task {task_id} deleted."}
 
 
 class TaskList(Resource):
@@ -212,7 +212,7 @@ class TaskList(Resource):
             task = manager._bulk_get_or_create([config])[0]
 
             return {
-                "msg": "Task created",
+                "msg": "Task created.",
                 "task": schema.dump(_to_model(REPOSITORY, task)),
             }, 201
         except KeyError:

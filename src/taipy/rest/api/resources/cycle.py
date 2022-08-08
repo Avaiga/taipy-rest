@@ -171,7 +171,7 @@ class CycleResource(Resource):
         if not cycle:
             return make_response(jsonify({"message": f"Cycle {cycle_id} not found"}), 404)
         manager._delete(cycle_id)
-        return {"msg": f"cycle {cycle_id} deleted"}
+        return {"msg": f"Cycle {cycle_id} deleted."}
 
 
 class CycleList(Resource):
@@ -260,7 +260,7 @@ class CycleList(Resource):
         manager._set(cycle)
 
         return {
-            "msg": "Cycle created",
+            "msg": "Cycle created.",
             "cycle": schema.dump(_to_model(REPOSITORY, cycle)),
         }, 201
 

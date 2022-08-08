@@ -116,7 +116,7 @@ class ScenarioResource(Resource):
         if not scenario:
             return make_response(jsonify({"message": f"Scenario {scenario_id} not found"}), 404)
         manager._delete(scenario_id)
-        return {"msg": f"scenario {scenario_id} deleted"}
+        return {"msg": f"Scenario {scenario_id} deleted."}
 
 
 class ScenarioList(Resource):
@@ -214,7 +214,7 @@ class ScenarioList(Resource):
             scenario = manager._create(config)
 
             return {
-                "msg": "Scenario created",
+                "msg": "Scenario created.",
                 "scenario": response_schema.dump(_to_model(REPOSITORY, scenario)),
             }, 201
         except KeyError:

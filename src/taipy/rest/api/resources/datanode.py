@@ -138,7 +138,7 @@ class DataNodeResource(Resource):
             manager._delete(datanode_id)
         except NonExistingDataNode:
             return make_response(jsonify({"message": f"Data node {datanode_id} not found"}), 404)
-        return {"msg": f"Data node {datanode_id} deleted"}
+        return {"msg": f"Data node {datanode_id} deleted."}
 
 
 class DataNodeList(Resource):
@@ -236,7 +236,7 @@ class DataNodeList(Resource):
             manager._bulk_get_or_create({config})
 
             return {
-                "msg": "Data node created",
+                "msg": "Data node created.",
                 "datanode": schema.dump(config),
             }, 201
         except KeyError:
