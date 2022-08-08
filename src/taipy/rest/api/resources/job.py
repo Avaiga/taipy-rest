@@ -116,7 +116,7 @@ class JobResource(Resource):
         if not job:
             return make_response(jsonify({"message": f"Job {job_id} not found"}), 404)
         manager._delete(job)
-        return {"msg": f"Job {job_id} deleted"}
+        return {"msg": f"Job {job_id} deleted."}
 
 
 class JobList(Resource):
@@ -217,7 +217,7 @@ class JobList(Resource):
         manager._set(job)
 
         return {
-            "msg": "Job created",
+            "msg": "Job created.",
             "job": schema.dump(job),
         }, 201
 
