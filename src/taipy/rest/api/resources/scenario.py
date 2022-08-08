@@ -171,7 +171,7 @@ class ScenarioList(Resource):
           name: config_id
           schema:
             type: string
-          description: The id of the scenario config
+          description: The identifier of the scenario configuration.
       responses:
         201:
           content:

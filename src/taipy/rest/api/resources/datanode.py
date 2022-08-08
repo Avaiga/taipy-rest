@@ -192,7 +192,7 @@ class DataNodeList(Resource):
           name: config_id
           schema:
             type: string
-          description: The id of the data node config
+          description: The identifier of the data node configuration.
       responses:
         201:
           content:

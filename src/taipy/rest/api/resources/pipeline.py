@@ -172,7 +172,7 @@ class PipelineList(Resource):
           name: config_id
           schema:
             type: string
-          description: The id of the pipeline config
+          description: The identifier of the pipeline configuration.
       responses:
         201:
           content:

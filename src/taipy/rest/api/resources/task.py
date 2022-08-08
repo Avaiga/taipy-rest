@@ -170,7 +170,7 @@ class TaskList(Resource):
           name: config_id
           schema:
             type: string
-          description: The id of the task config
+          description: The identifier of the task configuration.
       responses:
         201:
           content:

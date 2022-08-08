@@ -105,7 +105,7 @@ class CycleResource(Resource):
           name: cycle_id
           schema:
             type: string
-          description: The id of the cycle to retrieve.
+          description: The identifier of the cycle to retrieve.
       responses:
         200:
           content:
