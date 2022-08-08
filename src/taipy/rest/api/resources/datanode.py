@@ -55,7 +55,7 @@ class DataNodeResource(Resource):
     get:
       tags:
         - api
-      summary: Get a data node
+      summary: Get a data node.
       description: |
         Return a single data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 
@@ -86,7 +86,7 @@ class DataNodeResource(Resource):
     delete:
       tags:
         - api
-      summary: Delete a data node
+      summary: Delete a data node.
       description: |
         Delete a single data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 
@@ -175,7 +175,7 @@ class DataNodeList(Resource):
     post:
       tags:
         - api
-      summary: Create a datanode
+      summary: Create a data node.
       description: |
         Create a data node from its *config_id*. If the config does not exist, a 404 error is returned.
 
@@ -250,7 +250,7 @@ class DataNodeReader(Resource):
     get:
       tags:
         - api
-      summary: Read a data node
+      summary: Read a data node.
       description: |
         Return the data read from a data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 
@@ -328,7 +328,7 @@ class DataNodeWriter(Resource):
     put:
       tags:
         - api
-      summary: Write into a data node
+      summary: Write into a data node.
       description: |
         Write data from request body into a data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 

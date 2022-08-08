@@ -32,7 +32,7 @@ class TaskResource(Resource):
     get:
       tags:
         - api
-      summary: Get a task
+      summary: Get a task.
       description: |
         Return a single task by *task_id*. If the task does not exist, a 404 error is returned.
 
@@ -64,7 +64,7 @@ class TaskResource(Resource):
     delete:
       tags:
         - api
-      summary: Delete a task
+      summary: Delete a task.
       description: |
         Delete a single task by *task_id*. If the task does not exist, a 404 error is returned.
 
@@ -125,7 +125,7 @@ class TaskList(Resource):
     get:
       tags:
         - api
-      summary: Get all tasks
+      summary: Get all tasks.
       description: |
         Return all tasks.
 
@@ -153,7 +153,7 @@ class TaskList(Resource):
     post:
       tags:
         - api
-      summary: Create a task
+      summary: Create a task.
       description: |
         Create a new task from its *config_id*. If the config does not exist, a 404 error is returned.
 
@@ -226,7 +226,7 @@ class TaskExecutor(Resource):
     post:
       tags:
         - api
-      summary: Execute a task
+      summary: Execute a task.
       description: |
         Execute a task by *task_id*. If the task does not exist, a 404 error is returned.
 

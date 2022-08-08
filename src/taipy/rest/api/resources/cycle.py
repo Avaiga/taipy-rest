@@ -119,7 +119,7 @@ class CycleResource(Resource):
     delete:
       tags:
         - api
-      summary: Delete a cycle
+      summary: Delete a cycle.
       description: |
         Delete a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
@@ -181,7 +181,7 @@ class CycleList(Resource):
     get:
       tags:
         - api
-      summary: Get all cycles
+      summary: Get all cycles.
       description: |
         Return all cycles.
 
@@ -209,7 +209,7 @@ class CycleList(Resource):
     post:
       tags:
         - api
-      summary: Create a cycle
+      summary: Create a cycle.
       description: |
         Create a new cycle from the request body.
 

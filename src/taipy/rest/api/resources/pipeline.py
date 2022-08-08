@@ -32,7 +32,7 @@ class PipelineResource(Resource):
     get:
       tags:
         - api
-      summary: Get a pipeline
+      summary: Get a pipeline.
       description: |
         Return a single pipeline by pipeline_id. If the pipeline does not exist, a 404 error is returned.
 
@@ -64,7 +64,7 @@ class PipelineResource(Resource):
     delete:
       tags:
         - api
-      summary: Delete a pipeline
+      summary: Delete a pipeline.
       description: |
         Delete a single pipeline by pipeline_id. If the pipeline does not exist, a 404 error is returned.
 
@@ -126,7 +126,7 @@ class PipelineList(Resource):
     get:
       tags:
         - api
-      summary: Get all pipelines
+      summary: Get all pipelines.
       description: |
         Return all pipelines.
 
@@ -154,7 +154,7 @@ class PipelineList(Resource):
     post:
       tags:
         - api
-      summary: Create a pipeline
+      summary: Create a pipeline.
       description: |
         Create a pipeline from its config_id. If the config does not exist, a 404 error is returned.
 
@@ -228,7 +228,7 @@ class PipelineExecutor(Resource):
     post:
       tags:
         - api
-      summary: Execute a pipeline
+      summary: Execute a pipeline.
       description: |
         Execute a pipeline from pipeline_id. If the pipeline does not exist, a 404 error is returned.
 

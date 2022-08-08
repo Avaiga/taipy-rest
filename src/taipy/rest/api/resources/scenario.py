@@ -32,7 +32,7 @@ class ScenarioResource(Resource):
     get:
       tags:
         - api
-      summary: Get a scenario
+      summary: Get a scenario.
       description: |
         Return a single scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
@@ -64,7 +64,7 @@ class ScenarioResource(Resource):
     delete:
       tags:
         - api
-      summary: Delete a scenario
+      summary: Delete a scenario.
       description: |
         Delete a single scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
@@ -126,7 +126,7 @@ class ScenarioList(Resource):
     get:
       tags:
         - api
-      summary: Get all scenarios
+      summary: Get all scenarios.
       description: |
         Return all scenarios.
 
@@ -154,7 +154,7 @@ class ScenarioList(Resource):
     post:
       tags:
         - api
-      summary: Create a scenario
+      summary: Create a scenario.
       description: |
         Create a new scenario from its *config_id*. If the config does not exist, a 404 error is returned.
 
@@ -228,7 +228,7 @@ class ScenarioExecutor(Resource):
     post:
       tags:
         - api
-      summary: Execute a scenario
+      summary: Execute a scenario.
       description: |
         Execute a scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 

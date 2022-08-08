@@ -32,7 +32,7 @@ class JobResource(Resource):
     get:
       tags:
         - api
-      summary: Get a job
+      summary: Get a job.
       description: |
         Return a single job by *job_id*. If the job does not exist, a 404 error is returned.
 
@@ -64,7 +64,7 @@ class JobResource(Resource):
     delete:
       tags:
         - api
-      summary: Delete a job
+      summary: Delete a job.
       description: |
         Delete a single job by *job_id*. If the job does not exist, a 404 error is returned.
 
@@ -126,7 +126,7 @@ class JobList(Resource):
     get:
       tags:
         - api
-      summary: Get all jobs
+      summary: Get all jobs.
       description: |
         Return all jobs.
 
@@ -154,7 +154,7 @@ class JobList(Resource):
     post:
       tags:
         - api
-      summary: Create a job
+      summary: Create a job.
       description: |
         Create a job from a task *config_id*. If the config does not exist, a 404 error is returned.
 
@@ -238,7 +238,7 @@ class JobExecutor(Resource):
     post:
       tags:
         - api
-      summary: Cancel a job
+      summary: Cancel a job.
       description: |
         Cancel a job by *job_id*. If the job does not exist, a 404 error is returned.
 
