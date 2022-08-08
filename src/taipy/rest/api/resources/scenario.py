@@ -36,7 +36,8 @@ class ScenarioResource(Resource):
       description: |
         Return a single scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -67,7 +68,8 @@ class ScenarioResource(Resource):
       description: |
         Delete a single scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -128,7 +130,8 @@ class ScenarioList(Resource):
       description: |
         Return all scenarios.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -155,7 +158,8 @@ class ScenarioList(Resource):
       description: |
         Create a new scenario from its *config_id*. If the config does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -228,7 +232,8 @@ class ScenarioExecutor(Resource):
       description: |
         Execute a scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EXECUTOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EXECUTOR` role.
 
         Code example:
 

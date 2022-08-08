@@ -36,7 +36,8 @@ class JobResource(Resource):
       description: |
         Return a single job by *job_id*. If the job does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_READER` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -67,7 +68,8 @@ class JobResource(Resource):
       description: |
         Delete a single job by *job_id*. If the job does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EDITOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -128,7 +130,8 @@ class JobList(Resource):
       description: |
         Return all jobs.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_READER` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -155,7 +158,8 @@ class JobList(Resource):
       description: |
         Create a job from a task *config_id*. If the config does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EDITOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -238,7 +242,8 @@ class JobExecutor(Resource):
       description: |
         Cancel a job by *job_id*. If the job does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EXECUTOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EXECUTOR` role.
 
         Code example:
 

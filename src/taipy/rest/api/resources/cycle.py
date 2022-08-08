@@ -97,7 +97,7 @@ class CycleResource(Resource):
                 ```
 
         !!! Note
-            When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
+          When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
             requires the `TAIPY_READER` role.
 
       parameters:
@@ -123,7 +123,8 @@ class CycleResource(Resource):
       description: |
         Delete a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -184,7 +185,8 @@ class CycleList(Resource):
       description: |
         Return all cycles.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -211,7 +213,8 @@ class CycleList(Resource):
       description: |
         Create a new cycle from the request body.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
+        !!! Note
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
