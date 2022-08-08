@@ -50,7 +50,7 @@ class PipelineResource(Resource):
           name: pipeline_id
           schema:
             type: string
-          description: The generated id of the pipeline
+          description: The identifier of the pipeline.
       responses:
         200:
           content:
@@ -82,7 +82,7 @@ class PipelineResource(Resource):
           name: pipeline_id
           schema:
             type: string
-          description: The generated id of the pipeline
+          description: The identifier of the pipeline.
       responses:
         200:
           content:
@@ -92,7 +92,7 @@ class PipelineResource(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
         404:
           description: No pipeline has the *pipeline_id* identifier.
     """
@@ -182,7 +182,7 @@ class PipelineList(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   pipeline: PipelineSchema
     """
 
@@ -255,7 +255,7 @@ class PipelineExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   pipeline: PipelineSchema
         404:
             description: No pipeline has the *pipeline_id* identifier.

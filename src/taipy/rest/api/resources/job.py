@@ -50,7 +50,7 @@ class JobResource(Resource):
           name: job_id
           schema:
             type: string
-          description: The generated id of the job
+          description: The identifier of the job.
       responses:
         200:
           content:
@@ -82,7 +82,7 @@ class JobResource(Resource):
           name: job_id
           schema:
             type: string
-          description: The generated id of the job
+          description: The identifier of the job.
       responses:
         200:
           content:
@@ -92,7 +92,7 @@ class JobResource(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
         404:
           description: No job has the *job_id* identifier.
     """
@@ -182,7 +182,7 @@ class JobList(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   job: JobSchema
     """
 
@@ -265,7 +265,7 @@ class JobExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   job: JobSchema
         404:
           description: No job has the *job_id* identifier.

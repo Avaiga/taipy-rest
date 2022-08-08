@@ -72,7 +72,7 @@ class DataNodeResource(Resource):
           name: datanode_id
           schema:
             type: string
-          description: The generated id of the data node
+          description: The identifier of the data node.
       responses:
         200:
           content:
@@ -104,7 +104,7 @@ class DataNodeResource(Resource):
           name: datanode_id
           schema:
             type: string
-          description: The generated id of the data node
+          description: The identifier of the data node.
       responses:
         200:
           content:
@@ -114,7 +114,7 @@ class DataNodeResource(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
         404:
           description: No data node has the *datanode_id* identifier.
     """
@@ -148,9 +148,9 @@ class DataNodeList(Resource):
     get:
       tags:
         - api
-      summary: Get all data nodes
+      summary: Get all data nodes.
       description: |
-        Returns all data nodes.
+        Returns an array of all data nodes.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
@@ -202,7 +202,7 @@ class DataNodeList(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   datanode: DataNodeSchema
     """
 

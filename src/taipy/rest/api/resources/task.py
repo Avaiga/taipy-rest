@@ -50,7 +50,7 @@ class TaskResource(Resource):
           name: task_id
           schema:
             type: string
-          description: The generated id of the task
+          description: The identifier of the task.
       responses:
         200:
           content:
@@ -81,7 +81,7 @@ class TaskResource(Resource):
           name: task_id
           schema:
             type: string
-          description: The generated id of the task
+          description: The identifier of the task.
       responses:
         200:
           content:
@@ -91,7 +91,7 @@ class TaskResource(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
         404:
           description: No task has the *task_id* identifier.
     """
@@ -180,7 +180,7 @@ class TaskList(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   task: TaskSchema
     """
 
@@ -253,7 +253,7 @@ class TaskExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   task: TaskSchema
         404:
           description: No task has the *task_id* identifier.

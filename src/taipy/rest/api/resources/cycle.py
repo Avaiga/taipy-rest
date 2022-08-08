@@ -137,7 +137,7 @@ class CycleResource(Resource):
           name: cycle_id
           schema:
             type: string
-          description: The generated id of the cycle
+          description: The identifier of the cycle.
       responses:
         200:
           content:
@@ -147,7 +147,7 @@ class CycleResource(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
         404:
           description: No cycle has the *cycle_id* identifier
     """

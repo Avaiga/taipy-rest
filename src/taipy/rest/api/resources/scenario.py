@@ -50,7 +50,7 @@ class ScenarioResource(Resource):
           name: scenario_id
           schema:
             type: string
-          description: The generated id of the scenario
+          description: The identifier of the scenario.
       responses:
         200:
           content:
@@ -82,7 +82,7 @@ class ScenarioResource(Resource):
           name: scenario_id
           schema:
             type: string
-          description: The generated id of the scenario
+          description: The identifier of the scenario.
       responses:
         200:
           content:
@@ -92,7 +92,7 @@ class ScenarioResource(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
         404:
           description: No scenario has the *scenario_id* identifier.
     """
@@ -181,7 +181,7 @@ class ScenarioList(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   scenario: ScenarioSchema
     """
 
@@ -255,7 +255,7 @@ class ScenarioExecutor(Resource):
                 properties:
                   msg:
                     type: string
-                    description: Status message
+                    description: Status message.
                   scenario: ScenarioSchema
         404:
           description: No scenario has the *scenario_id* identifier.
