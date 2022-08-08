@@ -34,9 +34,9 @@ class JobResource(Resource):
         - api
       summary: Get a job
       description: |
-        Return a single job by job_id. If the job does not exist, a 404 error is returned.
+        Return a single job by *job_id*. If the job does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -59,15 +59,15 @@ class JobResource(Resource):
                 properties:
                   job: JobSchema
         404:
-          description: No job has the _job_id_ identifier
+          description: No job has the *job_id* identifier.
     delete:
       tags:
         - api
       summary: Delete a job
       description: |
-        Delete a single job by job_id. If the job does not exist, a 404 error is returned.
+        Delete a single job by *job_id*. If the job does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -92,7 +92,7 @@ class JobResource(Resource):
                     type: string
                     description: Status message
         404:
-          description: No job has the _job_id_ identifier
+          description: No job has the *job_id* identifier.
     """
 
     def __init__(self, **kwargs):
@@ -128,7 +128,7 @@ class JobList(Resource):
       description: |
         Return all jobs.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -153,9 +153,9 @@ class JobList(Resource):
         - api
       summary: Create a job
       description: |
-        Create a job from a task config_id. If the config does not exist, a 404 error is returned.
+        Create a job from a task *config_id*. If the config does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -236,9 +236,9 @@ class JobExecutor(Resource):
         - api
       summary: Cancel a job
       description: |
-        Cancel a job by job_id. If the job does not exist, a 404 error is returned.
+        Cancel a job by *job_id*. If the job does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires _TAIPY_EXECUTOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), the endpoint requires `TAIPY_EXECUTOR` role.
 
         Code example:
 
@@ -263,7 +263,7 @@ class JobExecutor(Resource):
                     description: Status message
                   job: JobSchema
         404:
-          description: No job has the _job_id_ identifier
+          description: No job has the *job_id* identifier.
     """
 
     def __init__(self, **kwargs):

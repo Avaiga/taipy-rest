@@ -33,8 +33,8 @@ class CycleResource(Resource):
       tags:
         - api
       description: |
-        Returns a `CycleSchema^` representing the unique `Cycle^` identified by the `cycle_id`
-        given as parameter. If no cycle corresponds to `cycle_id`, a `404` error is returned.
+        Returns a `CycleSchema^` representing the unique `Cycle^` identified by the *cycle_id*
+        given as parameter. If no cycle corresponds to *cycle_id*, a `404` error is returned.
 
         !!! Example
 
@@ -45,7 +45,7 @@ class CycleResource(Resource):
                 In this example the REST API is served on port 5000 on localhost. We are using curl command line
                 client.
 
-                `CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba` is the value of the `cycle_id` parameter. It
+                `CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba` is the value of the *cycle_id* parameter. It
                 represents the identifier of Cycle we want to retrieve.
 
                 In case of success here is an example of the response:
@@ -73,7 +73,7 @@ class CycleResource(Resource):
                     print(response)
                     print(response.json())
                 ```
-                `CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba` is the value of the `cycle_id` parameter. It
+                `CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba` is the value of the *cycle_id* parameter. It
                 represents the identifier of Cycle we want to retrieve.
 
                 In case of success here is an output example:
@@ -98,7 +98,7 @@ class CycleResource(Resource):
 
         !!! Note
             When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
-            requires the _TAIPY_READER_ role.
+            requires the `TAIPY_READER` role.
 
       parameters:
         - in: path
@@ -115,7 +115,7 @@ class CycleResource(Resource):
                 properties:
                   cycle: CycleSchema
         404:
-          description: No cycle has the _cycle_id_ identifier.
+          description: No cycle has the *cycle_id* identifier.
     delete:
       tags:
         - api
@@ -123,7 +123,7 @@ class CycleResource(Resource):
       description: |
         Delete a single cycle by cycle_id. If the cycle does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -148,7 +148,7 @@ class CycleResource(Resource):
                     type: string
                     description: Status message
         404:
-          description: No cycle has the _cycle_id_ identifier
+          description: No cycle has the *cycle_id* identifier
     """
 
     def __init__(self, **kwargs):
@@ -184,7 +184,7 @@ class CycleList(Resource):
       description: |
         Return all cycles.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -211,7 +211,7 @@ class CycleList(Resource):
       description: |
         Create a new cycle from the request body.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 

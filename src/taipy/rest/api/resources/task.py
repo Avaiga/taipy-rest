@@ -34,9 +34,9 @@ class TaskResource(Resource):
         - api
       summary: Get a task
       description: |
-        Return a single task by task_id. If the task does not exist, a 404 error is returned.
+        Return a single task by *task_id*. If the task does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -59,15 +59,15 @@ class TaskResource(Resource):
                 properties:
                   task: TaskSchema
         404:
-          description: No task has the _task_id_ identifier
+          description: No task has the *task_id* identifier.
     delete:
       tags:
         - api
       summary: Delete a task
       description: |
-        Delete a single task by task_id. If the task does not exist, a 404 error is returned.
+        Delete a single task by *task_id*. If the task does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -91,7 +91,7 @@ class TaskResource(Resource):
                     type: string
                     description: Status message
         404:
-          description: No task has the _task_id_ identifier
+          description: No task has the *task_id* identifier.
     """
 
     def __init__(self, **kwargs):
@@ -127,7 +127,7 @@ class TaskList(Resource):
       description: |
         Return all tasks.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -152,9 +152,9 @@ class TaskList(Resource):
         - api
       summary: Create a task
       description: |
-        Create a new task from its config_id. If the config does not exist, a 404 error is returned.
+        Create a new task from its *config_id*. If the config does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -224,9 +224,9 @@ class TaskExecutor(Resource):
         - api
       summary: Execute a task
       description: |
-        Execute a task by task_id. If the task does not exist, a 404 error is returned.
+        Execute a task by *task_id*. If the task does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EXECUTOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EXECUTOR` role.
 
         Code example:
 
@@ -251,7 +251,7 @@ class TaskExecutor(Resource):
                     description: Status message
                   task: TaskSchema
         404:
-          description: No task has the _task_id_ identifier
+          description: No task has the *task_id* identifier.
     """
 
     def __init__(self, **kwargs):

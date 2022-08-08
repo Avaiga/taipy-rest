@@ -57,9 +57,9 @@ class DataNodeResource(Resource):
         - api
       summary: Get a data node
       description: |
-        Return a single data node by datanode_id. If the data node does not exist, a 404 error is returned.
+        Return a single data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -81,15 +81,15 @@ class DataNodeResource(Resource):
                 properties:
                   datanode: DataNodeSchema
         404:
-          description: No data node has the _datanode_id_ identifier
+          description: No data node has the *datanode_id* identifier.
     delete:
       tags:
         - api
       summary: Delete a data node
       description: |
-        Delete a single data node by datanode_id. If the data node does not exist, a 404 error is returned.
+        Delete a single data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -114,7 +114,7 @@ class DataNodeResource(Resource):
                     type: string
                     description: Status message
         404:
-          description: No data node has the _datanode_id_ identifier
+          description: No data node has the *datanode_id* identifier.
     """
 
     def __init__(self, **kwargs):
@@ -150,7 +150,7 @@ class DataNodeList(Resource):
       description: |
         Returns all data nodes.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -174,9 +174,9 @@ class DataNodeList(Resource):
         - api
       summary: Create a datanode
       description: |
-        Create a data node from its config_id. If the config does not exist, a 404 error is returned.
+        Create a data node from its *config_id*. If the config does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -248,9 +248,9 @@ class DataNodeReader(Resource):
         - api
       summary: Read a data node
       description: |
-        Return the data read from a data node by datanode_id. If the data node does not exist, a 404 error is returned.
+        Return the data read from a data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -283,7 +283,7 @@ class DataNodeReader(Resource):
                 properties:
                   datanode: DataNodeSchema
         404:
-          description: No data node has the _data_node_id_ identifier
+          description: No data node has the *datanode_id* identifier.
     """
 
     def __init__(self, **kwargs):
@@ -325,14 +325,14 @@ class DataNodeWriter(Resource):
         - api
       summary: Write into a data node
       description: |
-        Write data from request body into a data node by datanode_id. If the data node does not exist, a 404 error is returned.
+        Write data from request body into a data node by *datanode_id*. If the data node does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
         ```shell
-          curl -X PUT -d '{"data": [{"a": 1, "b": 2}]}' -H 'Content-Type: application/json'  http://localhost:5000/api/v1/datanodes/DATANODE_ID/write
+          curl -X PUT -d '[{"path": "/abc", "type": 1}, {"path": "/def", "type": 2}]' -H 'Content-Type: application/json'  http://localhost:5000/api/v1/datanodes/DATANODE_ID/write
         ```
 
       parameters:
@@ -354,7 +354,7 @@ class DataNodeWriter(Resource):
                 properties:
                   datanode: DataNodeSchema
         404:
-          description: No data node has the _data_node_id_ identifier
+          description: No data node has the *datanode_id* identifier.
     """
 
     def __init__(self, **kwargs):

@@ -34,9 +34,9 @@ class ScenarioResource(Resource):
         - api
       summary: Get a scenario
       description: |
-        Return a single scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
+        Return a single scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -59,15 +59,15 @@ class ScenarioResource(Resource):
                 properties:
                   scenario: ScenarioSchema
         404:
-          description: No scenario has the _scenario_id_ identifier
+          description: No scenario has the *scenario_id* identifier.
     delete:
       tags:
         - api
       summary: Delete a scenario
       description: |
-        Delete a single scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
+        Delete a single scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -92,7 +92,7 @@ class ScenarioResource(Resource):
                     type: string
                     description: Status message
         404:
-          description: No scenario has the _scenario_id_ identifier
+          description: No scenario has the *scenario_id* identifier.
     """
 
     def __init__(self, **kwargs):
@@ -128,7 +128,7 @@ class ScenarioList(Resource):
       description: |
         Return all scenarios.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
 
         Code example:
 
@@ -153,9 +153,9 @@ class ScenarioList(Resource):
         - api
       summary: Create a scenario
       description: |
-        Create a new scenario from its config_id. If the config does not exist, a 404 error is returned.
+        Create a new scenario from its *config_id*. If the config does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EDITOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
 
         Code example:
 
@@ -226,9 +226,9 @@ class ScenarioExecutor(Resource):
         - api
       summary: Execute a scenario
       description: |
-        Execute a scenario by scenario_id. If the scenario does not exist, a 404 error is returned.
+        Execute a scenario by *scenario_id*. If the scenario does not exist, a 404 error is returned.
 
-        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_EXECUTOR_ role.
+        When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EXECUTOR` role.
 
         Code example:
 
@@ -253,7 +253,7 @@ class ScenarioExecutor(Resource):
                     description: Status message
                   scenario: ScenarioSchema
         404:
-          description: No scenario has the _scenario_id_ identifier
+          description: No scenario has the *scenario_id* identifier.
     """
 
     def __init__(self, **kwargs):

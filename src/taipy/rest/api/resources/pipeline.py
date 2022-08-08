@@ -59,7 +59,7 @@ class PipelineResource(Resource):
                 properties:
                   pipeline: PipelineSchema
         404:
-          description: No pipeline has the _pipeline_id_ identifier
+          description: No pipeline has the *pipeline_id* identifier.
     delete:
       tags:
         - api
@@ -92,7 +92,7 @@ class PipelineResource(Resource):
                     type: string
                     description: Status message
         404:
-          description: No pipeline has the _pipeline_id_ identifier
+          description: No pipeline has the *pipeline_id* identifier.
     """
 
     def __init__(self, **kwargs):
@@ -253,7 +253,7 @@ class PipelineExecutor(Resource):
                     description: Status message
                   pipeline: PipelineSchema
         404:
-            description: No pipeline has the _pipeline_id_ identifier
+            description: No pipeline has the *pipeline_id* identifier.
     """
 
     def __init__(self, **kwargs):
