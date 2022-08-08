@@ -149,7 +149,7 @@ class CycleResource(Resource):
                     type: string
                     description: Status message.
         404:
-          description: No cycle has the *cycle_id* identifier
+          description: No cycle has the *cycle_id* identifier.
     """
 
     def __init__(self, **kwargs):
