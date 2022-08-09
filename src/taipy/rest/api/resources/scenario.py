@@ -42,7 +42,7 @@ class ScenarioResource(Resource):
         Code example:
 
         ```
-          curl -X GET http://localhost:5000/api/v1/scenarios/SCENARIO_ID
+          curl -X GET http://localhost:5000/api/v1/scenarios/SCENARIO_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
@@ -74,7 +74,7 @@ class ScenarioResource(Resource):
         Code example:
 
         ```shell
-          curl -X DELETE http://localhost:5000/api/v1/scenarios/SCENARIO_ID
+          curl -X DELETE http://localhost:5000/api/v1/scenarios/SCENARIO_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
@@ -128,7 +128,7 @@ class ScenarioList(Resource):
         - api
       summary: Get all scenarios.
       description: |
-        Return all scenarios.
+        Return an array of all scenarios.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
@@ -164,7 +164,7 @@ class ScenarioList(Resource):
         Code example:
 
         ```shell
-          curl -X POST http://localhost:5000/api/v1/scenarios?config_id=CONFIG_ID
+          curl -X POST http://localhost:5000/api/v1/scenarios?config_id=my_scenario_config
         ```
       parameters:
         - in: query
@@ -238,7 +238,7 @@ class ScenarioExecutor(Resource):
         Code example:
 
         ```shell
-          curl -X POST http://localhost:5000/api/v1/scenarios/submit/SCENARIO_ID
+          curl -X POST http://localhost:5000/api/v1/scenarios/submit/SCENARIO_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:

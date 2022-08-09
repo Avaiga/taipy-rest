@@ -65,7 +65,7 @@ class DataNodeResource(Resource):
         Code example:
 
         ```shell
-          curl -X GET http://localhost:5000/api/v1/datanodes/DATANODE_ID
+          curl -X GET http://localhost:5000/api/v1/datanodes/DATANODE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
       parameters:
         - in: path
@@ -96,7 +96,7 @@ class DataNodeResource(Resource):
         Code example:
 
         ```shell
-          curl -X DELETE http://localhost:5000/api/v1/datanodes/DATANODE_ID
+          curl -X DELETE http://localhost:5000/api/v1/datanodes/DATANODE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
@@ -185,7 +185,7 @@ class DataNodeList(Resource):
         Code example:
 
         ```shell
-          curl -X POST http://localhost:5000/api/v1/datanodes?config_id=CONFIG_ID
+          curl -X POST http://localhost:5000/api/v1/datanodes?config_id=my_data_node_config
         ```
       parameters:
         - in: query
@@ -260,13 +260,13 @@ class DataNodeReader(Resource):
         Code example:
 
         ```shell
-          curl -X GET http://localhost:5000/api/v1/datanodes/DATANODE_ID/read
+          curl -X GET http://localhost:5000/api/v1/datanodes/DATANODE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9/read
         ```
 
         Code example with filters:
 
         ```shell
-          curl -X GET -H 'Content-Type: application/json' -d '{"operators": [{"key": "foo", "value": 10, "operator": ">"}], "join_operator": "AND"}' http://localhost:5000/api/v1/datanodes/DATANODE_ID/read
+          curl -X GET -H 'Content-Type: application/json' -d '{"operators": [{"key": "foo", "value": 10, "operator": ">"}], "join_operator": "AND"}' http://localhost:5000/api/v1/datanodes/DATANODE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9/read
         ```
 
       parameters:
@@ -338,7 +338,7 @@ class DataNodeWriter(Resource):
         Code example:
 
         ```shell
-          curl -X PUT -d '[{"path": "/abc", "type": 1}, {"path": "/def", "type": 2}]' -H 'Content-Type: application/json'  http://localhost:5000/api/v1/datanodes/DATANODE_ID/write
+          curl -X PUT -d '[{"path": "/abc", "type": 1}, {"path": "/def", "type": 2}]' -H 'Content-Type: application/json'  http://localhost:5000/api/v1/datanodes/DATANODE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9/write
         ```
 
       parameters:

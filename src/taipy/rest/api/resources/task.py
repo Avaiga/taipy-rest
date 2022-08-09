@@ -42,7 +42,7 @@ class TaskResource(Resource):
         Code example:
 
         ```shell
-          curl -X GET http://localhost:5000/api/v1/tasks/TASK_ID
+          curl -X GET http://localhost:5000/api/v1/tasks/TASK_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
@@ -74,7 +74,7 @@ class TaskResource(Resource):
         Code example:
 
         ```shell
-          curl -X DELETE http://localhost:5000/api/v1/tasks/TASK_ID
+          curl -X DELETE http://localhost:5000/api/v1/tasks/TASK_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
       parameters:
         - in: path
@@ -127,7 +127,7 @@ class TaskList(Resource):
         - api
       summary: Get all tasks.
       description: |
-        Return all tasks.
+        Return an array of all tasks.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
@@ -163,7 +163,7 @@ class TaskList(Resource):
         Code example:
 
         ```shell
-          curl -X POST http://localhost:5000/api/v1/tasks?config_id=CONFIG_ID
+          curl -X POST http://localhost:5000/api/v1/tasks?config_id=my_task_config
         ```
       parameters:
         - in: query
@@ -236,7 +236,7 @@ class TaskExecutor(Resource):
         Code example:
 
         ```shell
-          curl -X POST http://localhost:5000/api/v1/tasks/submit/TASK_ID
+          curl -X POST http://localhost:5000/api/v1/tasks/submit/TASK_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
