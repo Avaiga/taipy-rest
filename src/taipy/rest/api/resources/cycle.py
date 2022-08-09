@@ -62,7 +62,7 @@ class CycleResource(Resource):
 
                 In case of failure here is an example of the response:
                 ``` JSON
-                {"message": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found"}
+                {"message": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found."}
                 ```
 
             === "Python"
@@ -92,7 +92,7 @@ class CycleResource(Resource):
                 In case of failure here is an output example:
                 ```
                 <Response [404]>
-                {'message': 'Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found'}
+                {'message': 'Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found.'}
 
                 ```
 
@@ -137,12 +137,12 @@ class CycleResource(Resource):
 
                 In case of success here is an example of the response:
                 ``` JSON
-                {"msg": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a deleted"}
+                {"msg": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a deleted."}
                 ```
 
                 In case of failure here is an example of the response:
                 ``` JSON
-                {"message": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found"}
+                {"message": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found."}
                 ```
 
             === "Python"
@@ -159,13 +159,13 @@ class CycleResource(Resource):
                 In case of success here is an output example:
                 ```
                 <Response [200]>
-                {"msg": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a deleted"}
+                {"msg": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a deleted."}
                 ```
 
                 In case of failure here is an output example:
                 ```
                 <Response [404]>
-                {'message': 'Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found'}
+                {'message': 'Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found.'}
 
                 ```
 
@@ -351,7 +351,7 @@ class CycleList(Resource):
                 ```
                 <Response [201]>
                 {
-                    'msg': 'cycle created',
+                    'msg': 'cycle created.',
                     'cycle': {
                         'frequency': 'Frequency.DAILY',
                         'end_date': '2020-01-01T00:00:00',
