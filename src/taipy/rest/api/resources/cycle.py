@@ -129,7 +129,7 @@ class CycleResource(Resource):
         Code example:
 
         ```shell
-          curl -X DELETE http://localhost:5000/api/v1/cycles/CYCLE_ID
+          curl -X DELETE http://localhost:5000/api/v1/cycles/CYCLE_Frequency.DAILY_1989-12-24T000000_0f0b66a7-cb88-4bbd-b18a-97c05d7f28b4
         ```
 
       parameters:
@@ -183,7 +183,7 @@ class CycleList(Resource):
         - api
       summary: Get all cycles.
       description: |
-        Return all cycles.
+        Return an array of all cycles.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.

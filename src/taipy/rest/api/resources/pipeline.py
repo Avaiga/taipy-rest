@@ -42,7 +42,7 @@ class PipelineResource(Resource):
         Code example:
 
         ```shell
-          curl -X GET http://localhost:5000/api/v1/pipelines/PIPELINE_ID
+          curl -X GET http://localhost:5000/api/v1/pipelines/PIPELINE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
@@ -74,7 +74,7 @@ class PipelineResource(Resource):
         Code example:
 
         ```shell
-          curl -X DELETE http://localhost:5000/api/v1/pipelines/PIPELINE_ID
+          curl -X DELETE http://localhost:5000/api/v1/pipelines/PIPELINE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
@@ -128,7 +128,7 @@ class PipelineList(Resource):
         - api
       summary: Get all pipelines.
       description: |
-        Return all pipelines.
+        Return an array of all pipelines.
 
         !!! Note
           When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires _TAIPY_READER_ role.
@@ -164,7 +164,7 @@ class PipelineList(Resource):
         Code example:
 
         ```shell
-          curl -X POST http://localhost:5000/api/v1/pipelines?config_id=CONFIG_ID
+          curl -X POST http://localhost:5000/api/v1/pipelines?config_id=my_pipeline_config
         ```
 
       parameters:
@@ -238,7 +238,7 @@ class PipelineExecutor(Resource):
         Code example:
 
         ```shell
-          curl -X POST http://localhost:5000/api/v1/pipelines/submit/PIPELINE_ID
+          curl -X POST http://localhost:5000/api/v1/pipelines/submit/PIPELINE_my_config_75750ed8-4e09-4e00-958d-e352ee426cc9
         ```
 
       parameters:
