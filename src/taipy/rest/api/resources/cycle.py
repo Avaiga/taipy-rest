@@ -40,20 +40,20 @@ class CycleResource(Resource):
 
             === "Curl"
                 ```shell
-                    curl -X GET https://localhost:5000/api/v1/cycles/CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba
+                    curl -X GET https://localhost:5000/api/v1/cycles/CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a
                 ```
                 In this example the REST API is served on port 5000 on localhost. We are using curl command line
                 client.
 
-                `CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba` is the value of the *cycle_id* parameter. It
-                represents the identifier of Cycle we want to retrieve.
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                represents the identifier of the Cycle we want to retrieve.
 
                 In case of success here is an example of the response:
                 ``` JSON
                 {"cycle": {
                     "frequency": "Frequency.DAILY",
                     "creation_date": "2022-08-04T17:13:32.797384",
-                    "id": "CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba",
+                    "id": "CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a",
                     "start_date": "2022-08-04T00:00:00",
                     "end_date": "2022-08-04T23:59:59.999999",
                     "name": "Frequency.DAILY_2022-08-04T17:13:32.797384",
@@ -62,19 +62,19 @@ class CycleResource(Resource):
 
                 In case of failure here is an example of the response:
                 ``` JSON
-                {"message": "Cycle CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba not found"}
+                {"message": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found"}
                 ```
 
             === "Python"
                 This Python example requires the 'requests' package to be installed (`pip install requests`).
                 ```python
                 import requests
-                    response = requests.get("http://localhost:5000/api/v1/cycles/CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba")
+                    response = requests.get("http://localhost:5000/api/v1/cycles/CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a")
                     print(response)
                     print(response.json())
                 ```
-                `CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba` is the value of the *cycle_id* parameter. It
-                represents the identifier of Cycle we want to retrieve.
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                represents the identifier of the Cycle we want to retrieve.
 
                 In case of success here is an output example:
                 ```
@@ -82,7 +82,7 @@ class CycleResource(Resource):
                 {'cycle': {
                     'frequency': 'Frequency.DAILY',
                     'creation_date': '2022-08-04T17:13:32.797384',
-                    'id': 'CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba',
+                    'id': 'CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a',
                     'start_date': '2022-08-04T00:00:00',
                     'end_date': '2022-08-04T23:59:59.999999',
                     'name': 'Frequency.DAILY_2022-08-04T17:13:32.797384',
@@ -92,7 +92,7 @@ class CycleResource(Resource):
                 In case of failure here is an output example:
                 ```
                 <Response [404]>
-                {'message': 'Cycle CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba not found'}
+                {'message': 'Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found'}
 
                 ```
 
@@ -119,25 +119,66 @@ class CycleResource(Resource):
     delete:
       tags:
         - api
-      summary: Delete a cycle.
       description: |
-        Delete a cycle. If the cycle does not exist, a 404 error is returned.
+        Deletes the `Cycle^` identified by the `cycle_id` given as parameter. If the cycle does not exist,
+        a 404 error is returned.
+
+        !!! Example
+
+            === "Curl"
+                ```shell
+                    curl -X DELETE https://localhost:5000/api/v1/cycles/CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a
+                ```
+                In this example the REST API is served on port 5000 on localhost. We are using curl command line
+                client.
+
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                represents the identifier of the Cycle we want to delete.
+
+                In case of success here is an example of the response:
+                ``` JSON
+                {"msg": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a deleted"}
+                ```
+
+                In case of failure here is an example of the response:
+                ``` JSON
+                {"message": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found"}
+                ```
+
+            === "Python"
+                This Python example requires the 'requests' package to be installed (`pip install requests`).
+                ```python
+                import requests
+                    response = requests.delete("http://localhost:5000/api/v1/cycles/CYCLE_797384_ef210412-af91-4f41-b6e8-74d1648edcba")
+                    print(response)
+                    print(response.json())
+                ```
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                represents the identifier of the Cycle we want to delete.
+
+                In case of success here is an output example:
+                ```
+                <Response [200]>
+                {"msg": "Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a deleted"}
+                ```
+
+                In case of failure here is an output example:
+                ```
+                <Response [404]>
+                {'message': 'Cycle CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a not found'}
+
+                ```
 
         !!! Note
-          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
-
-        Code example:
-
-        ```shell
-          curl -X DELETE http://localhost:5000/api/v1/cycles/CYCLE_ID
-        ```
+            When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
+            requires the _TAIPY_EDITOR_ role.
 
       parameters:
         - in: path
           name: cycle_id
           schema:
             type: string
-          description: The identifier of the cycle.
+          description: The id of the cycle to delete.
       responses:
         200:
           content:
@@ -149,7 +190,7 @@ class CycleResource(Resource):
                     type: string
                     description: Status message.
         404:
-          description: No cycle has the *cycle_id* identifier.
+          description: No cycle has the _cycle_id_ identifier.
     """
 
     def __init__(self, **kwargs):
@@ -181,18 +222,73 @@ class CycleList(Resource):
     get:
       tags:
         - api
-      summary: Get all cycles.
       description: |
-        Return all cycles.
+        Returns a `CycleSchema^` list representing all existing Cycles.
+
+        !!! Example
+
+            === "Curl"
+                ```shell
+                    curl -X GET https://localhost:5000/api/v1/cycles
+                ```
+                In this example the REST API is served on port 5000 on localhost. We are using curl command line
+                client.
+
+                Here is an example of the response:
+                ``` JSON
+                [
+                    {
+                    "frequency": "Frequency.DAILY",
+                    "end_date": "2022-08-06T23:59:59.999999",
+                    "creation_date": "2022-08-06T15:45:50.223894",
+                    "start_date": "2022-08-06T00:00:00",
+                    "id": "CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a",
+                    "name": "Frequency.DAILY_2022-08-06T15:45:50.223894",
+                    "properties": {"display_name": "2022-08-06T00:00:00"}
+                    }
+                ]
+                ```
+
+                If there is no cycle, the response is an empty list as follows:
+                ``` JSON
+                []
+                ```
+
+            === "Python"
+                This Python example requires the 'requests' package to be installed (`pip install requests`).
+                ```python
+                import requests
+                    response = requests.get("http://localhost:5000/api/v1/cycles")
+                    print(response)
+                    print(response.json())
+                ```
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                represents the identifier of the Cycle we want to retrieve.
+
+                In case of success here is an output example:
+                ```
+                <Response [200]>
+                [{
+                    "frequency": "Frequency.DAILY",
+                    "end_date": "2022-08-06T23:59:59.999999",
+                    "creation_date": "2022-08-06T15:45:50.223894",
+                    "start_date": "2022-08-06T00:00:00",
+                    "id": "CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a",
+                    "name": "Frequency.DAILY_2022-08-06T15:45:50.223894",
+                    "properties": {"display_name": "2022-08-06T00:00:00"}
+                    }
+                ]
+                ```
+
+                If there is no cycle, the response is an empty list as follows:
+                ```
+                <Response [200]>
+                []
+                ```
 
         !!! Note
-          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_READER` role.
-
-        Code example:
-
-        ```shell
-          curl -X GET http://localhost:5000/api/v1/cycles
-        ```
+            When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
+            requires the _TAIPY_READER_ role.
 
       responses:
         200:
