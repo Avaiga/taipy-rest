@@ -305,19 +305,66 @@ class CycleList(Resource):
     post:
       tags:
         - api
-      summary: Create a cycle.
       description: |
-        Create a new cycle from the request body.
+        Creates a new cycle from the `CycleSchema^` given in the request body.
+
+        !!! Example
+
+            === "Curl"
+                ```shell
+                    curl -X POST -H "Content-Type: application/json" -d '{"frequency": "DAILY", "properties": {}, "creation_date": "2020-01-01T00:00:00", "start_date": "2020-01-01T00:00:00", "end_date": "2020-01-01T00:00:00"}' http://localhost:5000/api/v1/cycles
+                ```
+                In this example the REST API is served on port 5000 on localhost. We are using curl command line
+                client.
+
+                In the curl command line, a `CycleSchema^` is provided as JSON dictionary parameter with the curl
+                option -d (--data) to specify the various attributes of the `Cycle^` to create:
+                ``` JSON
+                {
+                    "frequency": "DAILY",
+                    "properties": {},
+                    "creation_date": "2020-01-01T00:00:00",
+                    "start_date": "2020-01-01T00:00:00",
+                    "end_date": "2020-01-01T00:00:00"
+                }
+                ```
+
+            === "Python"
+                This Python example requires the 'requests' package to be installed (`pip install requests`).
+                ```python
+                import requests
+                    cycle_schema = {
+                        "frequency": "DAILY",
+                        "properties": {},
+                        "creation_date": "2020-01-01T00:00:00",
+                        "start_date": "2020-01-01T00:00:00",
+                        "end_date": "2020-01-01T00:00:00"
+                    }
+                    response = requests.post("http://localhost:5000/api/v1/cycles", json=cycle_schema)
+                    print(response)
+                    print(response.json())
+                ```
+                A `CycleSchema^` is provided as a dictionary to specify the various attributes of the `Cycle^` to
+                create.
+
+                Here is the output example:
+                ```
+                <Response [201]>
+                {
+                    'msg': 'cycle created',
+                    'cycle': {
+                        'frequency': 'Frequency.DAILY',
+                        'end_date': '2020-01-01T00:00:00',
+                        'creation_date': '2020-01-01T00:00:00',
+                        'start_date': '2020-01-01T00:00:00',
+                        'id': 'CYCLE_c9cc527f-a8c8-4238-8f31-42166a9817db',
+                        'name': 'Frequency.DAILY_2020-01-01T00:00:00',
+                        'properties': {}}}
+                ```
 
         !!! Note
-          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint
-          requires `TAIPY_EDITOR` role.
-
-        Code example:
-
-        ```shell
-          curl -X POST -H "Content-Type: application/json" -d '{"frequency": "DAILY", "properties": {}, "creation_date": "2020-01-01T00:00:00", "start_date": "2020-01-01T00:00:00", "end_date": "2020-01-01T00:00:00"}' http://localhost:5000/api/v1/cycles
-        ```
+            When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
+            requires the `TAIPY_EDITOR` role.
 
       requestBody:
         required: true
