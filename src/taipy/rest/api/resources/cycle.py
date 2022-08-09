@@ -45,7 +45,7 @@ class CycleResource(Resource):
                 In this example the REST API is served on port 5000 on localhost. We are using curl command line
                 client.
 
-                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the *cycle_id* parameter. It
                 represents the identifier of the Cycle we want to retrieve.
 
                 In case of success here is an example of the response:
@@ -73,7 +73,7 @@ class CycleResource(Resource):
                     print(response)
                     print(response.json())
                 ```
-                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the  *cycle_id* parameter. It
                 represents the identifier of the Cycle we want to retrieve.
 
                 In case of success here is an output example:
@@ -120,7 +120,7 @@ class CycleResource(Resource):
       tags:
         - api
       description: |
-        Deletes the `Cycle^` identified by the `cycle_id` given as parameter. If the cycle does not exist,
+        Deletes the `Cycle^` identified by the  *cycle_id* given as parameter. If the cycle does not exist,
         a 404 error is returned.
 
         !!! Example
@@ -132,7 +132,7 @@ class CycleResource(Resource):
                 In this example the REST API is served on port 5000 on localhost. We are using curl command line
                 client.
 
-                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the  *cycle_id* parameter. It
                 represents the identifier of the Cycle we want to delete.
 
                 In case of success here is an example of the response:
@@ -153,7 +153,7 @@ class CycleResource(Resource):
                     print(response)
                     print(response.json())
                 ```
-                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the  *cycle_id* parameter. It
                 represents the identifier of the Cycle we want to delete.
 
                 In case of success here is an output example:
@@ -171,7 +171,7 @@ class CycleResource(Resource):
 
         !!! Note
             When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
-            requires the _TAIPY_EDITOR_ role.
+            requires the `TAIPY_EDITOR` role.
 
       parameters:
         - in: path
@@ -190,7 +190,7 @@ class CycleResource(Resource):
                     type: string
                     description: Status message.
         404:
-          description: No cycle has the _cycle_id_ identifier.
+          description: No cycle has the  *cycle_id* identifier.
     """
 
     def __init__(self, **kwargs):
@@ -262,7 +262,7 @@ class CycleList(Resource):
                     print(response)
                     print(response.json())
                 ```
-                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the `cycle_id` parameter. It
+                `CYCLE_223894_e0fab919-b50b-4b9f-ac09-52f77474fa7a` is the value of the  *cycle_id* parameter. It
                 represents the identifier of the Cycle we want to retrieve.
 
                 In case of success here is an output example:
@@ -288,7 +288,7 @@ class CycleList(Resource):
 
         !!! Note
             When the authorization feature is activated (available in Taipy Enterprise edition only), this endpoint
-            requires the _TAIPY_READER_ role.
+            requires the `TAIPY_READER` role.
 
       responses:
         200:
@@ -310,7 +310,8 @@ class CycleList(Resource):
         Create a new cycle from the request body.
 
         !!! Note
-          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint requires `TAIPY_EDITOR` role.
+          When the authorization feature is activated (available in the **Enterprise** edition only), this endpoint
+          requires `TAIPY_EDITOR` role.
 
         Code example:
 
