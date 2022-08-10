@@ -15,6 +15,7 @@ from marshmallow import ValidationError
 from taipy.core.exceptions.exceptions import (
     NonExistingCycle,
     NonExistingDataNode,
+    NonExistingDataNodeConfig,
     NonExistingJob,
     NonExistingPipeline,
     NonExistingPipelineConfig,
@@ -40,19 +41,54 @@ def handle_marshmallow_error(e):
 
 @blueprint.errorhandler(ConfigIdMissingException)
 def handle_config_id_missing_exception(e):
-    """Return json error for config id missing exception.
-
-    This will avoid having to try/catch ConfigIdMissingException in all endpoints, returning
-    correct JSON response with associated HTTP 400 Status (https://tools.ietf.org/html/rfc7231#section-6.5.1)
-    """
     return jsonify({"message": e.message}), 400
 
 
 @blueprint.errorhandler(NonExistingDataNode)
 def handle_data_node_not_found(e):
-    """Return json error for data node not found.
+    return jsonify({"message": e.message}), 404
 
-    This will avoid having to try/catch NotFound errors in all endpoints, returning
-    correct JSON response with associated HTTP 404 Status (https://tools.ietf.org/html/rfc7231#section-6.5.4)
-    """
-    return jsonify({"message": str(e)}), 404
+
+@blueprint.errorhandler(NonExistingDataNodeConfig)
+def handle_data_node_config_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingCycle)
+def handle_cycle_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingJob)
+def handle_job_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingPipeline)
+def handle_pipeline_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingPipelineConfig)
+def handle_pipeline_config_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingScenario)
+def handle_scenario_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingScenarioConfig)
+def handle_scenario_config_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingTask)
+def handle_task_not_found(e):
+    return jsonify({"message": e.message}), 404
+
+
+@blueprint.errorhandler(NonExistingTaskConfig)
+def handle_task_config_not_found(e):
+    return jsonify({"message": e.message}), 404
