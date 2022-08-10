@@ -12,7 +12,7 @@
 import uuid
 from typing import Optional
 
-from flask import jsonify, make_response, request
+from flask import request
 from flask_restful import Resource
 
 from taipy.config.config import Config
@@ -27,7 +27,7 @@ from ..middlewares._middleware import _middleware
 from ..schemas import JobSchema
 
 
-def get_or_raise(job_id: str):
+def _get_or_raise(job_id: str):
     manager = _JobManagerFactory._build_manager()
     job = manager._get(job_id)
     if job is None:
@@ -113,15 +113,15 @@ class JobResource(Resource):
     @_middleware
     def get(self, job_id):
         schema = JobSchema()
-        job = get_or_raise(job_id)
+        job = _get_or_raise(job_id)
         return {"job": schema.dump(job)}
 
     @_middleware
     def delete(self, job_id):
         manager = _JobManagerFactory._build_manager()
-        job = get_or_raise(job_id)
+        job = _get_or_raise(job_id)
         manager._delete(job)
-        return {"message": f"Job {job_id} deleted."}
+        return {"message": f"Job {job_id} was deleted."}
 
 
 class JobList(Resource):
@@ -220,7 +220,7 @@ class JobList(Resource):
         job = self.__create_job_from_schema(task_config_id)
         manager._set(job)
         return {
-            "message": "Job created.",
+            "message": "Job was created.",
             "job": schema.dump(job),
         }, 201
 
@@ -276,6 +276,6 @@ class JobExecutor(Resource):
     @_middleware
     def post(self, job_id):
         manager = _JobManagerFactory._build_manager()
-        job = get_or_raise(job_id)
+        job = _get_or_raise(job_id)
         manager._cancel(job)
         return {"message": f"Cancelled job {job_id}"}

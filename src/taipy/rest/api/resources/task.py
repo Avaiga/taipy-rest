@@ -9,15 +9,12 @@
 # an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations under the License.
 
-from flask import jsonify, make_response, request
+from flask import request
 from flask_restful import Resource
 
 from taipy.config.config import Config
-from taipy.core.common._utils import _load_fct
-from taipy.core.data._data_manager_factory import _DataManagerFactory
 from taipy.core.exceptions.exceptions import NonExistingTask, NonExistingTaskConfig
 from taipy.core.task._task_manager_factory import _TaskManagerFactory
-from taipy.core.task.task import Task
 
 from ...commons.to_from_model import _to_model
 from ..exceptions.exceptions import ConfigIdMissingException
@@ -25,7 +22,7 @@ from ..middlewares._middleware import _middleware
 from ..schemas import TaskSchema
 
 
-def get_or_raise(task_id: str):
+def _get_or_raise(task_id: str):
     manager = _TaskManagerFactory._build_manager()
     task = manager._get(task_id)
     if task is None:
@@ -113,15 +110,15 @@ class TaskResource(Resource):
     @_middleware
     def get(self, task_id):
         schema = TaskSchema()
-        task = get_or_raise(task_id)
+        task = _get_or_raise(task_id)
         return {"task": schema.dump(_to_model(REPOSITORY, task))}
 
     @_middleware
     def delete(self, task_id):
         manager = _TaskManagerFactory._build_manager()
-        get_or_raise(task_id)
+        _get_or_raise(task_id)
         manager._delete(task_id)
-        return {"message": f"Task {task_id} deleted."}
+        return {"message": f"Task {task_id} was deleted."}
 
 
 class TaskList(Resource):
@@ -220,7 +217,7 @@ class TaskList(Resource):
         task = manager._bulk_get_or_create([config])[0]
 
         return {
-            "message": "Task created.",
+            "message": "Task was created.",
             "task": schema.dump(_to_model(REPOSITORY, task)),
         }, 201
 
@@ -271,6 +268,6 @@ class TaskExecutor(Resource):
     @_middleware
     def post(self, task_id):
         manager = _TaskManagerFactory._build_manager()
-        task = get_or_raise(task_id)
+        task = _get_or_raise(task_id)
         manager._scheduler().submit_task(task)
         return {"message": f"Executed task {task_id}"}

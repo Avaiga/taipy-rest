@@ -13,7 +13,7 @@ from typing import List
 
 import numpy as np
 import pandas as pd
-from flask import jsonify, make_response, request
+from flask import request
 from flask_restful import Resource
 
 from taipy.config.config import Config
@@ -49,8 +49,7 @@ ds_schema_map = {
 REPOSITORY = "data"
 
 
-def get_or_raise(data_node_id: str) -> None:
-    """Raise an exception if the data node does not exist."""
+def _get_or_raise(data_node_id: str) -> None:
     manager = _DataManagerFactory._build_manager()
     data_node = manager._get(data_node_id)
     if not data_node:
@@ -135,15 +134,15 @@ class DataNodeResource(Resource):
     @_middleware
     def get(self, datanode_id):
         schema = DataNodeSchema()
-        datanode = get_or_raise(datanode_id)
+        datanode = _get_or_raise(datanode_id)
         return {"datanode": schema.dump(_to_model(REPOSITORY, datanode, class_map=datanode.storage_type()))}
 
     @_middleware
     def delete(self, datanode_id):
-        get_or_raise(datanode_id)
+        _get_or_raise(datanode_id)
         manager = _DataManagerFactory._build_manager()
         manager._delete(datanode_id)
-        return {"message": f"Data node {datanode_id} deleted."}
+        return {"message": f"Data node {datanode_id} was deleted."}
 
 
 class DataNodeList(Resource):
@@ -243,7 +242,7 @@ class DataNodeList(Resource):
         manager._bulk_get_or_create({config})
 
         return {
-            "message": "Data node created.",
+            "message": "Data node was created.",
             "datanode": schema.dump(config),
         }, 201
 
@@ -313,7 +312,7 @@ class DataNodeReader(Resource):
     def get(self, datanode_id):
         schema = DataNodeFilterSchema()
         data = request.get_json(silent=True)
-        data_node = get_or_raise(datanode_id)
+        data_node = _get_or_raise(datanode_id)
         operators = self.__make_operators(schema.load(data)) if data else []
         data = data_node.filter(operators)
         if isinstance(data, pd.DataFrame):
@@ -371,6 +370,6 @@ class DataNodeWriter(Resource):
     @_middleware
     def put(self, datanode_id):
         data = request.json
-        data_node = get_or_raise(datanode_id)
+        data_node = _get_or_raise(datanode_id)
         data_node.write(data)
         return {"message": "Data node is successfully written"}

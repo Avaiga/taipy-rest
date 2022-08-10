@@ -9,24 +9,21 @@
 # an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations under the License.
 
-from operator import ge
 
-from flask import jsonify, make_response, request
+from flask import request
 from flask_restful import Resource
 
 from taipy.config.config import Config
 from taipy.core.exceptions.exceptions import NonExistingPipeline, NonExistingPipelineConfig
 from taipy.core.pipeline._pipeline_manager_factory import _PipelineManagerFactory
-from taipy.core.pipeline.pipeline import Pipeline
-from taipy.core.task._task_manager_factory import _TaskManagerFactory
 
 from ...commons.to_from_model import _to_model
 from ..exceptions.exceptions import ConfigIdMissingException
 from ..middlewares._middleware import _middleware
-from ..schemas import PipelineResponseSchema, PipelineSchema
+from ..schemas import PipelineResponseSchema
 
 
-def get_or_raise(pipeline_id: str):
+def _get_or_raise(pipeline_id: str):
     manager = _PipelineManagerFactory._build_manager()
     pipeline = manager._get(pipeline_id)
     if pipeline is None:
@@ -115,15 +112,15 @@ class PipelineResource(Resource):
     @_middleware
     def get(self, pipeline_id):
         schema = PipelineResponseSchema()
-        pipeline = get_or_raise(pipeline_id)
+        pipeline = _get_or_raise(pipeline_id)
         return {"pipeline": schema.dump(_to_model(REPOSITORY, pipeline))}
 
     @_middleware
     def delete(self, pipeline_id):
         manager = _PipelineManagerFactory._build_manager()
-        get_or_raise(pipeline_id)
+        _get_or_raise(pipeline_id)
         manager._delete(pipeline_id)
-        return {"message": f"Pipeline {pipeline_id} deleted."}
+        return {"message": f"Pipeline {pipeline_id} was deleted."}
 
 
 class PipelineList(Resource):
@@ -223,7 +220,7 @@ class PipelineList(Resource):
         pipeline = manager._get_or_create(config)
 
         return {
-            "message": "Pipeline created.",
+            "message": "Pipeline was created.",
             "pipeline": response_schema.dump(_to_model(REPOSITORY, pipeline)),
         }, 201
 
@@ -273,7 +270,7 @@ class PipelineExecutor(Resource):
 
     @_middleware
     def post(self, pipeline_id):
-        get_or_raise(pipeline_id)
+        _get_or_raise(pipeline_id)
         manager = _PipelineManagerFactory._build_manager()
         manager._submit(pipeline_id)
         return {"message": f"Executed pipeline {pipeline_id}"}

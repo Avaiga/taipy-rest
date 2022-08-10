@@ -9,22 +9,20 @@
 # an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations under the License.
 
-from flask import jsonify, make_response, request
+from flask import request
 from flask_restful import Resource
 
 from taipy.config.config import Config
 from taipy.core.exceptions.exceptions import NonExistingScenario, NonExistingScenarioConfig
-from taipy.core.pipeline._pipeline_manager_factory import _PipelineManagerFactory
 from taipy.core.scenario._scenario_manager_factory import _ScenarioManagerFactory
-from taipy.core.scenario.scenario import Scenario
 
 from ...commons.to_from_model import _to_model
 from ..exceptions.exceptions import ConfigIdMissingException
 from ..middlewares._middleware import _middleware
-from ..schemas import ScenarioResponseSchema, ScenarioSchema
+from ..schemas import ScenarioResponseSchema
 
 
-def get_or_raise(scenario_id: str):
+def _get_or_raise(scenario_id: str):
     manager = _ScenarioManagerFactory._build_manager()
     scenario = manager._get(scenario_id)
     if scenario is None:
@@ -113,15 +111,15 @@ class ScenarioResource(Resource):
     @_middleware
     def get(self, scenario_id):
         schema = ScenarioResponseSchema()
-        scenario = get_or_raise(scenario_id)
+        scenario = _get_or_raise(scenario_id)
         return {"scenario": schema.dump(_to_model(REPOSITORY, scenario))}
 
     @_middleware
     def delete(self, scenario_id):
         manager = _ScenarioManagerFactory._build_manager()
-        get_or_raise(scenario_id)
+        _get_or_raise(scenario_id)
         manager._delete(scenario_id)
-        return {"message": f"Scenario {scenario_id} deleted."}
+        return {"message": f"Scenario {scenario_id} was deleted."}
 
 
 class ScenarioList(Resource):
@@ -221,7 +219,7 @@ class ScenarioList(Resource):
         scenario = manager._create(config)
 
         return {
-            "message": "Scenario created.",
+            "message": "Scenario was created.",
             "scenario": response_schema.dump(_to_model(REPOSITORY, scenario)),
         }, 201
 
@@ -271,7 +269,7 @@ class ScenarioExecutor(Resource):
 
     @_middleware
     def post(self, scenario_id):
-        get_or_raise(scenario_id)
+        _get_or_raise(scenario_id)
         manager = _ScenarioManagerFactory._build_manager()
         manager._submit(scenario_id)
         return {"message": f"Executed scenario {scenario_id}"}

@@ -29,6 +29,10 @@ from .exceptions.exceptions import ConfigIdMissingException
 from .views import blueprint
 
 
+def _create_404(e):
+    return {"message": e.message}, 404
+
+
 @blueprint.errorhandler(ValidationError)
 def handle_marshmallow_error(e):
     """Return json error for marshmallow validation errors.
@@ -46,49 +50,49 @@ def handle_config_id_missing_exception(e):
 
 @blueprint.errorhandler(NonExistingDataNode)
 def handle_data_node_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingDataNodeConfig)
 def handle_data_node_config_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingCycle)
 def handle_cycle_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingJob)
 def handle_job_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingPipeline)
 def handle_pipeline_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingPipelineConfig)
 def handle_pipeline_config_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingScenario)
 def handle_scenario_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingScenarioConfig)
 def handle_scenario_config_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingTask)
 def handle_task_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
 
 
 @blueprint.errorhandler(NonExistingTaskConfig)
 def handle_task_config_not_found(e):
-    return jsonify({"message": e.message}), 404
+    return _create_404(e)
