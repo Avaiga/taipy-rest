@@ -135,7 +135,7 @@ class DataNodeResource(Resource):
     def get(self, datanode_id):
         schema = DataNodeSchema()
         datanode = _get_or_raise(datanode_id)
-        return {"datanode": schema.dump(_to_model(REPOSITORY, datanode, class_map=datanode.storage_type()))}
+        return {"datanode": schema.dump(_to_model(REPOSITORY, datanode))}
 
     @_middleware
     def delete(self, datanode_id):

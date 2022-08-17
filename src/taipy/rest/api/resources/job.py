@@ -213,7 +213,7 @@ class JobList(Resource):
         task_config_id = args.get("task_id")
 
         if not task_config_id:
-            return ConfigIdMissingException
+            raise ConfigIdMissingException
 
         manager = _JobManagerFactory._build_manager()
         schema = JobSchema()
