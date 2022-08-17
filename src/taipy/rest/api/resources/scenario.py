@@ -272,4 +272,4 @@ class ScenarioExecutor(Resource):
         _get_or_raise(scenario_id)
         manager = _ScenarioManagerFactory._build_manager()
         manager._submit(scenario_id)
-        return {"message": f"Executed scenario {scenario_id}"}
+        return {"message": f"Scenario {scenario_id} was submitted."}

@@ -288,7 +288,9 @@ class DataNodeReader(Resource):
               schema:
                 type: object
                 properties:
-                  datanode: DataNodeSchema
+                  data:
+                    type: Any
+                    description: The data read from the data node.
         404:
           description: No data node has the *datanode_id* identifier.
     """
@@ -357,7 +359,9 @@ class DataNodeWriter(Resource):
               schema:
                 type: object
                 properties:
-                  datanode: DataNodeSchema
+                  message:
+                    type: string
+                    description: Status message.
         404:
           description: No data node has the *datanode_id* identifier.
     """
@@ -370,4 +374,4 @@ class DataNodeWriter(Resource):
         data = request.json
         data_node = _get_or_raise(datanode_id)
         data_node.write(data)
-        return {"message": "Data node is successfully written"}
+        return {"message": f"Data node {datanode_id} was successfully written."}

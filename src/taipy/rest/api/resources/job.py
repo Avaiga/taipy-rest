@@ -278,4 +278,4 @@ class JobExecutor(Resource):
         manager = _JobManagerFactory._build_manager()
         job = _get_or_raise(job_id)
         manager._cancel(job)
-        return {"message": f"Cancelled job {job_id}"}
+        return {"message": f"Job {job_id} was cancelled."}

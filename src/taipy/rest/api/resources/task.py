@@ -270,4 +270,4 @@ class TaskExecutor(Resource):
         manager = _TaskManagerFactory._build_manager()
         task = _get_or_raise(task_id)
         manager._scheduler().submit_task(task)
-        return {"message": f"Executed task {task_id}"}
+        return {"message": f"Task {task_id} was submitted."}

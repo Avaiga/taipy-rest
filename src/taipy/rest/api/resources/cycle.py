@@ -355,7 +355,7 @@ class CycleList(Resource):
                 ```
                 <Response [201]>
                 {
-                    'message': 'cycle was created.',
+                    'message': 'Cycle was created.',
                     'cycle': {
                         'frequency': 'Frequency.DAILY',
                         'end_date': '2020-01-01T00:00:00',

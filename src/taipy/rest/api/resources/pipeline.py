@@ -273,4 +273,4 @@ class PipelineExecutor(Resource):
         _get_or_raise(pipeline_id)
         manager = _PipelineManagerFactory._build_manager()
         manager._submit(pipeline_id)
-        return {"message": f"Executed pipeline {pipeline_id}"}
+        return {"message": f"Pipeline {pipeline_id} was submitted."}
