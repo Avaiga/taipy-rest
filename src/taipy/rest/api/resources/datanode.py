@@ -223,9 +223,7 @@ class DataNodeList(Resource):
     def get(self):
         schema = DataNodeSchema(many=True)
         manager = _DataManagerFactory._build_manager()
-        datanodes = [
-            _to_model(REPOSITORY, datanode, class_map=datanode.storage_type()) for datanode in manager._get_all()
-        ]
+        datanodes = [_to_model(REPOSITORY, datanode) for datanode in manager._get_all()]
         return schema.dump(datanodes)
 
     @_middleware

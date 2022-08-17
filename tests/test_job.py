@@ -65,16 +65,13 @@ def test_get_all_jobs(client, create_job_list):
     assert len(results) == 10
 
 
-# @pytest.mark.xfail()
-
-
 def test_cancel_job(client, default_job):
-    # TODO: improve this test after the PR refactoring dispatcher
-    from taipy.core._scheduler._scheduler import _Scheduler
-
-    _Scheduler._update_job_config()
-
     # test 404
+    from taipy.core._scheduler._scheduler_factory import _SchedulerFactory
+
+    _SchedulerFactory._build_scheduler()
+    _SchedulerFactory._build_dispatcher()
+
     user_url = url_for("api.job_cancel", job_id="foo")
     rep = client.post(user_url)
     assert rep.status_code == 404
