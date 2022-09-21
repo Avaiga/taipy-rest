@@ -64,6 +64,14 @@ class SQLDataNodeConfigSchema(DataNodeConfigSchema):
     write_table = fields.String()
 
 
+class MongoCollectionDataNodeConfigSchema(DataNodeConfigSchema):
+    db_username = fields.String()
+    db_password = fields.String()
+    db_name = fields.String()
+    collection_name = fields.String()
+    read_query = fields.Dict()
+
+
 class ExcelDataNodeConfigSchema(DataNodeConfigSchema):
     path = fields.String()
     default_path = fields.String()

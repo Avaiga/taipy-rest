@@ -34,6 +34,7 @@ from ..schemas import (
     JSONDataNodeConfigSchema,
     PickleDataNodeConfigSchema,
     SQLDataNodeConfigSchema,
+    MongoCollectionDataNodeConfigSchema,
 )
 
 ds_schema_map = {
@@ -41,6 +42,7 @@ ds_schema_map = {
     "pickle": PickleDataNodeConfigSchema,
     "in_memory": InMemoryDataNodeConfigSchema,
     "sql": SQLDataNodeConfigSchema,
+    "mongo": MongoCollectionDataNodeConfigSchema,
     "excel": ExcelDataNodeConfigSchema,
     "generic": GenericDataNodeConfigSchema,
     "json": JSONDataNodeConfigSchema,

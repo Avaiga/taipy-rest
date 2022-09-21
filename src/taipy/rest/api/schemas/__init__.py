@@ -21,6 +21,7 @@ from .datanode import (
     JSONDataNodeConfigSchema,
     PickleDataNodeConfigSchema,
     SQLDataNodeConfigSchema,
+    MongoCollectionDataNodeConfigSchema,
 )
 from .job import JobSchema
 from .pipeline import PipelineResponseSchema, PipelineSchema
