@@ -69,7 +69,6 @@ class MongoCollectionDataNodeConfigSchema(DataNodeConfigSchema):
     db_password = fields.String()
     db_name = fields.String()
     collection_name = fields.String()
-    read_query = fields.Dict()
 
 
 class ExcelDataNodeConfigSchema(DataNodeConfigSchema):
