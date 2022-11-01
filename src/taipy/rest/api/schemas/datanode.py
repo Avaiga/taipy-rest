@@ -32,6 +32,7 @@ class DataNodeConfigSchema(Schema):
     name = fields.String()
     storage_type = fields.String()
     scope = fields.Integer()
+    cacheable = fields.Boolean()
 
     @pre_dump
     def serialize_scope(self, obj, **kwargs):
