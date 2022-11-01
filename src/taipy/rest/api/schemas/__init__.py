@@ -20,6 +20,7 @@ from .datanode import (
     InMemoryDataNodeConfigSchema,
     JSONDataNodeConfigSchema,
     PickleDataNodeConfigSchema,
+    SQLTableDataNodeConfigSchema,
     SQLDataNodeConfigSchema,
     MongoCollectionDataNodeConfigSchema,
 )

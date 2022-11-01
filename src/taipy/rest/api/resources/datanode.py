@@ -33,6 +33,7 @@ from ..schemas import (
     InMemoryDataNodeConfigSchema,
     JSONDataNodeConfigSchema,
     PickleDataNodeConfigSchema,
+    SQLTableDataNodeConfigSchema,
     SQLDataNodeConfigSchema,
     MongoCollectionDataNodeConfigSchema,
 )
@@ -41,8 +42,9 @@ ds_schema_map = {
     "csv": CSVDataNodeConfigSchema,
     "pickle": PickleDataNodeConfigSchema,
     "in_memory": InMemoryDataNodeConfigSchema,
+    "sql_table": SQLTableDataNodeConfigSchema,
     "sql": SQLDataNodeConfigSchema,
-    "mongo": MongoCollectionDataNodeConfigSchema,
+    "mongo_collection": MongoCollectionDataNodeConfigSchema,
     "excel": ExcelDataNodeConfigSchema,
     "generic": GenericDataNodeConfigSchema,
     "json": JSONDataNodeConfigSchema,
