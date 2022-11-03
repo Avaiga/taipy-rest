@@ -60,41 +60,16 @@ class SQLTableDataNodeConfigSchema(DataNodeConfigSchema):
     db_name = fields.String()
     table_name = fields.String()
 
-    # Write-only properties
-    db_username = fields.String(load_only=True)
-    db_password = fields.String(load_only=True)
-    db_host = fields.String(load_only=True)
-    db_port = fields.Integer(load_only=True)
-    db_engine = fields.String(load_only=True)
-    db_driver = fields.String(load_only=True)
-    db_extra_args = fields.Dict(load_only=True)
-
 
 class SQLDataNodeConfigSchema(DataNodeConfigSchema):
     db_name = fields.String()
     read_query = fields.String()
     write_query = fields.List(fields.String())
 
-    # Write-only properties
-    db_username = fields.String(load_only=True)
-    db_password = fields.String(load_only=True)
-    db_host = fields.String(load_only=True)
-    db_port = fields.Integer(load_only=True)
-    db_engine = fields.String(load_only=True)
-    db_driver = fields.String(load_only=True)
-    db_extra_args = fields.Dict(load_only=True)
-
 
 class MongoCollectionDataNodeConfigSchema(DataNodeConfigSchema):
     db_name = fields.String()
     collection_name = fields.String()
-
-    # Write-only properties
-    db_username = fields.String(load_only=True)
-    db_password = fields.String(load_only=True)
-    db_host = fields.String(load_only=True)
-    db_port = fields.Integer(load_only=True)
-    db_extra_args = fields.Dict(load_only=True)
 
 
 class ExcelDataNodeConfigSchema(DataNodeConfigSchema):
