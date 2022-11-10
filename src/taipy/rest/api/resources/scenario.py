@@ -62,6 +62,7 @@ class ScenarioResource(Resource):
                     "id": "SCENARIO_63cb358d-5834-4d73-84e4-a6343df5e08c",
                     "properties": {},
                     "tags": [],
+                    "version": "latest",
                     "pipelines": [
                         "PIPELINE_mean_baseline_5af317c9-34df-48b4-8a8a-bf4007e1de99",
                         "PIPELINE_arima_90aef6b9-8922-4a0c-b625-b2c6f3d19fa4"],
@@ -94,6 +95,7 @@ class ScenarioResource(Resource):
                     "id": "SCENARIO_63cb358d-5834-4d73-84e4-a6343df5e08c",
                     "properties": {},
                     "tags": [],
+                    "version": "latest",
                     "pipelines": [
                         "PIPELINE_mean_baseline_5af317c9-34df-48b4-8a8a-bf4007e1de99",
                         "PIPELINE_arima_90aef6b9-8922-4a0c-b625-b2c6f3d19fa4"],
@@ -250,6 +252,7 @@ class ScenarioList(Resource):
                     "id": "SCENARIO_63cb358d-5834-4d73-84e4-a6343df5e08c",
                     "properties": {},
                     "tags": [],
+                    "version": "latest",
                     "pipelines": [
                         "PIPELINE_mean_baseline_5af317c9-34df-48b4-8a8a-bf4007e1de99",
                         "PIPELINE_arima_90aef6b9-8922-4a0c-b625-b2c6f3d19fa4"],
@@ -282,6 +285,7 @@ class ScenarioList(Resource):
                     "id": "SCENARIO_63cb358d-5834-4d73-84e4-a6343df5e08c",
                     "properties": {},
                     "tags": [],
+                    "version": "latest",
                     "pipelines": [
                         "PIPELINE_mean_baseline_5af317c9-34df-48b4-8a8a-bf4007e1de99",
                         "PIPELINE_arima_90aef6b9-8922-4a0c-b625-b2c6f3d19fa4"],
@@ -340,6 +344,7 @@ class ScenarioList(Resource):
                     "id": "SCENARIO_63cb358d-5834-4d73-84e4-a6343df5e08c",
                     "properties": {},
                     "tags": [],
+                    "version": "latest",
                     "pipelines": [
                         "PIPELINE_mean_baseline_5af317c9-34df-48b4-8a8a-bf4007e1de99",
                         "PIPELINE_arima_90aef6b9-8922-4a0c-b625-b2c6f3d19fa4"],
@@ -369,6 +374,7 @@ class ScenarioList(Resource):
                     "id": "SCENARIO_63cb358d-5834-4d73-84e4-a6343df5e08c",
                     "properties": {},
                     "tags": [],
+                    "version": "latest",
                     "pipelines": [
                         "PIPELINE_mean_baseline_5af317c9-34df-48b4-8a8a-bf4007e1de99",
                         "PIPELINE_arima_90aef6b9-8922-4a0c-b625-b2c6f3d19fa4"],
