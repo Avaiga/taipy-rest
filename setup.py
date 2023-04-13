@@ -56,6 +56,6 @@ setup(
         "passlib>=1.7.4,<1.8",
         "apispec[yaml]>=5.1,<6.0",
         "apispec-webframeworks>=0.5.2,<0.6",
-        "taipy-core>=2.1,<2.2",
+        "taipy-core>=2.2,<2.3",
     ],
 )
