@@ -75,7 +75,7 @@ def datanode_data():
     return {
         "name": "foo",
         "storage_type": "in_memory",
-        "scope": "pipeline",
+        "scope": "scenario",
         "default_data": ["1991-01-01T00:00:00"],
     }
 
