@@ -47,7 +47,7 @@ setup(
         "Programming Language :: Python :: 3.11",
     ],
     install_requires=[
-        "flask>=2.2,<3.0",
+        "flask>=2.2,<2.3",
         "flask-restful>=0.3.9,<0.4",
         "flask-migrate>=3.1,<4.0",
         "flask-jwt-extended>=4.3,<5.0",
@@ -56,6 +56,6 @@ setup(
         "passlib>=1.7.4,<1.8",
         "apispec[yaml]>=5.1,<6.0",
         "apispec-webframeworks>=0.5.2,<0.6",
-        "taipy-core@git+https://git@github.com/Avaiga/taipy-core.git@develop",
+        "taipy-core@git+https://git@github.com/Avaiga/taipy-core.git@dev/3.0",
     ],
 )
