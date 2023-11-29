@@ -1,3 +1,10 @@
+# 🚧 Under construction 🚧
+
+⚠️ WARNING: The Taipy team is performing a repository restructuration. This current repository taipy-rest is about to be 
+merged into the main repository: taipy. Once the merge is done, the current code base will be in the 
+[taipy repository](https://github.com/Avaiga/taipy). The migration should take a maximum of a few days.
+<be>
+
 # Taipy-REST
 [![Python](https://img.shields.io/pypi/pyversions/taipy-rest)](https://pypi.org/project/taipy-rest)
 [![PyPI](https://img.shields.io/pypi/v/taipy-rest.svg?label=pip&logo=PyPI&logoColor=white)](https://pypi.org/project/taipy-rest)
